@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity
 
     private void displayQuantity()
     {
-        TextView textView = (TextView) findViewById(R.id.textView0);
+        TextView textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
+        TextView editTextPrice = (TextView) findViewById(R.id.editTextPrice);
 
-        textView.setText("200");
+        textViewQuantity.setText("200");
     }
 }
