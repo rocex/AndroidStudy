@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
 {
-    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -22,9 +22,13 @@ public class MainActivity extends AppCompatActivity
 
     private void displayQuantity()
     {
+        EditText editTextPrice = (EditText) findViewById(R.id.editTextPrice);
+        EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
         TextView textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
-        TextView editTextPrice = (TextView) findViewById(R.id.editTextPrice);
 
-        textViewQuantity.setText("200");
+        double dblPrice = Double.parseDouble(editTextPrice.getText().toString());
+        double dblCount = Double.parseDouble(editTextCount.getText().toString());
+
+        textViewQuantity.setText(String.valueOf(dblPrice * dblCount));
     }
 }
