@@ -25,7 +25,7 @@
         android:textSize="16sp" />
 
     <Button
-        android:id="@+id/button0"
+        android:id="@+id/btnReduce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
