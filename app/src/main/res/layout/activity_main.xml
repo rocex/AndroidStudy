@@ -12,8 +12,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="Quantity"
-            android:textSize="32sp"
-            android:textAllCaps="true"/>
+            android:textAllCaps="true"
+            android:textSize="32sp" />
 
     <TextView
             android:id="@+id/textViewQuantity"
