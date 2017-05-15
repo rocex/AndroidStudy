@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         textViewQuantity.setText(NumberFormat.getCurrencyInstance().format(dblPrice * iCount));
     }
 
-    public void onAddCount(View view)
+    public void onIncrementCount(View view)
     {
         EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
         
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         editTextCount.setText(String.valueOf(iCount + 1));
     }
 
-    public void onReduceCount(View view)
+    public void onDecrementCount(View view)
     {
         EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
         

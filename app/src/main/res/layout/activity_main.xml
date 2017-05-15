@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Quantity"
-        android:textAllCaps="true"
+        android:text="Total"
+        android:textAlignment="textEnd"
         android:textSize="32sp"/>
 
     <TextView
@@ -21,15 +21,23 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="0"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/holo_red_light"
         android:textSize="28sp"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Quantity"
+        android:textSize="24sp"/>
 
     <Button
         android:id="@+id/btnReduce"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="8dp"
-        android:onClick="onReduceCount"
+        android:onClick="onDecrementCount"
         android:text="-"/>
 
     <EditText
@@ -47,7 +55,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="8dp"
-        android:onClick="onAddCount"
+        android:onClick="onIncrementCount"
         android:text="+"/>
 
     <TextView
@@ -55,16 +63,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Price"/>
+        android:text="Price"
+        android:textSize="24sp"/>
 
     <EditText
         android:id="@+id/editTextPrice"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="10"/>
+        android:text="10"
+        android:textAlignment="textEnd"/>
 
     <Button
         android:id="@+id/buttonOrder"
