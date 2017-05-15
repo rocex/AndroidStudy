@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.android.justjava.MainActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.example.android.justjava.MainActivity">
 
     <TextView
         android:id="@+id/textView0"
@@ -13,7 +13,7 @@
         android:layout_margin="8dp"
         android:text="Quantity"
         android:textAllCaps="true"
-        android:textSize="32sp" />
+        android:textSize="32sp"/>
 
     <TextView
         android:id="@+id/textViewQuantity"
@@ -22,39 +22,40 @@
         android:layout_margin="8dp"
         android:text="0"
         android:textColor="@android:color/black"
-        android:textSize="28sp" />
+        android:textSize="28sp"/>
 
     <Button
         android:id="@+id/btnReduce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_margin="8dp"
         android:onClick="onReduceCount"
-        android:text="-" />
+        android:text="-"/>
 
     <EditText
         android:id="@+id/editTextCount"
-        android:layout_width="113dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
         android:inputType="number"
-        android:text="2" />
+        android:text="2"
+        android:textAlignment="textEnd"/>
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_margin="8dp"
         android:onClick="onAddCount"
-        android:text="+" />
+        android:text="+"/>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Price" />
+        android:text="Price"/>
 
     <EditText
         android:id="@+id/editTextPrice"
@@ -63,7 +64,7 @@
         android:layout_margin="8dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="10" />
+        android:text="10"/>
 
     <Button
         android:id="@+id/buttonOrder"
@@ -71,6 +72,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:onClick="submitOrder"
-        android:text="Order" />
+        android:text="Order"/>
 
 </LinearLayout>
