@@ -2,6 +2,7 @@ package com.example.android.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,8 +18,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
     }
     
-    public void onOrder(View view)
+    public void submitOrder(View view)
     {
+        Log.d(getClass().getSimpleName(), "enter submitOrder function.");
+        
         EditText editTextPrice = (EditText) findViewById(R.id.editTextPrice);
         EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
         TextView textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
