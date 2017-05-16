@@ -38,6 +38,7 @@ captures/
 *.iml
 .idea
 .idea/
+.idea/*
 .idea/libraries
 .idea/*.*
 
