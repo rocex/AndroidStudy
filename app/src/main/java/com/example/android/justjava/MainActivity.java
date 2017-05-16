@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity
 {
     int iCount = 1;
     
-    
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
