@@ -47,8 +47,7 @@
             android:layout_height="48dp"
             android:layout_margin="8dp"
             android:onClick="onDecrementCount"
-            android:text="-"
-            />
+            android:text="-"/>
 
         <TextView
             android:id="@+id/editTextCount"
@@ -65,8 +64,7 @@
             android:layout_height="48dp"
             android:layout_margin="8dp"
             android:onClick="onIncrementCount"
-            android:text="+"
-            />
+            android:text="+"/>
 
     </LinearLayout>
 
@@ -103,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_margin="8dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@color/colorAccent"
             android:onClick="submitOrder"
