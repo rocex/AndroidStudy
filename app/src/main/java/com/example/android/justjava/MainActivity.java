@@ -11,46 +11,53 @@ import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity
 {
+    int iCount = 1;
+    
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+    
         setContentView(R.layout.activity_main);
+    
+        EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
+    
+        iCount = Integer.parseInt(editTextCount.getText().toString());
+    
+        EditText editTextPrice = (EditText) findViewById(R.id.editTextPrice);
+        editTextPrice.setText(NumberFormat.getCurrencyInstance().format(Double.parseDouble(editTextPrice.getText().toString())));
     }
-
+    
     public void submitOrder(View view)
     {
         Log.d(getClass().getSimpleName(), "enter submitOrder function.");
-
+    
         EditText editTextPrice = (EditText) findViewById(R.id.editTextPrice);
-        EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
         TextView textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
-
-        int iCount = Integer.parseInt(editTextCount.getText().toString());
+    
         double dblPrice = Double.parseDouble(editTextPrice.getText().toString());
-
+    
         textViewQuantity.setText(NumberFormat.getCurrencyInstance().format(dblPrice * iCount));
     }
-
+    
     public void onIncrementCount(View view)
     {
-        EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
-
-        int iCount = Integer.parseInt(editTextCount.getText().toString());
-
-        editTextCount.setText(String.valueOf(iCount + 1));
+        displayCount(++iCount);
     }
-
+    
     public void onDecrementCount(View view)
     {
-        EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
-
-        int iCount = Integer.parseInt(editTextCount.getText().toString());
-
-        if (iCount <= 1) {
+        if(iCount <= 1)
+        {
             return;
         }
-
-        editTextCount.setText(String.valueOf(iCount - 1));
+    
+        displayCount(--iCount);
+    }
+    
+    private void displayCount(int iNewCount)
+    {
+        EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
+        
+        editTextCount.setText(String.valueOf(iNewCount));
     }
 }
