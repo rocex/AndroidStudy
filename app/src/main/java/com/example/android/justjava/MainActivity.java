@@ -18,13 +18,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_main);
-        
-        EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
-        
-        iCount = Integer.parseInt(editTextCount.getText().toString());
-        
-        EditText editTextPrice = (EditText) findViewById(R.id.editTextPrice);
-        editTextPrice.setText(NumberFormat.getCurrencyInstance().format(Double.parseDouble(editTextPrice.getText().toString())));
+    
+        displayCount(iCount);
     }
     
     public void submitOrder(View view)
@@ -56,7 +51,7 @@ public class MainActivity extends AppCompatActivity
     
     private void displayCount(int iNewCount)
     {
-        EditText editTextCount = (EditText) findViewById(R.id.editTextCount);
+        TextView editTextCount = (TextView) findViewById(R.id.editTextCount);
         
         editTextCount.setText(String.valueOf(iNewCount));
     }

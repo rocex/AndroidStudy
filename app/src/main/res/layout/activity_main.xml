@@ -6,83 +6,108 @@
               android:orientation="vertical"
               tools:context="com.example.android.justjava.MainActivity">
 
-    <TextView
-        android:id="@+id/textView0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Total"
-        android:textAlignment="textEnd"
-        android:textSize="32sp"/>
-
-    <TextView
-        android:id="@+id/textViewQuantity"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="0"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="28sp"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Quantity"
-        android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Total"
+            android:textAlignment="textEnd"
+            android:textSize="32sp"/>
 
-    <Button
-        android:id="@+id/btnReduce"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_margin="8dp"
-        android:onClick="onDecrementCount"
-        android:text="-"/>
+        <TextView
+            android:id="@+id/textViewQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="28sp"/>
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/editTextCount"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:ems="10"
-        android:inputType="number"
-        android:text="1"
-        android:textAlignment="textEnd"/>
-
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_margin="8dp"
-        android:onClick="onIncrementCount"
-        android:text="+"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Price"
-        android:textSize="24sp"/>
-
-    <EditText
-        android:id="@+id/editTextPrice"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="10"
-        android:textAlignment="textEnd"/>
-
-    <Button
-        android:id="@+id/buttonOrder"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:onClick="submitOrder"
-        android:text="Order"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Quantity"
+            android:textSize="24sp"/>
+
+        <Button
+            android:id="@+id/btnReduce"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            android:onClick="onDecrementCount"
+            android:text="-"
+            />
+
+        <TextView
+            android:id="@+id/editTextCount"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:inputType="number"
+            android:text="1"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            android:onClick="onIncrementCount"
+            android:text="+"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Price"
+            android:textSize="24sp"/>
+
+        <EditText
+            android:id="@+id/editTextPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:text="10"
+            android:textAlignment="textEnd"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:onClick="submitOrder"
+            android:text="Order"/>
+    </LinearLayout>
 
 </LinearLayout>
