@@ -9,8 +9,8 @@ import com.example.android.justjava.R;
 
 public class CourtCounter extends AppCompatActivity
 {
-    int iACounter = 0;
-    int iBCounter = 0;
+    int iScoreA = 0;
+    int iScoreB = 0;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,71 +21,61 @@ public class CourtCounter extends AppCompatActivity
         setContentView(R.layout.activity_court_counter);
     }
     
-    public void resetCounter(View view)
+    public void resetAllScore(View view)
     {
-        iACounter = 0;
-        iBCounter = 0;
-        
-        displayACounter(iACounter);
-        displayBCounter(iBCounter);
+        iScoreA = 0;
+        iScoreB = 0;
+    
+        displayScore(R.id.textACounter, iScoreA);
+        displayScore(R.id.textBCounter, iScoreB);
     }
     
-    private void displayCounter(int iViewId, int iCounter)
+    private void displayScore(int iViewId, int iCounter)
     {
         TextView textViewQuantity = (TextView) findViewById(iViewId);
         
         textViewQuantity.setText(String.valueOf(iCounter));
     }
     
-    private void displayBCounter(int iCounter)
-    {
-        displayCounter(R.id.textBCounter, iCounter);
-    }
-    
-    private void displayACounter(int iCounter)
-    {
-        displayCounter(R.id.textACounter, iCounter);
-    }
-    
     public void onAddA1(View view)
     {
-        iACounter = iACounter + 1;
-        
-        displayACounter(iACounter);
+        iScoreA = iScoreA + 1;
+    
+        displayScore(R.id.textACounter, iScoreA);
     }
     
     public void onAddA2(View view)
     {
-        iACounter = iACounter + 2;
-        
-        displayACounter(iACounter);
+        iScoreA = iScoreA + 2;
+    
+        displayScore(R.id.textACounter, iScoreA);
     }
     
     public void onAddA3(View view)
     {
-        iACounter = iACounter + 3;
-        
-        displayACounter(iACounter);
+        iScoreA = iScoreA + 3;
+    
+        displayScore(R.id.textACounter, iScoreA);
     }
     
     public void onAddB1(View view)
     {
-        iBCounter = iBCounter + 1;
+        iScoreB = iScoreB + 1;
     
-        displayBCounter(iBCounter);
+        displayScore(R.id.textBCounter, iScoreB);
     }
     
     public void onAddB2(View view)
     {
-        iBCounter = iBCounter + 2;
+        iScoreB = iScoreB + 2;
     
-        displayBCounter(iBCounter);
+        displayScore(R.id.textBCounter, iScoreB);
     }
     
     public void onAddB3(View view)
     {
-        iBCounter = iBCounter + 3;
+        iScoreB = iScoreB + 3;
     
-        displayBCounter(iBCounter);
+        displayScore(R.id.textBCounter, iScoreB);
     }
 }
