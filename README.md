@@ -1,2 +1,2 @@
-# JustJava
-JustJava
+# Just Java
+Just Java
