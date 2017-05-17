@@ -14,7 +14,8 @@ public class CourtCounter extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        
+    
+        setTitle("Court Counter");
         setContentView(R.layout.activity_court_counter);
     }
     
