@@ -1,4 +1,4 @@
-package com.example.android.justjava;
+package org.rocex.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.android.justjava.R;
 
 import java.text.NumberFormat;
 

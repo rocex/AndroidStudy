@@ -1,4 +1,4 @@
-package com.example.android.justjava;
+package org.rocex.justjava;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class ExampleUnitTest
 {
     @Test
-    public void addition_isCorrect() throws Exception
+    public static void addition_isCorrect() throws Exception
     {
         assertEquals(4, 2 + 2);
     }
