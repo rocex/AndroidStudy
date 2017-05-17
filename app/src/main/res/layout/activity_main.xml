@@ -103,7 +103,7 @@
             android:layout_gravity="bottom"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:background="@android:color/holo_green_dark"
             android:onClick="submitOrder"
             android:text="Order"/>
     </LinearLayout>
