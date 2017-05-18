@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.example.android.justjava.R;
 
-public class CourtCounter extends AppCompatActivity
+public class CourtCounterActivity extends AppCompatActivity
 {
     int iScoreA = 0;
     int iScoreB = 0;

@@ -1,60 +1,35 @@
 package org.rocex.justjava;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.android.justjava.R;
 
-import java.text.NumberFormat;
-
 public class MainActivity extends AppCompatActivity
 {
-    int iCount = 1;
-    
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_main);
-        
-        displayCount(iCount);
     }
     
-    public void submitOrder(View view)
+    public void jumpToCoffee(View view)
     {
-        Log.d(getClass().getSimpleName(), "enter submitOrder function.");
-        
-        EditText editTextPrice = (EditText) findViewById(R.id.editTextPrice);
-        TextView textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
-        
-        double dblPrice = Double.parseDouble(editTextPrice.getText().toString());
-        
-        textViewQuantity.setText(NumberFormat.getCurrencyInstance().format(dblPrice * iCount));
+        Log.d(getClass().getSimpleName(), "enter jumpToCoffee function.");
+    
+        Intent intent = new Intent(getApplicationContext(), CoffeeActivity.class);
+        startActivity(intent);
     }
     
-    public void onIncrementCount(View view)
+    public void jumpToCourtCounter(View view)
     {
-        displayCount(++iCount);
-    }
+        Log.d(getClass().getSimpleName(), "enter jumpToCourtCounter function.");
     
-    public void onDecrementCount(View view)
-    {
-        if(iCount <= 1)
-        {
-            return;
-        }
-        
-        displayCount(--iCount);
-    }
-    
-    private void displayCount(int iNewCount)
-    {
-        TextView editTextCount = (TextView) findViewById(R.id.editTextCount);
-        
-        editTextCount.setText(String.valueOf(iNewCount));
+        Intent intent = new Intent(getApplicationContext(), CourtCounterActivity.class);
+        startActivity(intent);
     }
 }
