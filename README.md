@@ -1,2 +1,2 @@
 # Android Study
-学习Android时的练习代码以及笔记。
+学习 Android 的练习代码及笔记。
