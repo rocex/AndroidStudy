@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.rocex.justjava.CoffeeActivity">
+        <activity android:name="org.rocex.justjava.CoffeeOrderActivity">
         </activity>
         <activity android:name="org.rocex.justjava.CourtCounterActivity">
         </activity>

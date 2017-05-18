@@ -17,11 +17,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
     }
     
-    public void jumpToCoffee(View view)
+    public void jumpToCoffeeOrder(View view)
     {
-        Log.d(getClass().getSimpleName(), "enter jumpToCoffee function.");
+        Log.d(getClass().getSimpleName(), "enter jumpToCoffeeOrder function.");
     
-        Intent intent = new Intent(getApplicationContext(), CoffeeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), CoffeeOrderActivity.class);
         startActivity(intent);
     }
     

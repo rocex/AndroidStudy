@@ -11,7 +11,7 @@ import com.example.android.justjava.R;
 
 import java.text.NumberFormat;
 
-public class CoffeeActivity extends AppCompatActivity
+public class CoffeeOrderActivity extends AppCompatActivity
 {
     int iCount = 1;
     
