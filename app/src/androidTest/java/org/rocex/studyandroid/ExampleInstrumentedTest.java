@@ -1,4 +1,4 @@
-package org.rocex.justjava;
+package org.rocex.studyandroid;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -22,7 +22,7 @@ public class ExampleInstrumentedTest
     {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-    
-        assertEquals("org.rocex.justjava", appContext.getPackageName());
+
+        assertEquals("org.rocex.studyandroid", appContext.getPackageName());
     }
 }

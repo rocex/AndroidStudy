@@ -1,4 +1,4 @@
-package org.rocex.justjava;
+package org.rocex.studyandroid;
 
 import org.junit.Test;
 
