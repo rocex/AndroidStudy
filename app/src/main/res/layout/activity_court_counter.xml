@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Team A"
+                android:text="@string/team_a"
                 android:textSize="36sp"/>
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
                 android:onClick="onAddA1"
-                android:text="+1 Points"
+                android:text="@string/_1_points"
                 android:textAllCaps="false"/>
 
             <Button
@@ -57,7 +57,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
                 android:onClick="onAddA2"
-                android:text="+2 Points"
+                android:text="@string/_2_points"
                 android:textAllCaps="false"/>
 
             <Button
@@ -68,7 +68,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
                 android:onClick="onAddA3"
-                android:text="+3 Points"
+                android:text="@string/_3_points"
                 android:textAllCaps="false"/>
         </LinearLayout>
 
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Team B"
+                android:text="@string/team_b"
                 android:textSize="36sp"/>
 
             <TextView
@@ -114,7 +114,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
                 android:onClick="onAddB1"
-                android:text="+1 Points"
+                android:text="@string/_1_points"
                 android:textAllCaps="false"/>
 
             <Button
@@ -125,7 +125,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
                 android:onClick="onAddB2"
-                android:text="+2 Points"
+                android:text="@string/_2_points"
                 android:textAllCaps="false"/>
 
             <Button
@@ -136,7 +136,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
                 android:onClick="onAddB3"
-                android:text="+3 Points"
+                android:text="@string/_3_points"
                 android:textAllCaps="false"/>
         </LinearLayout>
 
@@ -155,6 +155,6 @@
         android:layout_weight="1"
         android:background="@android:color/holo_green_dark"
         android:onClick="resetAllScore"
-        android:text="reset"/>
+        android:text="@string/reset" />
 
 </LinearLayout>

@@ -5,7 +5,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               tools:context="org.rocex.studyandroid.MainActivity">
-
+    
     <Button
         android:id="@+id/buttonCoffee"
         android:layout_width="match_parent"
@@ -13,8 +13,10 @@
         android:layout_margin="16dp"
         android:background="@android:color/holo_green_dark"
         android:onClick="jumpToCoffeeOrder"
-        android:text="Coffee Order"/>
-
+        android:text="@string/coffee_order"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
+    
     <Button
         android:id="@+id/buttonCourtCounter"
         android:layout_width="match_parent"
@@ -22,6 +24,8 @@
         android:layout_margin="16dp"
         android:background="@android:color/holo_green_dark"
         android:onClick="jumpToCourtCounter"
-        android:text="Court Counter"/>
+        android:text="@string/court_counter"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
 
 </LinearLayout>
