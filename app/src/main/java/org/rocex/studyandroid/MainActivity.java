@@ -18,16 +18,16 @@ public class MainActivity extends AppCompatActivity
     public void jumpToCoffeeOrder(View view)
     {
         Log.d(getClass().getSimpleName(), "enter jumpToCoffeeOrder function.");
-
-        Intent intent = new Intent(getApplicationContext(), CoffeeOrderActivity.class);
+    
+        Intent intent = new Intent(this, CoffeeOrderActivity.class);
         startActivity(intent);
     }
 
     public void jumpToCourtCounter(View view)
     {
         Log.d(getClass().getSimpleName(), "enter jumpToCourtCounter function.");
-
-        Intent intent = new Intent(getApplicationContext(), CourtCounterActivity.class);
+    
+        Intent intent = new Intent(this, CourtCounterActivity.class);
         startActivity(intent);
     }
 }
