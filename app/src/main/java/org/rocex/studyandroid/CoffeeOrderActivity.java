@@ -28,6 +28,7 @@ public class CoffeeOrderActivity extends AppCompatActivity
     
     private void displayOrderSummary()
     {
+        EditText editTextUserName = (EditText) findViewById(R.id.editTextUserName);
         CheckBox checkboxChocolate = (CheckBox) findViewById(R.id.checkboxChocolate);
         CheckBox checkboxWhippedCream = (CheckBox) findViewById(R.id.checkboxWhippedCream);
     
@@ -36,7 +37,8 @@ public class CoffeeOrderActivity extends AppCompatActivity
         dblPrice = Double.parseDouble(editTextPrice.getText().toString());
     
         String strSummary = MessageFormat.format("Name:{0}\nAdd Whipped cream: {1}\nAdd Chocolate: {2}\nQuantity: {3}\nTotal: {4}\n\nThank you!"
-                , "Lyla", checkboxWhippedCream.isChecked(), checkboxChocolate.isChecked(), iCount, NumberFormat.getCurrencyInstance().format(dblPrice * iCount));
+                , editTextUserName.getText(), checkboxWhippedCream.isChecked(), checkboxChocolate.isChecked(), iCount
+                , NumberFormat.getCurrencyInstance().format(dblPrice * iCount));
         
         TextView textViewSummary = (TextView) findViewById(R.id.textViewSummary);
         textViewSummary.setText(strSummary);
