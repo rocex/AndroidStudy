@@ -28,4 +28,15 @@
         android:textAllCaps="false"
         android:textSize="24sp" />
 
+    <Button
+        android:id="@+id/buttonHappyBirthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@android:color/holo_green_dark"
+        android:onClick="jumpToHappyBirthday"
+        android:text="Happy Birthday"
+        android:textAllCaps="false"
+        android:textSize="24sp"/>
+
 </LinearLayout>

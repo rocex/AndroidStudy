@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity
     public void jumpToCoffeeOrder(View view)
     {
         Log.d(getClass().getSimpleName(), "enter jumpToCoffeeOrder function.");
-    
+
         Intent intent = new Intent(this, CoffeeOrderActivity.class);
         startActivity(intent);
     }
@@ -26,8 +26,16 @@ public class MainActivity extends AppCompatActivity
     public void jumpToCourtCounter(View view)
     {
         Log.d(getClass().getSimpleName(), "enter jumpToCourtCounter function.");
-    
+
         Intent intent = new Intent(this, CourtCounterActivity.class);
+        startActivity(intent);
+    }
+
+    public void jumpToHappyBirthday(View view)
+    {
+        Log.d(getClass().getSimpleName(), "enter jumpToHappyBirthday function.");
+
+        Intent intent = new Intent(this, HappyBirthdayActivity.class);
         startActivity(intent);
     }
 }
