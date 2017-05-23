@@ -41,7 +41,7 @@
             android:id="@+id/btnReduce"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
             android:onClick="onDecrementCount"
             android:text="-"
             android:textSize="24sp" />
@@ -50,7 +50,7 @@
             android:id="@+id/editTextCount"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
             android:inputType="number"
             android:text="1"
             android:textAlignment="center"
@@ -60,7 +60,7 @@
             android:id="@+id/btnAdd"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
             android:onClick="onIncrementCount"
             android:text="+"
             android:textSize="24sp" />
@@ -92,31 +92,6 @@
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
-        <TextView
-            android:id="@+id/textView0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/total"
-            android:textAlignment="textEnd"
-            android:textSize="24sp" />
-        
-        <TextView
-            android:id="@+id/textViewQuantity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:text="10"
-            android:textAlignment="textEnd"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="24sp" />
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         
@@ -135,21 +110,34 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textSize="24sp" />
+
     </LinearLayout>
     
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-        
+    
         <Button
-            android:id="@+id/buttonOrder"
-            android:layout_width="match_parent"
+            android:id="@+id/buttonReset"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@android:color/holo_green_dark"
+            android:background="@android:color/holo_red_light"
+            android:onClick="resetOrder"
+            android:text="@string/reset"
+            android:textSize="24sp" />
+    
+        <Button
+            android:id="@+id/buttonOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_blue_light"
             android:onClick="submitOrder"
             android:text="@string/order"
             android:textSize="24sp" />
