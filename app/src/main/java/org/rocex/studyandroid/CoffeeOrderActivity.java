@@ -1,5 +1,7 @@
 package org.rocex.studyandroid;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -25,6 +27,20 @@ public class CoffeeOrderActivity extends AppCompatActivity
         setContentView(R.layout.activity_coffee);
     
         displayCount(iCount);
+    }
+    
+    private void sendEMail(String strSubject, String strMessage, String... strAddresses)
+    {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setType("*/*");
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, strAddresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, strSubject);
+        
+        if(intent.resolveActivity(getPackageManager()) != null)
+        {
+            startActivity(intent);
+        }
     }
     
     private void displayOrderSummary()
@@ -64,6 +80,8 @@ public class CoffeeOrderActivity extends AppCompatActivity
         
         TextView textViewSummary = (TextView) findViewById(R.id.textViewSummary);
         textViewSummary.setText(strSummary);
+    
+        sendEMail(editTextUserName.getText().toString(), strSummary, "");
     }
     
     public void submitOrder(View view)
