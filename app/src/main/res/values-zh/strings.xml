@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidStudy</string>
+    <string name="price">单价</string>
+    <string name="quantity">数量</string>
+    <string name="reset">重置</string>
+    <string name="team_a">A队</string>
+    <string name="team_b">B队</string>
+    <string name="total">总价</string>
+    <string name="your_name">姓名</string>
+    <string name="coffee_order">咖啡订单</string>
+    <string name="court_counter">篮球记分板</string>
+    <string name="order">下单</string>
+    <string name="order_summary">汇总</string>
+</resources>
