@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AndroidStudy</string>
+    <string name="app_name">Android 学习</string>
     <string name="price">单价</string>
     <string name="quantity">数量</string>
     <string name="reset">重置</string>
@@ -12,4 +12,7 @@
     <string name="court_counter">篮球记分板</string>
     <string name="order">下单</string>
     <string name="order_summary">汇总</string>
+    <string name="_1_points">1分球</string>
+    <string name="_2_points">2分球</string>
+    <string name="_3_points">3分球</string>
 </resources>
