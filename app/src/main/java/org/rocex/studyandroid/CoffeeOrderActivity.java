@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.MessageFormat;
 import java.text.NumberFormat;
@@ -29,6 +30,13 @@ public class CoffeeOrderActivity extends AppCompatActivity
     private void displayOrderSummary()
     {
         EditText editTextUserName = (EditText) findViewById(R.id.editTextUserName);
+    
+        if(editTextUserName.getText().length() == 0)
+        {
+            Toast.makeText(this, "Input your name, pls!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
         CheckBox checkboxChocolate = (CheckBox) findViewById(R.id.checkboxChocolate);
         CheckBox checkboxWhippedCream = (CheckBox) findViewById(R.id.checkboxWhippedCream);
     
@@ -36,9 +44,23 @@ public class CoffeeOrderActivity extends AppCompatActivity
     
         dblPrice = Double.parseDouble(editTextPrice.getText().toString());
     
+        double dblBasePrice = dblPrice;
+    
+        if(checkboxWhippedCream.isChecked())
+        {
+            dblBasePrice += 1;
+        }
+    
+        if(checkboxChocolate.isChecked())
+        {
+            dblBasePrice += 2;
+        }
+    
+        double dblSumPrice = dblBasePrice * iCount;
+        
         String strSummary = MessageFormat.format("Name:{0}\nAdd Whipped cream: {1}\nAdd Chocolate: {2}\nQuantity: {3}\nTotal: {4}\n\nThank you!"
                 , editTextUserName.getText(), checkboxWhippedCream.isChecked(), checkboxChocolate.isChecked(), iCount
-                , NumberFormat.getCurrencyInstance().format(dblPrice * iCount));
+                , NumberFormat.getCurrencyInstance().format(dblSumPrice));
         
         TextView textViewSummary = (TextView) findViewById(R.id.textViewSummary);
         textViewSummary.setText(strSummary);
@@ -65,6 +87,11 @@ public class CoffeeOrderActivity extends AppCompatActivity
     
     public void onIncrementCount(View view)
     {
+        if(iCount >= 100)
+        {
+            return;
+        }
+        
         displayCount(++iCount);
     }
     
