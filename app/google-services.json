@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "180459202310",
+    "firebase_url": "https://firecast-app-889ad.firebaseio.com",
+    "project_id": "firecast-app-889ad",
+    "storage_bucket": "firecast-app-889ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180459202310:android:8d714d4e2e29b3f4",
+        "android_client_info": {
+          "package_name": "org.rocex.androidstudy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180459202310-ku32u5cbrh447imtsre4eofq9le9oh8g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.rocex.androidstudy",
+            "certificate_hash": "9e9cbe0d31e0ae47cd1dda1d586c7f4690b17676"
+          }
+        },
+        {
+          "client_id": "180459202310-akld0deup7c1p10n1igdeasj93s4r779.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA87wokiQ_sjqeCvWQ_y8N0REsLzw1t4nU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180459202310-akld0deup7c1p10n1igdeasj93s4r779.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
