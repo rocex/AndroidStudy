@@ -5,4 +5,4 @@ keytool -exportcert -list -v -alias androiddebugkey -keystore C:\Users\XXXX\.and
 
 pwd: android
 
-![AndroidStudy](AndroidStudy.png)
+![Android Study](AndroidStudy.png)
