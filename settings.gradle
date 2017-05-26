@@ -1,1 +1,1 @@
-include ':app', ':bodydata'
+include ':android_study', ':bodydata', ':bodydata2'

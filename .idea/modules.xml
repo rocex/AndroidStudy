@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidStudy.iml" filepath="$PROJECT_DIR$/AndroidStudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android_study/android_study.iml" filepath="$PROJECT_DIR$/android_study/android_study.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/bodydata/bodydata.iml" filepath="$PROJECT_DIR$/bodydata/bodydata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bodydata2/bodydata2.iml" filepath="$PROJECT_DIR$/bodydata2/bodydata2.iml" />
     </modules>
   </component>
 </project>
