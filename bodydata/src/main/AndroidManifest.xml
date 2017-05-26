@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="cn.studyjams.s2.sj0225.rocex.bodydata">
+    package="cn.studyjams.s2.sj0225.rocex.bodydata">
     
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".BodyDataListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,12 +20,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
+            android:name=".BodyDataDetailActivity"
+            android:label="@string/title_bodydata_detail"
+            android:parentActivityName=".BodyDataListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cn.studyjams.s2.sj0225.rocex.bodydata.MainActivity" />
+                android:value="cn.studyjams.s2.sj0225.rocex.bodydata.BodyDataListActivity" />
         </activity>
     </application>
 
