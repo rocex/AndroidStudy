@@ -3,12 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidStudy.iml" filepath="$PROJECT_DIR$/AndroidStudy.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activity_basic/activity_basic.iml" filepath="$PROJECT_DIR$/activity_basic/activity_basic.iml" />
       <module fileurl="file://$PROJECT_DIR$/activity_bottom_navigation/activity_bottom_navigation.iml" filepath="$PROJECT_DIR$/activity_bottom_navigation/activity_bottom_navigation.iml" />
       <module fileurl="file://$PROJECT_DIR$/activity_empty/activity_empty.iml" filepath="$PROJECT_DIR$/activity_empty/activity_empty.iml" />
       <module fileurl="file://$PROJECT_DIR$/activity_fullscreen/activity_fullscreen.iml" filepath="$PROJECT_DIR$/activity_fullscreen/activity_fullscreen.iml" />
       <module fileurl="file://$PROJECT_DIR$/activity_login/activity_login.iml" filepath="$PROJECT_DIR$/activity_login/activity_login.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activity_master_detail/activity_master_detail.iml" filepath="$PROJECT_DIR$/activity_master_detail/activity_master_detail.iml" />
       <module fileurl="file://$PROJECT_DIR$/activity_navigation_drawer/activity_navigation_drawer.iml" filepath="$PROJECT_DIR$/activity_navigation_drawer/activity_navigation_drawer.iml" />
       <module fileurl="file://$PROJECT_DIR$/activity_scrolling/activity_scrolling.iml" filepath="$PROJECT_DIR$/activity_scrolling/activity_scrolling.iml" />
       <module fileurl="file://$PROJECT_DIR$/activity_settings/activity_settings.iml" filepath="$PROJECT_DIR$/activity_settings/activity_settings.iml" />

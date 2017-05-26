@@ -8,12 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/activity_basic" />
             <option value="$PROJECT_DIR$/activity_bottom_navigation" />
             <option value="$PROJECT_DIR$/activity_empty" />
             <option value="$PROJECT_DIR$/activity_fullscreen" />
             <option value="$PROJECT_DIR$/activity_login" />
-            <option value="$PROJECT_DIR$/activity_master_detail" />
             <option value="$PROJECT_DIR$/activity_navigation_drawer" />
             <option value="$PROJECT_DIR$/activity_scrolling" />
             <option value="$PROJECT_DIR$/activity_settings" />
