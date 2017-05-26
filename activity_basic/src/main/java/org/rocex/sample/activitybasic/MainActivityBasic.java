@@ -1,4 +1,4 @@
-package org.rocex.activitybasic;
+package org.rocex.sample.activitybasic;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,9 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.rocex.activitybasic.R;
+
 public class MainActivityBasic extends AppCompatActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

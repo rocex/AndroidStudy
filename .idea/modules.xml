@@ -14,7 +14,6 @@
       <module fileurl="file://$PROJECT_DIR$/activity_settings/activity_settings.iml" filepath="$PROJECT_DIR$/activity_settings/activity_settings.iml" />
       <module fileurl="file://$PROJECT_DIR$/activity_tabbed/activity_tabbed.iml" filepath="$PROJECT_DIR$/activity_tabbed/activity_tabbed.iml" />
       <module fileurl="file://$PROJECT_DIR$/android_study/android_study.iml" filepath="$PROJECT_DIR$/android_study/android_study.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/bodydata/bodydata.iml" filepath="$PROJECT_DIR$/bodydata/bodydata.iml" />
       <module fileurl="file://$PROJECT_DIR$/bodydata2/bodydata2.iml" filepath="$PROJECT_DIR$/bodydata2/bodydata2.iml" />
     </modules>
