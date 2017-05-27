@@ -28,7 +28,6 @@ import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.DummyContent;
  */
 public class BodyDataListActivity extends AppCompatActivity
 {
-    
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
