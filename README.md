@@ -5,8 +5,8 @@ keytool -exportcert -list -v -alias androiddebugkey -keystore C:\Users\XXXX\.and
 
 pwd: android
 
-+Activity Basic
-+Activity Bottom Navigation
+1.Activity Basic
+2.Activity Bottom Navigation
 +Activity Empty
 +Activity Fullscreen
 +Activity Login
