@@ -5,15 +5,17 @@ keytool -exportcert -list -v -alias androiddebugkey -keystore C:\Users\XXXX\.and
 
 pwd: android
 
+#### 增加以下 Activity 样例代码
+
 + Activity Basic
 + Activity Bottom Navigation
 + Activity Empty
 + Activity Fullscreen
 + Activity Login
 + Activity Master Detail
-* Activity Navigation Drawer
-* Activity Scrolling
-- Activity Settings
-- Activity Tabbed
++ Activity Navigation Drawer
++ Activity Scrolling
++ Activity Settings
++ Activity Tabbed
 
 ![Android Study](AndroidStudy.png)
