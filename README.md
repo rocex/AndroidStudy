@@ -7,8 +7,8 @@ pwd: android
 
 1.Activity Basic
 2.Activity Bottom Navigation
-+Activity Empty
-+Activity Fullscreen
+        +Activity Empty
+        1.Activity Fullscreen
 +Activity Login
 +Activity Master Detail
 +Activity Navigation Drawer
