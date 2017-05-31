@@ -1,11 +1,10 @@
 # Android Study
 
-[TOC]
+## 学习 Android 的练习代码及笔记。
+[完整的学习笔记](AndroidStudy.png)
 
-## 学习 Android 的练习代码及笔记。[完整的学习笔记](AndroidStudy.png)
-
+## 生成SHA1命令
 keytool -exportcert -list -v -alias androiddebugkey -keystore C:\Users\XXXX\.android\debug.keystore
-
 pwd: android
 
 ## 增加以下 Activity 样例代码
