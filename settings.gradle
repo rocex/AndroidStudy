@@ -1,1 +1,1 @@
-include ':android_study', ':bodydata', ':bodydata2', ':activity_bottom_navigation', ':activity_empty', ':activity_fullscreen', ':activity_login', ':activity_navigation_drawer', ':activity_scrolling', ':activity_settings', ':activity_tabbed', ':activity_basic', ':activity_master_detail'
+include 'activity_basic', 'activity_bottom_navigation', 'activity_empty', 'activity_fullscreen', 'activity_login', 'activity_master_detail', 'activity_navigation_drawer', 'activity_scrolling', 'activity_settings', 'activity_tabbed', ':android_study', ':bodydata', ':bodydata2'
