@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleSettings">
-    <option name="linkedExternalProjectsSettings">
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/activity_basic" />
-            <option value="$PROJECT_DIR$/activity_bottom_navigation" />
-            <option value="$PROJECT_DIR$/activity_empty" />
-            <option value="$PROJECT_DIR$/activity_fullscreen" />
-            <option value="$PROJECT_DIR$/activity_login" />
-            <option value="$PROJECT_DIR$/activity_master_detail" />
-            <option value="$PROJECT_DIR$/activity_navigation_drawer" />
-            <option value="$PROJECT_DIR$/activity_scrolling" />
-            <option value="$PROJECT_DIR$/activity_settings" />
-            <option value="$PROJECT_DIR$/activity_tabbed" />
-            <option value="$PROJECT_DIR$/android_study" />
-            <option value="$PROJECT_DIR$/bodydata" />
-            <option value="$PROJECT_DIR$/bodydata2" />
-          </set>
+    <component name="GradleSettings">
+        <option name="linkedExternalProjectsSettings">
+            <GradleProjectSettings>
+                <option name="distributionType" value="DEFAULT_WRAPPED" />
+                <option name="externalProjectPath" value="$PROJECT_DIR$" />
+                <option name="modules">
+                    <set>
+                        <option value="$PROJECT_DIR$" />
+                        <option value="$PROJECT_DIR$/activity_basic" />
+                        <option value="$PROJECT_DIR$/activity_bottom_navigation" />
+                        <option value="$PROJECT_DIR$/activity_empty" />
+                        <option value="$PROJECT_DIR$/activity_fullscreen" />
+                        <option value="$PROJECT_DIR$/activity_login" />
+                        <option value="$PROJECT_DIR$/activity_master_detail" />
+                        <option value="$PROJECT_DIR$/activity_navigation_drawer" />
+                        <option value="$PROJECT_DIR$/activity_scrolling" />
+                        <option value="$PROJECT_DIR$/activity_settings" />
+                        <option value="$PROJECT_DIR$/activity_tabbed" />
+                        <option value="$PROJECT_DIR$/android_study" />
+                        <option value="$PROJECT_DIR$/bodydata" />
+                        <option value="$PROJECT_DIR$/bodydata2" />
+                    </set>
+                </option>
+                <option name="resolveModulePerSourceSet" value="false" />
+            </GradleProjectSettings>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
-      </GradleProjectSettings>
-    </option>
-  </component>
+    </component>
 </project>
