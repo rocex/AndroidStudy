@@ -5,6 +5,7 @@
 
 ## 生成SHA1命令
 keytool -exportcert -list -v -alias androiddebugkey -keystore C:\Users\XXXX\.android\debug.keystore
+
 pwd: android
 
 ## 增加以下 Activity 样例代码
