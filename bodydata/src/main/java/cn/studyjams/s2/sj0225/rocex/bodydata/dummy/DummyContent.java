@@ -2,6 +2,7 @@ package cn.studyjams.s2.sj0225.rocex.bodydata.dummy;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +25,12 @@ public class DummyContent
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
     
-    private static final int COUNT = 25;
-    
     static
     {
-        addItem(createDummyItem(1, 178, 64));
+        addItem(createDummyItem(1, 178, 64.5));
+        addItem(createDummyItem(2, 178, 65.6));
+        addItem(createDummyItem(3, 178, 66.7));
+        addItem(createDummyItem(4, 178, 68.3));
     }
     
     private static void addItem(DummyItem item)
@@ -51,6 +53,7 @@ public class DummyContent
         public final Double stature;  // 身高cm
         public final Double weight; // 体重kg
         public final Double bmi; // 体质指数BMI = weight / (stature / 100 * stature / 100)
+        public final Date date;
     
         public DummyItem(String id, Double stature, Double weight)
         {
@@ -59,12 +62,14 @@ public class DummyContent
             this.weight = weight;
     
             this.bmi = weight / (stature / 100 * stature / 100);
+    
+            date = new Date(System.currentTimeMillis());
         }
         
         @Override
         public String toString()
         {
-            return MessageFormat.format("stature {0}cm, weight {1}kg, BMI {2}", stature, weight, bmi);
+            return MessageFormat.format("{0}cm, {1}kg, BMI {2}", stature, weight, bmi);
         }
     }
 }

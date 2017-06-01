@@ -38,18 +38,24 @@ public class BodyDataListActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+    
         setContentView(R.layout.activity_bodydata_list);
         
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-        
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+    
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
+                Intent intent = new Intent(BodyDataListActivity.this, BodyDataDetailActivity.class);
+                intent.putExtra(BodyDataDetailFragment.ARG_ITEM_ID, "0");
+    
+                fab.getContext().startActivity(intent);
+                
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
