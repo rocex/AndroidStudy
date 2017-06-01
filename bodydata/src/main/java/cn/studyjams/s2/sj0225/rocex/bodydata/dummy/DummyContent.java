@@ -1,5 +1,6 @@
 package cn.studyjams.s2.sj0225.rocex.bodydata.dummy;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.Map;
  */
 public class DummyContent
 {
-    
     /**
      * An array of sample (dummy) items.
      */
@@ -28,11 +28,7 @@ public class DummyContent
     
     static
     {
-        // Add some sample items.
-        for(int i = 1; i <= COUNT; i++)
-        {
-            addItem(createDummyItem(i));
-        }
+        addItem(createDummyItem(1, 178, 64));
     }
     
     private static void addItem(DummyItem item)
@@ -41,20 +37,9 @@ public class DummyContent
         ITEM_MAP.put(item.id, item);
     }
     
-    private static DummyItem createDummyItem(int position)
+    private static DummyItem createDummyItem(int position, double stature, double weight)
     {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
-    }
-    
-    private static String makeDetails(int position)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for(int i = 0; i < position; i++)
-        {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
+        return new DummyItem(String.valueOf(position), stature, weight);
     }
     
     /**
@@ -63,20 +48,23 @@ public class DummyContent
     public static class DummyItem
     {
         public final String id;
-        public final String content;
-        public final String details;
-        
-        public DummyItem(String id, String content, String details)
+        public final Double stature;  // 身高cm
+        public final Double weight; // 体重kg
+        public final Double bmi; // 体质指数BMI = weight / (stature / 100 * stature / 100)
+    
+        public DummyItem(String id, Double stature, Double weight)
         {
             this.id = id;
-            this.content = content;
-            this.details = details;
+            this.stature = stature;
+            this.weight = weight;
+    
+            this.bmi = weight / (stature / 100 * stature / 100);
         }
         
         @Override
         public String toString()
         {
-            return content;
+            return MessageFormat.format("stature {0}cm, weight {1}kg, BMI {2}", stature, weight, bmi);
         }
     }
 }

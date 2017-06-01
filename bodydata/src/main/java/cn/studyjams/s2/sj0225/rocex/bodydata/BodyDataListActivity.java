@@ -50,8 +50,7 @@ public class BodyDataListActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
         
@@ -74,10 +73,8 @@ public class BodyDataListActivity extends AppCompatActivity
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
     }
     
-    public class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>
-    {
-        
+    public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>
+    {        
         private final List<DummyContent.DummyItem> mValues;
         
         public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items)
@@ -88,8 +85,8 @@ public class BodyDataListActivity extends AppCompatActivity
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
         {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.bodydata_list_content, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bodydata_list_content, parent, false);
+            
             return new ViewHolder(view);
         }
         
@@ -98,7 +95,7 @@ public class BodyDataListActivity extends AppCompatActivity
         {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mContentView.setText(mValues.get(position).toString());
             
             holder.mView.setOnClickListener(new View.OnClickListener()
             {
@@ -111,9 +108,7 @@ public class BodyDataListActivity extends AppCompatActivity
                         arguments.putString(BodyDataDetailFragment.ARG_ITEM_ID, holder.mItem.id);
                         BodyDataDetailFragment fragment = new BodyDataDetailFragment();
                         fragment.setArguments(arguments);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.bodydata_detail_container, fragment)
-                                .commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.bodydata_detail_container, fragment).commit();
                     }
                     else
                     {
