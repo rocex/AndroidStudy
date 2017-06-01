@@ -54,10 +54,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                 int index = listPreference.findIndexOfValue(stringValue);
                 
                 // Set the summary to reflect the new value.
-                preference.setSummary(
-                        index >= 0
-                                ? listPreference.getEntries()[index]
-                                : null);
+                preference.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
                 
             }
             else if(preference instanceof RingtonePreference)
@@ -72,8 +69,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                 }
                 else
                 {
-                    Ringtone ringtone = RingtoneManager.getRingtone(
-                            preference.getContext(), Uri.parse(stringValue));
+                    Ringtone ringtone = RingtoneManager.getRingtone(preference.getContext(), Uri.parse(stringValue));
                     
                     if(ringtone == null)
                     {
@@ -106,8 +102,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
      */
     private static boolean isXLargeTablet(Context context)
     {
-        return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
+        return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
     }
     
     /**
@@ -126,10 +121,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
         
         // Trigger the listener immediately with the preference's
         // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, PreferenceManager.getDefaultSharedPreferences(preference.getContext()).getString(preference.getKey(), ""));
     }
     
     @Override
@@ -192,10 +184,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
      */
     protected boolean isValidFragment(String fragmentName)
     {
-        return PreferenceFragment.class.getName().equals(fragmentName)
-                || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-                || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
-                || NotificationPreferenceFragment.class.getName().equals(fragmentName);
+        return PreferenceFragment.class.getName().equals(fragmentName) || GeneralPreferenceFragment.class.getName().equals(fragmentName) || DataSyncPreferenceFragment.class.getName().equals(fragmentName) || NotificationPreferenceFragment.class.getName().equals(fragmentName);
     }
     
     /**

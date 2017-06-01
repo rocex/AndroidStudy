@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/team_a"
-                android:textSize="36sp"/>
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/textACounter"
@@ -36,7 +36,7 @@
                 android:text="0"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="56sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnAddA1"
@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 android:onClick="onAddA1"
                 android:text="@string/_1_points"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/btnAddA2"
@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:onClick="onAddA2"
                 android:text="@string/_2_points"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/btnAddA3"
@@ -69,7 +69,7 @@
                 android:layout_weight="1"
                 android:onClick="onAddA3"
                 android:text="@string/_3_points"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
         </LinearLayout>
 
         <TextView
@@ -79,7 +79,7 @@
             android:layout_marginBottom="8dp"
             android:layout_weight="0"
             android:background="@android:color/holo_blue_bright"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/team_b"
-                android:textSize="36sp"/>
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/textBCounter"
@@ -104,7 +104,7 @@
                 android:text="0"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="56sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnAddB1"
@@ -115,7 +115,7 @@
                 android:layout_weight="1"
                 android:onClick="onAddB1"
                 android:text="@string/_1_points"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/btnAddB2"
@@ -126,7 +126,7 @@
                 android:layout_weight="1"
                 android:onClick="onAddB2"
                 android:text="@string/_2_points"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/btnAddB3"
@@ -137,7 +137,7 @@
                 android:layout_weight="1"
                 android:onClick="onAddB3"
                 android:text="@string/_3_points"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
         </LinearLayout>
 
     </LinearLayout>
@@ -145,7 +145,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btnReset"

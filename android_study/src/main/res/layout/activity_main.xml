@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="org.rocex.studyandroid.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.rocex.studyandroid.MainActivity">
     
     <Button
         android:id="@+id/buttonCoffee"
@@ -27,7 +27,7 @@
         android:text="@string/court_counter"
         android:textAllCaps="false"
         android:textSize="24sp" />
-
+    
     <Button
         android:id="@+id/buttonHappyBirthday"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         android:onClick="jumpToHappyBirthday"
         android:text="Happy Birthday"
         android:textAllCaps="false"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
     
     <Button
         android:id="@+id/buttonShowMap"

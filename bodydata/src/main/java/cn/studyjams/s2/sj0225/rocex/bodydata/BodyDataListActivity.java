@@ -80,7 +80,7 @@ public class BodyDataListActivity extends AppCompatActivity
     }
     
     public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>
-    {        
+    {
         private final List<DummyContent.DummyItem> mValues;
         
         public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items)

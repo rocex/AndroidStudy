@@ -20,19 +20,18 @@ public class MainActivityBasic extends AppCompatActivity
         setContentView(R.layout.activity_main_basic);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+    
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
     }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -40,7 +39,7 @@ public class MainActivityBasic extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu_main_activity_basic, menu);
         return true;
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -48,12 +47,13 @@ public class MainActivityBasic extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+    
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if(id == R.id.action_settings)
+        {
             return true;
         }
-
+    
         return super.onOptionsItemSelected(item);
     }
 }

@@ -22,7 +22,7 @@ public class CoffeeOrderActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-    
+
         setTitle("Coffee Order");
         setContentView(R.layout.activity_coffee);
     
@@ -73,10 +73,8 @@ public class CoffeeOrderActivity extends AppCompatActivity
         }
     
         double dblSumPrice = dblBasePrice * iCount;
-        
-        String strSummary = MessageFormat.format("Name:{0}\nAdd Whipped cream: {1}\nAdd Chocolate: {2}\nQuantity: {3}\nTotal: {4}\n\nThank you!"
-                , editTextUserName.getText(), checkboxWhippedCream.isChecked(), checkboxChocolate.isChecked(), iCount
-                , NumberFormat.getCurrencyInstance().format(dblSumPrice));
+    
+        String strSummary = MessageFormat.format("Name:{0}\nAdd Whipped cream: {1}\nAdd Chocolate: {2}\nQuantity: {3}\nTotal: {4}\n\nThank you!", editTextUserName.getText(), checkboxWhippedCream.isChecked(), checkboxChocolate.isChecked(), iCount, NumberFormat.getCurrencyInstance().format(dblSumPrice));
         
         TextView textViewSummary = (TextView) findViewById(R.id.textViewSummary);
         textViewSummary.setText(strSummary);
