@@ -58,8 +58,8 @@ public class DummyContent
         public DummyItem(String id, Double stature, Double weight)
         {
             this.id = id;
-            this.stature = stature;
             this.weight = weight;
+            this.stature = stature;
     
             this.bmi = weight / (stature / 100 * stature / 100);
     
