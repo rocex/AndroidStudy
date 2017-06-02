@@ -1,7 +1,11 @@
 package cn.studyjams.s2.sj0225.rocex.bodydata.dummy;
 
+import android.text.format.DateFormat;
+
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -49,12 +53,14 @@ public class DummyContent
      */
     public static class DummyItem
     {
-        public final String id;
-        public final Double stature;  // 身高cm
-        public final Double weight; // 体重kg
-        public final Double bmi; // 体质指数BMI = weight / (stature / 100 * stature / 100)
+        public final String dateString;
         public final Date date;
     
+        public String id;
+        public Double stature;  // 身高cm
+        public Double weight; // 体重kg
+        public Double bmi; // 体质指数BMI = weight / (stature / 100 * stature / 100)
+        
         public DummyItem(String id, Double stature, Double weight)
         {
             this.id = id;
@@ -63,7 +69,10 @@ public class DummyContent
     
             this.bmi = weight / (stature / 100 * stature / 100);
     
-            date = new Date(System.currentTimeMillis());
+            date = Calendar.getInstance().getTime();
+    
+            CharSequence format = DateFormat.format("yyyy-mm-dd HH:mm:ss", date);
+            dateString = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").format(date);
         }
         
         @Override

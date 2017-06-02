@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.DummyContent;
 
 /**
  * An activity representing a single BodyData detail screen. This
@@ -85,5 +88,32 @@ public class BodyDataDetailActivity extends AppCompatActivity
         }
     
         return super.onOptionsItemSelected(item);
+    }
+    
+    public void onCalculateBMI(View view)
+    {
+    }
+    
+    public void onResetBMI(View view)
+    {
+        setValue(null);
+    }
+    
+    public void setValue(DummyContent.DummyItem dummyItem)
+    {
+        if(dummyItem == null)
+        {
+            ((TextView) findViewById(R.id.editTextWeight)).setText("");
+            ((TextView) findViewById(R.id.editTextStature)).setText("");
+            ((TextView) findViewById(R.id.editTextBMI)).setText("");
+            ((TextView) findViewById(R.id.textViewDate)).setText("");
+            
+            return;
+        }
+        
+        ((TextView) findViewById(R.id.editTextWeight)).setText(String.valueOf(dummyItem.weight));
+        ((TextView) findViewById(R.id.editTextStature)).setText(String.valueOf(dummyItem.stature));
+        ((TextView) findViewById(R.id.editTextBMI)).setText(String.valueOf(dummyItem.bmi));
+        ((TextView) findViewById(R.id.textViewDate)).setText(dummyItem.dateString);
     }
 }

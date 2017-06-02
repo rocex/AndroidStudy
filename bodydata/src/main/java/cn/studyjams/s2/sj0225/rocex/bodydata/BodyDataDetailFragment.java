@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-
 import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.DummyContent;
 
 /**
@@ -56,7 +54,7 @@ public class BodyDataDetailFragment extends Fragment
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if(appBarLayout != null && mItem.date != null)
             {
-                appBarLayout.setTitle(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(mItem.date));
+                appBarLayout.setTitle(mItem.dateString);
             }
         }
     }
@@ -69,7 +67,10 @@ public class BodyDataDetailFragment extends Fragment
         // Show the dummy content as text in a TextView.
         if(mItem != null)
         {
-            ((TextView) rootView.findViewById(R.id.bodydata_detail)).setText(mItem.toString());
+            ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(mItem.weight));
+            ((TextView) rootView.findViewById(R.id.editTextStature)).setText(String.valueOf(mItem.stature));
+            ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.valueOf(mItem.bmi));
+            ((TextView) rootView.findViewById(R.id.textViewDate)).setText(mItem.dateString);
         }
         
         return rootView;
