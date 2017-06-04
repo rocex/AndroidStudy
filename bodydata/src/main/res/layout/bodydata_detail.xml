@@ -11,7 +11,8 @@
     
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:columnCount="3"
         android:padding="@dimen/text_margin">
         
@@ -84,13 +85,24 @@
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
             android:text="体质指数BMI = 体重 / (身高 / 100 * 身高 / 100)" />
+
+    </GridLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:orientation="horizontal">
         
         <Button
             android:id="@+id/btnReset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:layout_margin="4dp"
             android:layout_weight="1"
+            android:background="@android:color/holo_red_light"
             android:onClick="onResetBMI"
             android:text="重置" />
         
@@ -98,19 +110,12 @@
             android:id="@+id/btnCalculate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_columnSpan="2"
-            android:layout_gravity="bottom|fill_horizontal"
+            android:layout_gravity="bottom"
+            android:layout_margin="4dp"
             android:layout_weight="1"
+            android:background="@android:color/holo_blue_light"
             android:onClick="onCalculateBMI"
             android:text="计算" />
-    
-    </GridLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
     
     </LinearLayout>
 

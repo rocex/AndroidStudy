@@ -116,4 +116,12 @@ public class BodyDataDetailActivity extends AppCompatActivity
         ((TextView) findViewById(R.id.editTextBMI)).setText(String.valueOf(dummyItem.bmi));
         ((TextView) findViewById(R.id.textViewDate)).setText(dummyItem.dateString);
     }
+    
+    public void setEditable(boolean blEditable)
+    {
+        findViewById(R.id.editTextWeight).setEnabled(blEditable);
+        findViewById(R.id.editTextStature).setEnabled(blEditable);
+        findViewById(R.id.editTextBMI).setEnabled(blEditable);
+        findViewById(R.id.textViewDate).setEnabled(blEditable);
+    }
 }

@@ -69,9 +69,14 @@ public class BodyDataDetailFragment extends Fragment
         {
             ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(mItem.weight));
             ((TextView) rootView.findViewById(R.id.editTextStature)).setText(String.valueOf(mItem.stature));
-            ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.valueOf(mItem.bmi));
+            ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", mItem.bmi));
             ((TextView) rootView.findViewById(R.id.textViewDate)).setText(mItem.dateString);
         }
+    
+        rootView.findViewById(R.id.editTextWeight).setEnabled(false);
+        rootView.findViewById(R.id.editTextStature).setEnabled(false);
+        rootView.findViewById(R.id.editTextBMI).setEnabled(false);
+        rootView.findViewById(R.id.textViewDate).setEnabled(false);
         
         return rootView;
     }
