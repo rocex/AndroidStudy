@@ -15,17 +15,17 @@ import java.util.Map;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class DummyContent
+public class BodyDataContent
 {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static final List<BodyData> ITEMS = new ArrayList<BodyData>();
     
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<String, BodyData> ITEM_MAP = new HashMap<String, BodyData>();
     
     static
     {
@@ -35,21 +35,21 @@ public class DummyContent
         addItem(createDummyItem(178, 68.3));
     }
     
-    private static void addItem(DummyItem item)
+    private static void addItem(BodyData item)
     {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
     
-    private static DummyItem createDummyItem(double stature, double weight)
+    private static BodyData createDummyItem(double stature, double weight)
     {
-        return new DummyItem(stature, weight);
+        return new BodyData(stature, weight);
     }
     
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem
+    public static class BodyData
     {
         public final String dateString;
         public final Date date;
@@ -59,7 +59,7 @@ public class DummyContent
         public Double weight = 1.0; // 体重kg
         public Double bmi; // 体质指数BMI = weight / (height / 100 * height / 100)
     
-        public DummyItem()
+        public BodyData()
         {
             this.id = String.valueOf(System.currentTimeMillis());
     
@@ -68,14 +68,26 @@ public class DummyContent
             dateString = DateFormat.format("yyyy-MM-dd HH:mm:ss", date).toString();
         }
     
-        public DummyItem(Double height, Double weight)
+        public BodyData(Double height, Double weight)
         {
             this();
             
             this.weight = weight;
             this.height = height;
-        
-            this.bmi = weight / (height / 100 * height / 100);
+    
+            calculate();
+        }
+    
+        public void calculate()
+        {
+            if(height != 0)
+            {
+                this.bmi = weight / (height / 100 * height / 100);
+            }
+            else
+            {
+                this.bmi = 0.0;
+            }
         }
         
         @Override

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.DummyContent;
+import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.BodyDataContent;
 
 /**
  * An activity representing a list of BodyDatas. This activity
@@ -73,14 +73,14 @@ public class BodyDataListActivity extends AppCompatActivity
     
     private void setupRecyclerView(@NonNull RecyclerView recyclerView)
     {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(BodyDataContent.ITEMS));
     }
     
     public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>
     {
-        private final List<DummyContent.DummyItem> mValues;
-        
-        public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items)
+        private final List<BodyDataContent.BodyData> mValues;
+    
+        public SimpleItemRecyclerViewAdapter(List<BodyDataContent.BodyData> items)
         {
             mValues = items;
         }
@@ -108,7 +108,7 @@ public class BodyDataListActivity extends AppCompatActivity
                     if(mTwoPane)
                     {
                         Bundle arguments = new Bundle();
-                        arguments.putString(BodyDataDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        arguments.putString(BodyDataDetailFragment.BODY_DATA_ID, holder.mItem.id);
                         BodyDataDetailFragment fragment = new BodyDataDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction().replace(R.id.bodydata_detail_container, fragment).commit();
@@ -117,7 +117,7 @@ public class BodyDataListActivity extends AppCompatActivity
                     {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, BodyDataDetailActivity.class);
-                        intent.putExtra(BodyDataDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        intent.putExtra(BodyDataDetailFragment.BODY_DATA_ID, holder.mItem.id);
                         
                         context.startActivity(intent);
                     }
@@ -136,7 +136,7 @@ public class BodyDataListActivity extends AppCompatActivity
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
-            public DummyContent.DummyItem mItem;
+            public BodyDataContent.BodyData mItem;
             
             public ViewHolder(View view)
             {

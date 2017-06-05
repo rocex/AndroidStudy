@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.DummyContent;
+import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.BodyDataContent;
 
 /**
  * A fragment representing a single BodyData detail screen.
@@ -23,12 +23,12 @@ public class BodyDataDetailFragment extends Fragment
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
+    public static final String BODY_DATA_ID = "body_data_id";
     
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem dummyItem;
+    private BodyDataContent.BodyData bodyData;
     
     private View rootView;
     
@@ -43,11 +43,38 @@ public class BodyDataDetailFragment extends Fragment
     
     public void onCalculateBMI(View view)
     {
+        TextView editTextHeight = (TextView) rootView.findViewById(R.id.editTextHeight);
+        String strHeight = editTextHeight.getText().toString();
+    
+        if(strHeight == null || strHeight.trim().length() == 0)
+        {
+            editTextHeight.setError("请输入身高！");
+        
+            return;
+        }
+    
+        bodyData.height = Double.parseDouble(strHeight);
+    
+        TextView editTextWeight = (TextView) rootView.findViewById(R.id.editTextWeight);
+        String strWeight = editTextWeight.getText().toString();
+    
+        if(strWeight == null || strWeight.trim().length() == 0)
+        {
+            editTextWeight.setError("请输入体重！");
+        
+            return;
+        }
+    
+        bodyData.weight = Double.parseDouble(strWeight);
+    
+        bodyData.calculate();
+    
+        setValue(bodyData);
     }
     
-    public void setValue(DummyContent.DummyItem dummyItem)
+    public void setValue(BodyDataContent.BodyData bodyData)
     {
-        if(dummyItem == null)
+        if(bodyData == null)
         {
             ((TextView) rootView.findViewById(R.id.editTextWeight)).setText("");
             ((TextView) rootView.findViewById(R.id.editTextHeight)).setText("");
@@ -56,11 +83,11 @@ public class BodyDataDetailFragment extends Fragment
             
             return;
         }
-        
-        ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(dummyItem.weight));
-        ((TextView) rootView.findViewById(R.id.editTextHeight)).setText(String.valueOf(dummyItem.height));
-        ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", dummyItem.bmi));
-        ((TextView) rootView.findViewById(R.id.textViewDate)).setText(dummyItem.dateString);
+    
+        ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(bodyData.weight));
+        ((TextView) rootView.findViewById(R.id.editTextHeight)).setText(String.valueOf(bodyData.height));
+        ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", bodyData.bmi));
+        ((TextView) rootView.findViewById(R.id.textViewDate)).setText(bodyData.dateString);
     }
     
     public void setEditable(boolean blEditable)
@@ -74,15 +101,15 @@ public class BodyDataDetailFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
     
-        if(getArguments().containsKey(ARG_ITEM_ID) && getArguments().getString(ARG_ITEM_ID) != null)
+        if(getArguments().containsKey(BODY_DATA_ID) && getArguments().getString(BODY_DATA_ID) != null)
         {
-            dummyItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            bodyData = BodyDataContent.ITEM_MAP.get(getArguments().getString(BODY_DATA_ID));
             
             Activity activity = getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if(appBarLayout != null && dummyItem.date != null)
+            if(appBarLayout != null && bodyData.date != null)
             {
-                appBarLayout.setTitle(dummyItem.dateString);
+                appBarLayout.setTitle(bodyData.dateString);
             }
         }
     }
@@ -92,13 +119,14 @@ public class BodyDataDetailFragment extends Fragment
     {
         rootView = inflater.inflate(R.layout.bodydata_detail, container, false);
     
-        if(dummyItem != null)
+        if(bodyData != null)
         {
-            BodyDataDetailActivity activity = (BodyDataDetailActivity) getActivity();
+            //            BodyDataDetailActivity activity = (BodyDataDetailActivity) getActivity();
     
-            setValue(dummyItem);
+            setValue(bodyData);
         }
         
         return rootView;
     }
 }
+
