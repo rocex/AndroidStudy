@@ -52,11 +52,8 @@ public class BodyDataListActivity extends AppCompatActivity
             {
                 Context context = fab.getContext();
                 Intent intent = new Intent(context, BodyDataDetailActivity.class);
-                intent.putExtra(BodyDataDetailFragment.ARG_ITEM_ID, "1");
     
                 context.startActivity(intent);
-    
-                //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
         

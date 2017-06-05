@@ -28,7 +28,9 @@ public class BodyDataDetailFragment extends Fragment
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private DummyContent.DummyItem dummyItem;
+    
+    private View rootView;
     
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -36,25 +38,51 @@ public class BodyDataDetailFragment extends Fragment
      */
     public BodyDataDetailFragment()
     {
+        super();
+    }
+    
+    public void onCalculateBMI(View view)
+    {
+    }
+    
+    public void setValue(DummyContent.DummyItem dummyItem)
+    {
+        if(dummyItem == null)
+        {
+            ((TextView) rootView.findViewById(R.id.editTextWeight)).setText("");
+            ((TextView) rootView.findViewById(R.id.editTextHeight)).setText("");
+            ((TextView) rootView.findViewById(R.id.editTextBMI)).setText("");
+            ((TextView) rootView.findViewById(R.id.textViewDate)).setText("");
+            
+            return;
+        }
+        
+        ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(dummyItem.weight));
+        ((TextView) rootView.findViewById(R.id.editTextHeight)).setText(String.valueOf(dummyItem.height));
+        ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", dummyItem.bmi));
+        ((TextView) rootView.findViewById(R.id.textViewDate)).setText(dummyItem.dateString);
+    }
+    
+    public void setEditable(boolean blEditable)
+    {
+        rootView.findViewById(R.id.editTextWeight).setEnabled(blEditable);
+        rootView.findViewById(R.id.editTextHeight).setEnabled(blEditable);
     }
     
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        
-        if(getArguments().containsKey(ARG_ITEM_ID))
-        {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
     
+        if(getArguments().containsKey(ARG_ITEM_ID) && getArguments().getString(ARG_ITEM_ID) != null)
+        {
+            dummyItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            
             Activity activity = getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if(appBarLayout != null && mItem.date != null)
+            if(appBarLayout != null && dummyItem.date != null)
             {
-                appBarLayout.setTitle(mItem.dateString);
+                appBarLayout.setTitle(dummyItem.dateString);
             }
         }
     }
@@ -62,21 +90,14 @@ public class BodyDataDetailFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.bodydata_detail, container, false);
-        
-        // Show the dummy content as text in a TextView.
-        if(mItem != null)
-        {
-            ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(mItem.weight));
-            ((TextView) rootView.findViewById(R.id.editTextStature)).setText(String.valueOf(mItem.stature));
-            ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", mItem.bmi));
-            ((TextView) rootView.findViewById(R.id.textViewDate)).setText(mItem.dateString);
-        }
+        rootView = inflater.inflate(R.layout.bodydata_detail, container, false);
     
-        rootView.findViewById(R.id.editTextWeight).setEnabled(false);
-        rootView.findViewById(R.id.editTextStature).setEnabled(false);
-        rootView.findViewById(R.id.editTextBMI).setEnabled(false);
-        rootView.findViewById(R.id.textViewDate).setEnabled(false);
+        if(dummyItem != null)
+        {
+            BodyDataDetailActivity activity = (BodyDataDetailActivity) getActivity();
+    
+            setValue(dummyItem);
+        }
         
         return rootView;
     }

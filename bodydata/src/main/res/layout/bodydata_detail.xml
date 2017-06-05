@@ -26,11 +26,13 @@
             android:id="@+id/editTextWeight"
             android:layout_columnSpan="2"
             android:layout_gravity="fill"
+            android:enabled="false"
             android:gravity="end"
+            android:hint="请输入体重(kg)"
             android:inputType="numberDecimal"
+            android:maxLength="6"
             android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin"
-            android:text="0.0" />
+            android:paddingTop="@dimen/text_margin" />
         
         <TextView
             android:id="@+id/textView"
@@ -39,14 +41,16 @@
             android:text="身高(cm)" />
         
         <EditText
-            android:id="@+id/editTextStature"
+            android:id="@+id/editTextHeight"
             android:layout_columnSpan="2"
             android:layout_gravity="fill"
+            android:enabled="false"
             android:gravity="end"
-            android:inputType="numberSigned"
+            android:hint="请输入身高(cm)"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
             android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin"
-            android:text="0.0" />
+            android:paddingTop="@dimen/text_margin" />
         
         <TextView
             android:id="@+id/textView3"
@@ -58,11 +62,12 @@
             android:id="@+id/editTextBMI"
             android:layout_columnSpan="2"
             android:layout_gravity="fill"
+            android:enabled="false"
             android:gravity="end"
-            android:inputType="numberSigned"
+            android:inputType="numberDecimal"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
-            android:text="0.0" />
+            android:saveEnabled="true" />
         
         <TextView
             android:id="@+id/textView6"
@@ -75,8 +80,7 @@
             android:layout_columnSpan="2"
             android:layout_gravity="fill"
             android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin"
-            android:text="2017-06-02 12:22:51" />
+            android:paddingTop="@dimen/text_margin" />
         
         <TextView
             android:id="@+id/textView4"
@@ -94,7 +98,7 @@
         android:layout_gravity="bottom"
         android:layout_weight="1"
         android:orientation="horizontal">
-        
+    
         <Button
             android:id="@+id/btnReset"
             android:layout_width="wrap_content"

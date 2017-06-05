@@ -3,9 +3,7 @@ package cn.studyjams.s2.sj0225.rocex.bodydata.dummy;
 import android.text.format.DateFormat;
 
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,10 +29,10 @@ public class DummyContent
     
     static
     {
-        addItem(createDummyItem(1, 178, 64.5));
-        addItem(createDummyItem(2, 178, 65.6));
-        addItem(createDummyItem(3, 178, 66.7));
-        addItem(createDummyItem(4, 178, 68.3));
+        addItem(createDummyItem(178, 64.5));
+        addItem(createDummyItem(178, 65.6));
+        addItem(createDummyItem(178, 66.7));
+        addItem(createDummyItem(178, 68.3));
     }
     
     private static void addItem(DummyItem item)
@@ -43,9 +41,9 @@ public class DummyContent
         ITEM_MAP.put(item.id, item);
     }
     
-    private static DummyItem createDummyItem(int position, double stature, double weight)
+    private static DummyItem createDummyItem(double stature, double weight)
     {
-        return new DummyItem(String.valueOf(position), stature, weight);
+        return new DummyItem(stature, weight);
     }
     
     /**
@@ -57,28 +55,33 @@ public class DummyContent
         public final Date date;
     
         public String id;
-        public Double stature;  // 身高cm
-        public Double weight; // 体重kg
-        public Double bmi; // 体质指数BMI = weight / (stature / 100 * stature / 100)
-        
-        public DummyItem(String id, Double stature, Double weight)
+        public Double height = 1.0;  // 身高cm
+        public Double weight = 1.0; // 体重kg
+        public Double bmi; // 体质指数BMI = weight / (height / 100 * height / 100)
+    
+        public DummyItem()
         {
-            this.id = id;
+            this.id = String.valueOf(System.currentTimeMillis());
+    
+            date = new Date();
+    
+            dateString = DateFormat.format("yyyy-MM-dd HH:mm:ss", date).toString();
+        }
+    
+        public DummyItem(Double height, Double weight)
+        {
+            this();
+            
             this.weight = weight;
-            this.stature = stature;
-    
-            this.bmi = weight / (stature / 100 * stature / 100);
-    
-            date = Calendar.getInstance().getTime();
-    
-            CharSequence format = DateFormat.format("yyyy-mm-dd HH:mm:ss", date);
-            dateString = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").format(date);
+            this.height = height;
+        
+            this.bmi = weight / (height / 100 * height / 100);
         }
         
         @Override
         public String toString()
         {
-            return MessageFormat.format("{0}cm, {1}kg, BMI {2}", stature, weight, bmi);
+            return MessageFormat.format("{0}cm, {1}kg, BMI {2}", height, weight, bmi);
         }
     }
 }

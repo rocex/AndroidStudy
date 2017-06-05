@@ -3,16 +3,12 @@ package cn.studyjams.s2.sj0225.rocex.bodydata;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-
-import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.DummyContent;
 
 /**
  * An activity representing a single BodyData detail screen. This
@@ -22,6 +18,8 @@ import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.DummyContent;
  */
 public class BodyDataDetailActivity extends AppCompatActivity
 {
+    private BodyDataDetailFragment fragment;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,7 +35,10 @@ public class BodyDataDetailActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                if(fragment != null)
+                {
+                    fragment.setEditable(true);
+                }
             }
         });
         
@@ -59,12 +60,12 @@ public class BodyDataDetailActivity extends AppCompatActivity
         //
         if(savedInstanceState == null)
         {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
+            // Create the detail fragment and add it to the activity using a fragment transaction.
             Bundle arguments = new Bundle();
             arguments.putString(BodyDataDetailFragment.ARG_ITEM_ID, getIntent().getStringExtra(BodyDataDetailFragment.ARG_ITEM_ID));
-            BodyDataDetailFragment fragment = new BodyDataDetailFragment();
+            fragment = new BodyDataDetailFragment();
             fragment.setArguments(arguments);
+    
             getSupportFragmentManager().beginTransaction().add(R.id.bodydata_detail_container, fragment).commit();
         }
     }
@@ -92,36 +93,17 @@ public class BodyDataDetailActivity extends AppCompatActivity
     
     public void onCalculateBMI(View view)
     {
+        if(fragment != null)
+        {
+            fragment.onCalculateBMI(view);
+        }
     }
     
     public void onResetBMI(View view)
     {
-        setValue(null);
-    }
-    
-    public void setValue(DummyContent.DummyItem dummyItem)
-    {
-        if(dummyItem == null)
+        if(fragment != null)
         {
-            ((TextView) findViewById(R.id.editTextWeight)).setText("");
-            ((TextView) findViewById(R.id.editTextStature)).setText("");
-            ((TextView) findViewById(R.id.editTextBMI)).setText("");
-            ((TextView) findViewById(R.id.textViewDate)).setText("");
-            
-            return;
+            fragment.setValue(null);
         }
-        
-        ((TextView) findViewById(R.id.editTextWeight)).setText(String.valueOf(dummyItem.weight));
-        ((TextView) findViewById(R.id.editTextStature)).setText(String.valueOf(dummyItem.stature));
-        ((TextView) findViewById(R.id.editTextBMI)).setText(String.valueOf(dummyItem.bmi));
-        ((TextView) findViewById(R.id.textViewDate)).setText(dummyItem.dateString);
-    }
-    
-    public void setEditable(boolean blEditable)
-    {
-        findViewById(R.id.editTextWeight).setEnabled(blEditable);
-        findViewById(R.id.editTextStature).setEnabled(blEditable);
-        findViewById(R.id.editTextBMI).setEnabled(blEditable);
-        findViewById(R.id.textViewDate).setEnabled(blEditable);
     }
 }
