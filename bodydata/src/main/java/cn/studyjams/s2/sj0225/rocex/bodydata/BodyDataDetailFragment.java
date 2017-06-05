@@ -48,24 +48,26 @@ public class BodyDataDetailFragment extends Fragment
         
         if(strWeight == null || strWeight.trim().length() == 0)
         {
+            editTextWeight.requestFocus();
             editTextWeight.setError("请输入体重！");
             
             return;
         }
-        
-        bodyData.weight = Double.parseDouble(strWeight);
+    
+        bodyData.weight = Double.valueOf(strWeight);
         
         TextView editTextHeight = (TextView) rootView.findViewById(R.id.editTextHeight);
         String strHeight = editTextHeight.getText().toString();
         
         if(strHeight == null || strHeight.trim().length() == 0)
         {
+            editTextHeight.requestFocus();
             editTextHeight.setError("请输入身高！");
             
             return;
         }
-        
-        bodyData.height = Double.parseDouble(strHeight);
+    
+        bodyData.height = Double.valueOf(strHeight);
         
         bodyData.calculate();
         
@@ -94,6 +96,9 @@ public class BodyDataDetailFragment extends Fragment
     {
         rootView.findViewById(R.id.editTextWeight).setEnabled(blEditable);
         rootView.findViewById(R.id.editTextHeight).setEnabled(blEditable);
+    
+        rootView.findViewById(R.id.btnReset).setEnabled(blEditable);
+        rootView.findViewById(R.id.btnCalculate).setEnabled(blEditable);
     }
     
     @Override

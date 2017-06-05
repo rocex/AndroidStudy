@@ -107,6 +107,7 @@
             android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@android:color/holo_red_light"
+            android:enabled="false"
             android:onClick="onResetBMI"
             android:text="重置" />
         
@@ -118,6 +119,7 @@
             android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
+            android:enabled="false"
             android:onClick="onCalculateBMI"
             android:text="计算" />
     
