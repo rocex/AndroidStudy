@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.BodyDataContent;
+import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
+import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataContent;
 
 /**
  * An activity representing a list of BodyDatas. This activity
@@ -28,8 +30,7 @@ import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.BodyDataContent;
 public class BodyDataListActivity extends AppCompatActivity
 {
     /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
+     * Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
      */
     private boolean mTwoPane;
     
@@ -78,9 +79,9 @@ public class BodyDataListActivity extends AppCompatActivity
     
     public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>
     {
-        private final List<BodyDataContent.BodyData> mValues;
+        private final List<BodyData> mValues;
     
-        public SimpleItemRecyclerViewAdapter(List<BodyDataContent.BodyData> items)
+        public SimpleItemRecyclerViewAdapter(List<BodyData> items)
         {
             mValues = items;
         }
@@ -97,10 +98,10 @@ public class BodyDataListActivity extends AppCompatActivity
         public void onBindViewHolder(final ViewHolder holder, int position)
         {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).toString());
-            
-            holder.mView.setOnClickListener(new View.OnClickListener()
+            holder.textViewId.setText(DateFormat.format("yyyy-MM-dd", mValues.get(position).date).toString());
+            holder.textViewWeight.setText(mValues.get(position).toString());
+    
+            holder.view.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
@@ -133,23 +134,29 @@ public class BodyDataListActivity extends AppCompatActivity
         
         public class ViewHolder extends RecyclerView.ViewHolder
         {
-            public final View mView;
-            public final TextView mIdView;
-            public final TextView mContentView;
-            public BodyDataContent.BodyData mItem;
+            public final View view;
+            public final TextView textViewId;
+            public final TextView textViewDate;
+            public final TextView textViewWeight;
+            public final TextView textViewHeight;
+    
+            public BodyData mItem;
             
             public ViewHolder(View view)
             {
                 super(view);
-                mView = view;
-                mIdView = (TextView) view.findViewById(R.id.id);
-                mContentView = (TextView) view.findViewById(R.id.content);
+    
+                this.view = view;
+                textViewId = (TextView) view.findViewById(R.id.id);
+                textViewDate = (TextView) view.findViewById(R.id.textViewDate);
+                textViewWeight = (TextView) view.findViewById(R.id.textViewWeight);
+                textViewHeight = (TextView) view.findViewById(R.id.textViewHeight);
             }
             
             @Override
             public String toString()
             {
-                return super.toString() + " '" + mContentView.getText() + "'";
+                return super.toString() + " '" + textViewWeight.getText() + "'";
             }
         }
     }

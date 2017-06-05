@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.BodyDataContent;
+import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
+import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataContent;
 
 /**
  * A fragment representing a single BodyData detail screen.
@@ -20,15 +21,14 @@ import cn.studyjams.s2.sj0225.rocex.bodydata.dummy.BodyDataContent;
 public class BodyDataDetailFragment extends Fragment
 {
     /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
+     * The fragment argument representing the item ID that this fragment represents.
      */
     public static final String BODY_DATA_ID = "body_data_id";
     
     /**
-     * The dummy content this fragment is presenting.
+     * The model content this fragment is presenting.
      */
-    private BodyDataContent.BodyData bodyData;
+    private BodyData bodyData;
     
     private View rootView;
     
@@ -74,7 +74,7 @@ public class BodyDataDetailFragment extends Fragment
         setValue(bodyData);
     }
     
-    public void setValue(BodyDataContent.BodyData bodyData)
+    public void setValue(BodyData bodyData)
     {
         if(bodyData == null)
         {
@@ -126,9 +126,13 @@ public class BodyDataDetailFragment extends Fragment
         
         if(bodyData != null)
         {
-            // BodyDataDetailActivity activity = (BodyDataDetailActivity) getActivity();
-            
             setValue(bodyData);
+        }
+        else
+        {
+            bodyData = new BodyData();
+    
+            setEditable(true);
         }
         
         return rootView;
