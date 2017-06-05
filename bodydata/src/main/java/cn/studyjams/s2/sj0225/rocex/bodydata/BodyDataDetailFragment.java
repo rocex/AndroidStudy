@@ -43,32 +43,32 @@ public class BodyDataDetailFragment extends Fragment
     
     public void onCalculateBMI(View view)
     {
-        TextView editTextHeight = (TextView) rootView.findViewById(R.id.editTextHeight);
-        String strHeight = editTextHeight.getText().toString();
-    
-        if(strHeight == null || strHeight.trim().length() == 0)
-        {
-            editTextHeight.setError("请输入身高！");
-        
-            return;
-        }
-    
-        bodyData.height = Double.parseDouble(strHeight);
-    
         TextView editTextWeight = (TextView) rootView.findViewById(R.id.editTextWeight);
         String strWeight = editTextWeight.getText().toString();
-    
+        
         if(strWeight == null || strWeight.trim().length() == 0)
         {
             editTextWeight.setError("请输入体重！");
-        
+            
             return;
         }
-    
+        
         bodyData.weight = Double.parseDouble(strWeight);
-    
+        
+        TextView editTextHeight = (TextView) rootView.findViewById(R.id.editTextHeight);
+        String strHeight = editTextHeight.getText().toString();
+        
+        if(strHeight == null || strHeight.trim().length() == 0)
+        {
+            editTextHeight.setError("请输入身高！");
+            
+            return;
+        }
+        
+        bodyData.height = Double.parseDouble(strHeight);
+        
         bodyData.calculate();
-    
+        
         setValue(bodyData);
     }
     
@@ -83,7 +83,7 @@ public class BodyDataDetailFragment extends Fragment
             
             return;
         }
-    
+        
         ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(bodyData.weight));
         ((TextView) rootView.findViewById(R.id.editTextHeight)).setText(String.valueOf(bodyData.height));
         ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", bodyData.bmi));
@@ -100,7 +100,7 @@ public class BodyDataDetailFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-    
+        
         if(getArguments().containsKey(BODY_DATA_ID) && getArguments().getString(BODY_DATA_ID) != null)
         {
             bodyData = BodyDataContent.ITEM_MAP.get(getArguments().getString(BODY_DATA_ID));
@@ -118,11 +118,11 @@ public class BodyDataDetailFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         rootView = inflater.inflate(R.layout.bodydata_detail, container, false);
-    
+        
         if(bodyData != null)
         {
-            //            BodyDataDetailActivity activity = (BodyDataDetailActivity) getActivity();
-    
+            // BodyDataDetailActivity activity = (BodyDataDetailActivity) getActivity();
+            
             setValue(bodyData);
         }
         
