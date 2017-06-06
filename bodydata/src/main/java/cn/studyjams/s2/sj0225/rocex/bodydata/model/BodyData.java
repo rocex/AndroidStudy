@@ -2,13 +2,14 @@ package cn.studyjams.s2.sj0225.rocex.bodydata.model;
 
 import android.text.format.DateFormat;
 
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 
 /**
  * A model item representing a piece of content.
  */
-public class BodyData
+public class BodyData implements Serializable
 {
     public final String dateString;
     public final Date date;

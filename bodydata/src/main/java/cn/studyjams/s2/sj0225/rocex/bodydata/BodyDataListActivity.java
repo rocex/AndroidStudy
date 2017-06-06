@@ -138,6 +138,7 @@ public class BodyDataListActivity extends AppCompatActivity
         public class ViewHolder extends RecyclerView.ViewHolder
         {
             public final View view;
+            public final TextView textViewId;
             public final TextView textViewDate;
             public final TextView textViewWeight;
             public final TextView textViewHeight;
@@ -150,6 +151,7 @@ public class BodyDataListActivity extends AppCompatActivity
                 super(view);
     
                 this.view = view;
+                textViewId = (TextView) view.findViewById(R.id.textViewId);
                 textViewDate = (TextView) view.findViewById(R.id.textViewDate);
                 textViewWeight = (TextView) view.findViewById(R.id.textViewWeight);
                 textViewHeight = (TextView) view.findViewById(R.id.textViewHeight);
