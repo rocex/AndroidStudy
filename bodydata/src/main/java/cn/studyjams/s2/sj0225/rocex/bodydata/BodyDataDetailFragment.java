@@ -1,6 +1,5 @@
 package cn.studyjams.s2.sj0225.rocex.bodydata;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -97,7 +96,6 @@ public class BodyDataDetailFragment extends Fragment
         rootView.findViewById(R.id.editTextWeight).setEnabled(blEditable);
         rootView.findViewById(R.id.editTextHeight).setEnabled(blEditable);
     
-        rootView.findViewById(R.id.btnReset).setEnabled(blEditable);
         rootView.findViewById(R.id.btnCalculate).setEnabled(blEditable);
     }
     
@@ -109,9 +107,8 @@ public class BodyDataDetailFragment extends Fragment
         if(getArguments().containsKey(BODY_DATA_ID) && getArguments().getString(BODY_DATA_ID) != null)
         {
             bodyData = BodyDataContent.ITEM_MAP.get(getArguments().getString(BODY_DATA_ID));
-            
-            Activity activity = getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+    
+            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
             if(appBarLayout != null && bodyData.date != null)
             {
                 appBarLayout.setTitle(bodyData.dateString);

@@ -12,7 +12,7 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="4"
         android:columnCount="3"
         android:padding="@dimen/text_margin">
         
@@ -20,7 +20,7 @@
             android:id="@+id/textView2"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
-            android:text="体重(kg)" />
+            android:text="@string/weight" />
         
         <EditText
             android:id="@+id/editTextWeight"
@@ -28,7 +28,7 @@
             android:layout_gravity="fill"
             android:enabled="false"
             android:gravity="end"
-            android:hint="请输入体重(kg)"
+            android:hint="@string/weight_hint"
             android:inputType="numberDecimal"
             android:maxLength="6"
             android:paddingBottom="@dimen/text_margin"
@@ -38,7 +38,7 @@
             android:id="@+id/textView"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
-            android:text="身高(cm)" />
+            android:text="@string/height" />
         
         <EditText
             android:id="@+id/editTextHeight"
@@ -46,7 +46,7 @@
             android:layout_gravity="fill"
             android:enabled="false"
             android:gravity="end"
-            android:hint="请输入身高(cm)"
+            android:hint="@string/height_hint"
             android:inputType="numberDecimal"
             android:maxLength="6"
             android:paddingBottom="@dimen/text_margin"
@@ -56,7 +56,7 @@
             android:id="@+id/textView3"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
-            android:text="BMI" />
+            android:text="@string/bmi" />
         
         <EditText
             android:id="@+id/editTextBMI"
@@ -73,7 +73,7 @@
             android:id="@+id/textView6"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
-            android:text="时间" />
+            android:text="@string/bmi_date" />
         
         <TextView
             android:id="@+id/textViewDate"
@@ -88,42 +88,19 @@
             android:layout_gravity="fill"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
-            android:text="体质指数BMI = 体重 / (身高 / 100 * 身高 / 100)" />
+            android:text="@string/bmi_desc" />
 
     </GridLayout>
     
-    <LinearLayout
+    <Button
+        android:id="@+id/btnCalculate"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-    
-        <Button
-            android:id="@+id/btnReset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_red_light"
-            android:enabled="false"
-            android:onClick="onResetBMI"
-            android:text="重置" />
-        
-        <Button
-            android:id="@+id/btnCalculate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_blue_light"
-            android:enabled="false"
-            android:onClick="onCalculateBMI"
-            android:text="计算" />
-    
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@android:color/holo_blue_light"
+        android:enabled="false"
+        android:onClick="onCalculateBMI"
+        android:text="@string/Calculate" />
 
 </LinearLayout>
     

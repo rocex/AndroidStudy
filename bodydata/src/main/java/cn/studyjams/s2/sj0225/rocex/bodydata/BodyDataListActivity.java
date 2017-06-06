@@ -79,11 +79,11 @@ public class BodyDataListActivity extends AppCompatActivity
     
     public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>
     {
-        private final List<BodyData> mValues;
+        private final List<BodyData> listBodyData;
     
-        public SimpleItemRecyclerViewAdapter(List<BodyData> items)
+        public SimpleItemRecyclerViewAdapter(List<BodyData> listBodyData)
         {
-            mValues = items;
+            this.listBodyData = listBodyData;
         }
         
         @Override
@@ -97,10 +97,13 @@ public class BodyDataListActivity extends AppCompatActivity
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position)
         {
-            holder.mItem = mValues.get(position);
-            holder.textViewId.setText(DateFormat.format("yyyy-MM-dd", mValues.get(position).date).toString());
-            holder.textViewWeight.setText(mValues.get(position).toString());
+            holder.bodyData = listBodyData.get(position);
     
+            holder.textViewDate.setText(DateFormat.format("yyyy-MM-dd", holder.bodyData.date).toString());
+            holder.textViewWeight.setText(holder.bodyData.weight + "kg");
+            holder.textViewHeight.setText(holder.bodyData.height + "cm");
+            holder.textViewBMI.setText(String.format("%.2f", holder.bodyData.bmi));
+            
             holder.view.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -109,7 +112,7 @@ public class BodyDataListActivity extends AppCompatActivity
                     if(mTwoPane)
                     {
                         Bundle arguments = new Bundle();
-                        arguments.putString(BodyDataDetailFragment.BODY_DATA_ID, holder.mItem.id);
+                        arguments.putString(BodyDataDetailFragment.BODY_DATA_ID, holder.bodyData.id);
                         BodyDataDetailFragment fragment = new BodyDataDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction().replace(R.id.bodydata_detail_container, fragment).commit();
@@ -118,7 +121,7 @@ public class BodyDataListActivity extends AppCompatActivity
                     {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, BodyDataDetailActivity.class);
-                        intent.putExtra(BodyDataDetailFragment.BODY_DATA_ID, holder.mItem.id);
+                        intent.putExtra(BodyDataDetailFragment.BODY_DATA_ID, holder.bodyData.id);
                         
                         context.startActivity(intent);
                     }
@@ -129,34 +132,34 @@ public class BodyDataListActivity extends AppCompatActivity
         @Override
         public int getItemCount()
         {
-            return mValues.size();
+            return listBodyData.size();
         }
         
         public class ViewHolder extends RecyclerView.ViewHolder
         {
             public final View view;
-            public final TextView textViewId;
             public final TextView textViewDate;
             public final TextView textViewWeight;
             public final TextView textViewHeight;
+            public final TextView textViewBMI;
     
-            public BodyData mItem;
+            public BodyData bodyData;
             
             public ViewHolder(View view)
             {
                 super(view);
     
                 this.view = view;
-                textViewId = (TextView) view.findViewById(R.id.id);
                 textViewDate = (TextView) view.findViewById(R.id.textViewDate);
                 textViewWeight = (TextView) view.findViewById(R.id.textViewWeight);
                 textViewHeight = (TextView) view.findViewById(R.id.textViewHeight);
+                textViewBMI = (TextView) view.findViewById(R.id.textViewBMI);
             }
             
             @Override
             public String toString()
             {
-                return super.toString() + " '" + textViewWeight.getText() + "'";
+                return super.toString() + " '" + textViewBMI.getText() + "'";
             }
         }
     }

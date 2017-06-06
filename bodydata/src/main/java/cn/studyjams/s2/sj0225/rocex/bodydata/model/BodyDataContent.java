@@ -24,20 +24,20 @@ public class BodyDataContent
     
     static
     {
-        addItem(createBodyData(178, 64.5));
-        addItem(createBodyData(178, 65.6));
-        addItem(createBodyData(178, 66.7));
-        addItem(createBodyData(178, 68.3));
+        addItem(createBodyData(181, 64.5));
+        addItem(createBodyData(182, 65.6));
+        addItem(createBodyData(183, 66.7));
+        addItem(createBodyData(184, 68.3));
     }
     
-    private static void addItem(BodyData item)
+    private static void addItem(BodyData bodyData)
     {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEMS.add(bodyData);
+        ITEM_MAP.put(bodyData.id, bodyData);
     }
     
-    private static BodyData createBodyData(double stature, double weight)
+    private static BodyData createBodyData(double height, double weight)
     {
-        return new BodyData(stature, weight);
+        return new BodyData(height, weight);
     }
 }

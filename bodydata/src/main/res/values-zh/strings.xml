@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">身体数据</string>
-    <string name="title_bodydata_detail">详情</string>
+    <string name="title_bodydata_detail">身体数据详情</string>
+    <string name="weight">体重(kg)</string>
+    <string name="height">身高(cm)</string>
+    <string name="bmi">BMI</string>
+    <string name="Calculate">计算</string>
+    <string name="bmi_desc">体质指数BMI = 体重 / (身高 / 100 * 身高 / 100)</string>
+    <string name="bmi_date">时间</string>
+    <string name="height_hint">请输入身高(cm)</string>
+    <string name="weight_hint">请输入体重(kg)</string>
 </resources>
