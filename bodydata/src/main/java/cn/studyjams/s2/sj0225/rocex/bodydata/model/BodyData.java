@@ -12,7 +12,7 @@ import java.util.Date;
 public class BodyData implements Serializable
 {
     public final String dateString;
-    public final Date date;
+    public final Date create_date;
     
     public String id;
     public Double height = 1.0;  // 身高cm
@@ -22,10 +22,10 @@ public class BodyData implements Serializable
     public BodyData()
     {
         this.id = String.valueOf(System.currentTimeMillis());
-        
-        date = new Date();
-        
-        dateString = DateFormat.format("yyyy-MM-dd HH:mm:ss", date).toString();
+    
+        create_date = new Date();
+    
+        dateString = DateFormat.format("yyyy-MM-dd HH:mm:ss", create_date).toString();
     }
     
     public BodyData(Double height, Double weight)

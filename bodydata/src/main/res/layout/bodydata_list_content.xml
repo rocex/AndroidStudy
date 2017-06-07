@@ -8,35 +8,35 @@
         android:id="@+id/textViewId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="8dp"
         android:textAppearance="?attr/textAppearanceListItem"
         android:visibility="gone" />
     
     <TextView
-        android:id="@+id/textViewDate"
+        android:id="@+id/textViewCreateDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="8dp"
         android:textAppearance="?attr/textAppearanceListItem" />
     
     <TextView
         android:id="@+id/textViewWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="8dp"
         android:textAppearance="?attr/textAppearanceListItem" />
     
     <TextView
         android:id="@+id/textViewHeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="8dp"
         android:textAppearance="?attr/textAppearanceListItem" />
     
     <TextView
         android:id="@+id/textViewBMI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="8dp"
         android:textAppearance="?attr/textAppearanceListItem" />
 </LinearLayout>

@@ -80,7 +80,7 @@ public class BodyDataDetailFragment extends Fragment
             ((TextView) rootView.findViewById(R.id.editTextWeight)).setText("");
             ((TextView) rootView.findViewById(R.id.editTextHeight)).setText("");
             ((TextView) rootView.findViewById(R.id.editTextBMI)).setText("");
-            ((TextView) rootView.findViewById(R.id.textViewDate)).setText("");
+            ((TextView) rootView.findViewById(R.id.textViewCreateDate)).setText("");
             
             return;
         }
@@ -88,7 +88,7 @@ public class BodyDataDetailFragment extends Fragment
         ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(bodyData.weight));
         ((TextView) rootView.findViewById(R.id.editTextHeight)).setText(String.valueOf(bodyData.height));
         ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", bodyData.bmi));
-        ((TextView) rootView.findViewById(R.id.textViewDate)).setText(bodyData.dateString);
+        ((TextView) rootView.findViewById(R.id.textViewCreateDate)).setText(bodyData.dateString);
     }
     
     public void setEditable(boolean blEditable)
@@ -109,9 +109,9 @@ public class BodyDataDetailFragment extends Fragment
             bodyData = BodyDataContent.ITEM_MAP.get(getArguments().getString(BODY_DATA_ID));
     
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
-            if(appBarLayout != null && bodyData.date != null)
+            if(appBarLayout != null && bodyData.create_date != null)
             {
-                appBarLayout.setTitle(bodyData.dateString);
+                //                appBarLayout.setTitle(bodyData.dateString);
             }
         }
     }

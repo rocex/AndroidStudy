@@ -99,7 +99,7 @@ public class BodyDataListActivity extends AppCompatActivity
         {
             holder.bodyData = listBodyData.get(position);
     
-            holder.textViewDate.setText(DateFormat.format("yyyy-MM-dd", holder.bodyData.date).toString());
+            holder.textViewCreateDate.setText(DateFormat.format("yyyy-MM-dd", holder.bodyData.create_date).toString());
             holder.textViewWeight.setText(holder.bodyData.weight + "kg");
             holder.textViewHeight.setText(holder.bodyData.height + "cm");
             holder.textViewBMI.setText(String.format("%.2f", holder.bodyData.bmi));
@@ -139,7 +139,7 @@ public class BodyDataListActivity extends AppCompatActivity
         {
             public final View view;
             public final TextView textViewId;
-            public final TextView textViewDate;
+            public final TextView textViewCreateDate;
             public final TextView textViewWeight;
             public final TextView textViewHeight;
             public final TextView textViewBMI;
@@ -152,7 +152,7 @@ public class BodyDataListActivity extends AppCompatActivity
     
                 this.view = view;
                 textViewId = (TextView) view.findViewById(R.id.textViewId);
-                textViewDate = (TextView) view.findViewById(R.id.textViewDate);
+                textViewCreateDate = (TextView) view.findViewById(R.id.textViewCreateDate);
                 textViewWeight = (TextView) view.findViewById(R.id.textViewWeight);
                 textViewHeight = (TextView) view.findViewById(R.id.textViewHeight);
                 textViewBMI = (TextView) view.findViewById(R.id.textViewBMI);
