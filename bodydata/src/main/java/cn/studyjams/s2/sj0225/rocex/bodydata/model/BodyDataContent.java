@@ -18,7 +18,7 @@ public class BodyDataContent
     public static final List<BodyData> ITEMS = new ArrayList<BodyData>();
     
     /**
-     * A map of sample (model) items, by ID.
+     * A map of sample (model) items, by _ID.
      */
     public static final Map<String, BodyData> ITEM_MAP = new HashMap<String, BodyData>();
     

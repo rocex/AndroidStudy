@@ -7,12 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by Administrator on 2017-6-6.
+ * Created by rocexwang on 2017-6-6 21:37:01
  */
 public class BodyDataDBHelper extends SQLiteOpenHelper
 {
-    private String strCreateDBSQL = "create table bodydata (id integer primary key autoincrement, weight real, height real" +
-            ", create_date date, bmi real);";
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "bodydata.db";
+    
+    private static String strCreateTableSQL = "create table bodydata (_id integer primary key autoincrement, weight real, height real, bmi real, create_time integer);";
     
     public BodyDataDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
     {
@@ -21,7 +23,7 @@ public class BodyDataDBHelper extends SQLiteOpenHelper
     
     public BodyDataDBHelper(Context context)
     {
-        this(context, "bodydata", null, 1);
+        this(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     
     public BodyDataDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler)
@@ -32,16 +34,24 @@ public class BodyDataDBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        SQLiteDatabase.openOrCreateDatabase("bodydata",null);
+        Cursor cursor = null;
         
-        Cursor cursor = db.rawQuery("select name from sqlite_master where type='table' and name='bodydata'", null);
-        
-        if(cursor.getCount() == 0)
+        try
         {
-            db.execSQL(strCreateDBSQL);
+            cursor = db.rawQuery("select name from sqlite_master where type='table' and name='bodydata'", null);
+            
+            if(cursor.getCount() == 0)
+            {
+                db.execSQL(strCreateTableSQL);
+            }
         }
-    
-        cursor.close();
+        finally
+        {
+            if(cursor != null)
+            {
+                cursor.close();
+            }
+        }
     }
     
     @Override

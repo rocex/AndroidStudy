@@ -1,5 +1,7 @@
 package cn.studyjams.s2.sj0225.rocex.bodydata;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -21,7 +23,7 @@ import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataDBHelper;
 public class BodyDataDetailFragment extends Fragment
 {
     /**
-     * The fragment argument representing the item ID that this fragment represents.
+     * The fragment argument representing the item _ID that this fragment represents.
      */
     public static final String BODY_DATA_ID = "body_data_id";
     
@@ -53,7 +55,7 @@ public class BodyDataDetailFragment extends Fragment
             
             return;
         }
-    
+        
         bodyData.weight = Double.valueOf(strWeight);
         
         TextView editTextHeight = (TextView) rootView.findViewById(R.id.editTextHeight);
@@ -66,14 +68,33 @@ public class BodyDataDetailFragment extends Fragment
             
             return;
         }
-    
+        
         bodyData.height = Double.valueOf(strHeight);
         
         bodyData.calculate();
         
         setValue(bodyData);
-    
-        BodyDataDBHelper bodyDataDBHelper = new BodyDataDBHelper(getActivity());
+        
+        ContentValues contentValues = new ContentValues();
+        
+        contentValues.put(BodyData.BMI, bodyData.bmi);
+        contentValues.put(BodyData.HEIGHT, bodyData.height);
+        contentValues.put(BodyData.WEIGHT, bodyData.weight);
+        contentValues.put(BodyData.CREATE_TIME, String.valueOf(bodyData.getCreate_time()));
+        
+        SQLiteDatabase db = null;
+        try
+        {
+            db = new BodyDataDBHelper(getContext()).getWritableDatabase();
+            db.insert(BodyData.TABLE_NAME, null, contentValues);
+        }
+        finally
+        {
+            if(db != null)
+            {
+                db.close();
+            }
+        }
     }
     
     public void setValue(BodyData bodyData)
@@ -98,7 +119,7 @@ public class BodyDataDetailFragment extends Fragment
     {
         rootView.findViewById(R.id.editTextWeight).setEnabled(blEditable);
         rootView.findViewById(R.id.editTextHeight).setEnabled(blEditable);
-    
+        
         rootView.findViewById(R.id.btnCalculate).setEnabled(blEditable);
     }
     
@@ -110,9 +131,9 @@ public class BodyDataDetailFragment extends Fragment
         if(getArguments().containsKey(BODY_DATA_ID) && getArguments().getString(BODY_DATA_ID) != null)
         {
             bodyData = BodyDataContent.ITEM_MAP.get(getArguments().getString(BODY_DATA_ID));
-    
+            
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
-            if(appBarLayout != null && bodyData.create_date != null)
+            if(appBarLayout != null)
             {
                 //                appBarLayout.setTitle(bodyData.dateString);
             }
@@ -131,7 +152,7 @@ public class BodyDataDetailFragment extends Fragment
         else
         {
             bodyData = new BodyData();
-    
+            
             setEditable(true);
         }
         

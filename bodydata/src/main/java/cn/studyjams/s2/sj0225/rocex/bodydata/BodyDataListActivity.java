@@ -38,13 +38,13 @@ public class BodyDataListActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-    
+        
         setContentView(R.layout.activity_bodydata_list);
         
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-    
+        
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
@@ -53,7 +53,7 @@ public class BodyDataListActivity extends AppCompatActivity
             {
                 Context context = fab.getContext();
                 Intent intent = new Intent(context, BodyDataDetailActivity.class);
-    
+                
                 context.startActivity(intent);
             }
         });
@@ -80,7 +80,7 @@ public class BodyDataListActivity extends AppCompatActivity
     public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>
     {
         private final List<BodyData> listBodyData;
-    
+        
         public SimpleItemRecyclerViewAdapter(List<BodyData> listBodyData)
         {
             this.listBodyData = listBodyData;
@@ -98,8 +98,8 @@ public class BodyDataListActivity extends AppCompatActivity
         public void onBindViewHolder(final ViewHolder holder, int position)
         {
             holder.bodyData = listBodyData.get(position);
-    
-            holder.textViewCreateDate.setText(DateFormat.format("yyyy-MM-dd", holder.bodyData.create_date).toString());
+            
+            holder.textViewCreateDate.setText(DateFormat.format("yyyy-MM-dd", holder.bodyData.getCreate_time()).toString());
             holder.textViewWeight.setText(holder.bodyData.weight + "kg");
             holder.textViewHeight.setText(holder.bodyData.height + "cm");
             holder.textViewBMI.setText(String.format("%.2f", holder.bodyData.bmi));
@@ -143,13 +143,13 @@ public class BodyDataListActivity extends AppCompatActivity
             public final TextView textViewWeight;
             public final TextView textViewHeight;
             public final TextView textViewBMI;
-    
+            
             public BodyData bodyData;
             
             public ViewHolder(View view)
             {
                 super(view);
-    
+                
                 this.view = view;
                 textViewId = (TextView) view.findViewById(R.id.textViewId);
                 textViewCreateDate = (TextView) view.findViewById(R.id.textViewCreateDate);

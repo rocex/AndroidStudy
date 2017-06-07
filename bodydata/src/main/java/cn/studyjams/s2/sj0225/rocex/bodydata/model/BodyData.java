@@ -2,17 +2,19 @@ package cn.studyjams.s2.sj0225.rocex.bodydata.model;
 
 import android.text.format.DateFormat;
 
-import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.Date;
 
 /**
  * A model item representing a piece of content.
  */
-public class BodyData implements Serializable
+public class BodyData extends SuperModel
 {
+    public static final String HEIGHT = "height";
+    public static final String WEIGHT = "weight";
+    public static final String BMI = "bmi";
+    public static final String TABLE_NAME = "bodydata";
+    
     public final String dateString;
-    public final Date create_date;
     
     public String id;
     public Double height = 1.0;  // 身高cm
@@ -21,11 +23,11 @@ public class BodyData implements Serializable
     
     public BodyData()
     {
-        this.id = String.valueOf(System.currentTimeMillis());
-    
-        create_date = new Date();
-    
-        dateString = DateFormat.format("yyyy-MM-dd HH:mm:ss", create_date).toString();
+        super();
+        
+        setId(getCreate_time());
+        
+        dateString = DateFormat.format("yyyy-MM-dd HH:mm:ss", getCreate_time()).toString();
     }
     
     public BodyData(Double height, Double weight)
@@ -54,5 +56,11 @@ public class BodyData implements Serializable
     public String toString()
     {
         return MessageFormat.format("{0}cm, {1}kg, BMI {2}", height, weight, bmi);
+    }
+    
+    @Override
+    public String getTableName()
+    {
+        return TABLE_NAME;
     }
 }
