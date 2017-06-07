@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
 import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataContent;
+import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataDBHelper;
 
 /**
  * A fragment representing a single BodyData detail screen.
@@ -71,6 +72,8 @@ public class BodyDataDetailFragment extends Fragment
         bodyData.calculate();
         
         setValue(bodyData);
+    
+        BodyDataDBHelper bodyDataDBHelper = new BodyDataDBHelper(getActivity());
     }
     
     public void setValue(BodyData bodyData)

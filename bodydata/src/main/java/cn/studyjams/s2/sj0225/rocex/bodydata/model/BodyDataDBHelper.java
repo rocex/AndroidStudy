@@ -34,6 +34,12 @@ public class BodyDataDBHelper extends SQLiteOpenHelper
     {
         Cursor cursor = db.rawQuery("select name from sqlite_master where type='table' and name='bodydata'", null);
         
+        if(cursor.getCount() == 0)
+        {
+            db.execSQL(strCreateDBSQL);
+        }
+    
+        cursor.close();
     }
     
     @Override
