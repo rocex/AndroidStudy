@@ -18,6 +18,7 @@ import java.util.List;
 
 import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
 import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataContent;
+import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataDBHelper;
 
 /**
  * An activity representing a list of BodyDatas. This activity
@@ -74,6 +75,10 @@ public class BodyDataListActivity extends AppCompatActivity
     
     private void setupRecyclerView(@NonNull RecyclerView recyclerView)
     {
+        BodyDataDBHelper bodyDataDBHelper = new BodyDataDBHelper(this);
+    
+        bodyDataDBHelper.query();
+        
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(BodyDataContent.ITEMS));
     }
     
@@ -98,8 +103,8 @@ public class BodyDataListActivity extends AppCompatActivity
         public void onBindViewHolder(final ViewHolder holder, int position)
         {
             holder.bodyData = listBodyData.get(position);
-            
-            holder.textViewCreateDate.setText(DateFormat.format("yyyy-MM-dd", holder.bodyData.getCreate_time()).toString());
+    
+            holder.textViewCreateTime.setText(DateFormat.format("yyyy-MM-dd", holder.bodyData.getCreate_time()).toString());
             holder.textViewWeight.setText(holder.bodyData.weight + "kg");
             holder.textViewHeight.setText(holder.bodyData.height + "cm");
             holder.textViewBMI.setText(String.format("%.2f", holder.bodyData.bmi));
@@ -112,7 +117,7 @@ public class BodyDataListActivity extends AppCompatActivity
                     if(mTwoPane)
                     {
                         Bundle arguments = new Bundle();
-                        arguments.putString(BodyDataDetailFragment.BODY_DATA_ID, holder.bodyData.id);
+                        arguments.putLong(BodyDataDetailFragment.BODY_DATA_ID, holder.bodyData.getId());
                         BodyDataDetailFragment fragment = new BodyDataDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction().replace(R.id.bodydata_detail_container, fragment).commit();
@@ -121,7 +126,7 @@ public class BodyDataListActivity extends AppCompatActivity
                     {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, BodyDataDetailActivity.class);
-                        intent.putExtra(BodyDataDetailFragment.BODY_DATA_ID, holder.bodyData.id);
+                        intent.putExtra(BodyDataDetailFragment.BODY_DATA_ID, holder.bodyData.getId());
                         
                         context.startActivity(intent);
                     }
@@ -139,7 +144,7 @@ public class BodyDataListActivity extends AppCompatActivity
         {
             public final View view;
             public final TextView textViewId;
-            public final TextView textViewCreateDate;
+            public final TextView textViewCreateTime;
             public final TextView textViewWeight;
             public final TextView textViewHeight;
             public final TextView textViewBMI;
@@ -152,7 +157,7 @@ public class BodyDataListActivity extends AppCompatActivity
                 
                 this.view = view;
                 textViewId = (TextView) view.findViewById(R.id.textViewId);
-                textViewCreateDate = (TextView) view.findViewById(R.id.textViewCreateDate);
+                textViewCreateTime = (TextView) view.findViewById(R.id.textViewCreateTime);
                 textViewWeight = (TextView) view.findViewById(R.id.textViewWeight);
                 textViewHeight = (TextView) view.findViewById(R.id.textViewHeight);
                 textViewBMI = (TextView) view.findViewById(R.id.textViewBMI);

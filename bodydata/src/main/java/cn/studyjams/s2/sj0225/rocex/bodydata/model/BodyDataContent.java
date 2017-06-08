@@ -33,7 +33,7 @@ public class BodyDataContent
     private static void addItem(BodyData bodyData)
     {
         ITEMS.add(bodyData);
-        ITEM_MAP.put(bodyData.id, bodyData);
+        ITEM_MAP.put(String.valueOf(bodyData.getId()), bodyData);
     }
     
     private static BodyData createBodyData(double height, double weight)

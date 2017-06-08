@@ -1,43 +1,57 @@
 package cn.studyjams.s2.sj0225.rocex.bodydata.model;
 
-import android.provider.BaseColumns;
+import java.io.Serializable;
 
 /**
  * Created by rocexwang on 2017-06-07 22:57:01
  */
-public abstract class SuperModel implements BaseColumns
+public abstract class SuperModel implements Serializable
 {
+    public static final String ID = "id";
+    public static final String TS = "ts";
     public static final String CREATE_TIME = "create_time";
     
-    private long create_time;
-    private long _id;
+    private Long create_time;
+    private Long id;
+    private Long ts;
     
     public SuperModel()
     {
         super();
         
         create_time = System.currentTimeMillis();
+        ts = create_time;
     }
     
     public abstract String getTableName();
     
-    public long getCreate_time()
+    public Long getCreate_time()
     {
         return create_time;
     }
     
-    public void setCreate_time(long create_time)
+    public void setCreate_time(Long create_time)
     {
         this.create_time = create_time;
     }
     
-    public long getId()
+    public Long getId()
     {
-        return _id;
+        return id;
     }
     
-    public void setId(long _id)
+    public void setId(Long id)
     {
-        this._id = _id;
+        this.id = id;
+    }
+    
+    public Long getTs()
+    {
+        return ts;
+    }
+    
+    public void setTs(Long ts)
+    {
+        this.ts = ts;
     }
 }

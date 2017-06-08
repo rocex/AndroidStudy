@@ -1,13 +1,14 @@
 package cn.studyjams.s2.sj0225.rocex.bodydata;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
@@ -74,26 +75,18 @@ public class BodyDataDetailFragment extends Fragment
         bodyData.calculate();
         
         setValue(bodyData);
-        
-        ContentValues contentValues = new ContentValues();
-        
-        contentValues.put(BodyData.BMI, bodyData.bmi);
-        contentValues.put(BodyData.HEIGHT, bodyData.height);
-        contentValues.put(BodyData.WEIGHT, bodyData.weight);
-        contentValues.put(BodyData.CREATE_TIME, String.valueOf(bodyData.getCreate_time()));
-        
-        SQLiteDatabase db = null;
-        try
+    
+        Button btnCalculate = (Button) rootView.findViewById(R.id.btnCalculate);
+        btnCalculate.setEnabled(false);
+    
+        BodyDataDBHelper bodyDataDBHelper = new BodyDataDBHelper(getContext());
+        if(bodyData.getId() == null)
         {
-            db = new BodyDataDBHelper(getContext()).getWritableDatabase();
-            db.insert(BodyData.TABLE_NAME, null, contentValues);
+            bodyDataDBHelper.insert(bodyData);
         }
-        finally
+        else
         {
-            if(db != null)
-            {
-                db.close();
-            }
+            bodyDataDBHelper.update(bodyData);
         }
     }
     
@@ -101,18 +94,20 @@ public class BodyDataDetailFragment extends Fragment
     {
         if(bodyData == null)
         {
+            ((TextView) rootView.findViewById(R.id.textViewId)).setText("");
             ((TextView) rootView.findViewById(R.id.editTextWeight)).setText("");
             ((TextView) rootView.findViewById(R.id.editTextHeight)).setText("");
             ((TextView) rootView.findViewById(R.id.editTextBMI)).setText("");
-            ((TextView) rootView.findViewById(R.id.textViewCreateDate)).setText("");
+            ((TextView) rootView.findViewById(R.id.textViewCreateTime)).setText("");
             
             return;
         }
-        
+    
+        ((TextView) rootView.findViewById(R.id.textViewId)).setText(String.valueOf(bodyData.getId()));
         ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(bodyData.weight));
         ((TextView) rootView.findViewById(R.id.editTextHeight)).setText(String.valueOf(bodyData.height));
         ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", bodyData.bmi));
-        ((TextView) rootView.findViewById(R.id.textViewCreateDate)).setText(bodyData.dateString);
+        ((TextView) rootView.findViewById(R.id.textViewCreateTime)).setText(bodyData.dateString);
     }
     
     public void setEditable(boolean blEditable)
@@ -135,7 +130,7 @@ public class BodyDataDetailFragment extends Fragment
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
             if(appBarLayout != null)
             {
-                //                appBarLayout.setTitle(bodyData.dateString);
+                //appBarLayout.setTitle(bodyData.dateString);
             }
         }
     }
@@ -144,6 +139,29 @@ public class BodyDataDetailFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         rootView = inflater.inflate(R.layout.bodydata_detail, container, false);
+    
+        TextWatcher textWatcher = new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+            }
+        
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+            }
+        
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                Button btnCalculate = (Button) rootView.findViewById(R.id.btnCalculate);
+                btnCalculate.setEnabled(true);
+            }
+        };
+    
+        ((TextView) rootView.findViewById(R.id.editTextWeight)).addTextChangedListener(textWatcher);
+        ((TextView) rootView.findViewById(R.id.editTextHeight)).addTextChangedListener(textWatcher);
         
         if(bodyData != null)
         {

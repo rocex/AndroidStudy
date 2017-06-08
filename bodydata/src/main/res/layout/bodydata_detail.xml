@@ -75,7 +75,7 @@
             android:text="@string/bmi_date" />
         
         <TextView
-            android:id="@+id/textViewCreateDate"
+            android:id="@+id/textViewCreateTime"
             android:layout_columnSpan="2"
             android:layout_gravity="fill"
             android:paddingBottom="@dimen/text_margin"
@@ -88,6 +88,10 @@
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
             android:text="@string/bmi_desc" />
+    
+        <TextView
+            android:id="@+id/textViewId"
+            android:visibility="gone" />
 
     </GridLayout>
     
