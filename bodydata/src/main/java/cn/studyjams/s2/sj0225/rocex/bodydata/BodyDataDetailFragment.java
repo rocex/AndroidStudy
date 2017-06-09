@@ -23,17 +23,34 @@ import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataDBHelper;
  */
 public class BodyDataDetailFragment extends Fragment
 {
-    /**
-     * The fragment argument representing the item _ID that this fragment represents.
-     */
+    // The fragment argument representing the item _ID that this fragment represents.
     public static final String BODY_DATA_ID = "body_data_id";
     
-    /**
-     * The model content this fragment is presenting.
-     */
-    private BodyData bodyData;
+    private BodyDataDBHelper bodyDataDBHelper = null;
     
+    // The model content this fragment is presenting.
+    private BodyData bodyData;
     private View rootView;
+    
+    private TextWatcher textWatcher = new TextWatcher()
+    {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after)
+        {
+        }
+        
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+        }
+        
+        @Override
+        public void afterTextChanged(Editable s)
+        {
+            Button btnCalculate = (Button) rootView.findViewById(R.id.btnCalculate);
+            btnCalculate.setEnabled(true);
+        }
+    };
     
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -52,7 +69,7 @@ public class BodyDataDetailFragment extends Fragment
         if(strWeight == null || strWeight.trim().length() == 0)
         {
             editTextWeight.requestFocus();
-            editTextWeight.setError("请输入体重！");
+            editTextWeight.setError(getString(R.string.weight_hint));//"请输入体重！"
             
             return;
         }
@@ -65,7 +82,7 @@ public class BodyDataDetailFragment extends Fragment
         if(strHeight == null || strHeight.trim().length() == 0)
         {
             editTextHeight.requestFocus();
-            editTextHeight.setError("请输入身高！");
+            editTextHeight.setError(getString(R.string.height_hint));//"请输入身高！"
             
             return;
         }
@@ -76,10 +93,8 @@ public class BodyDataDetailFragment extends Fragment
         
         setValue(bodyData);
     
-        Button btnCalculate = (Button) rootView.findViewById(R.id.btnCalculate);
-        btnCalculate.setEnabled(false);
-    
-        BodyDataDBHelper bodyDataDBHelper = new BodyDataDBHelper(getContext());
+        setEditable(false);
+        
         if(bodyData.getId() == null)
         {
             bodyDataDBHelper.insert(bodyData);
@@ -122,10 +137,14 @@ public class BodyDataDetailFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        
-        if(getArguments().containsKey(BODY_DATA_ID) && getArguments().getString(BODY_DATA_ID) != null)
+    
+        bodyDataDBHelper = new BodyDataDBHelper(getContext());
+    
+        if(getArguments().containsKey(BODY_DATA_ID) && getArguments().getLong(BODY_DATA_ID, -1) != -1)
         {
             bodyData = BodyDataContent.ITEM_MAP.get(getArguments().getString(BODY_DATA_ID));
+    
+            bodyData = bodyDataDBHelper.queryById(getArguments().getLong(BODY_DATA_ID));
             
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
             if(appBarLayout != null)
@@ -139,27 +158,7 @@ public class BodyDataDetailFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         rootView = inflater.inflate(R.layout.bodydata_detail, container, false);
-    
-        TextWatcher textWatcher = new TextWatcher()
-        {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
-            }
         
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-            }
-        
-            @Override
-            public void afterTextChanged(Editable s)
-            {
-                Button btnCalculate = (Button) rootView.findViewById(R.id.btnCalculate);
-                btnCalculate.setEnabled(true);
-            }
-        };
-    
         ((TextView) rootView.findViewById(R.id.editTextWeight)).addTextChangedListener(textWatcher);
         ((TextView) rootView.findViewById(R.id.editTextHeight)).addTextChangedListener(textWatcher);
         

@@ -17,7 +17,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
-import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataContent;
 import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataDBHelper;
 
 /**
@@ -60,7 +59,9 @@ public class BodyDataListActivity extends AppCompatActivity
         });
         
         View recyclerView = findViewById(R.id.bodydata_list);
+    
         assert recyclerView != null;
+    
         setupRecyclerView((RecyclerView) recyclerView);
         
         if(findViewById(R.id.bodydata_detail_container) != null)
@@ -77,9 +78,9 @@ public class BodyDataListActivity extends AppCompatActivity
     {
         BodyDataDBHelper bodyDataDBHelper = new BodyDataDBHelper(this);
     
-        bodyDataDBHelper.query();
-        
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(BodyDataContent.ITEMS));
+        List list = bodyDataDBHelper.query(null, null);
+    
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(list));//BodyDataContent.ITEMS
     }
     
     public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>
@@ -112,7 +113,7 @@ public class BodyDataListActivity extends AppCompatActivity
             holder.view.setOnClickListener(new View.OnClickListener()
             {
                 @Override
-                public void onClick(View v)
+                public void onClick(View view)
                 {
                     if(mTwoPane)
                     {
@@ -124,7 +125,7 @@ public class BodyDataListActivity extends AppCompatActivity
                     }
                     else
                     {
-                        Context context = v.getContext();
+                        Context context = view.getContext();
                         Intent intent = new Intent(context, BodyDataDetailActivity.class);
                         intent.putExtra(BodyDataDetailFragment.BODY_DATA_ID, holder.bodyData.getId());
                         

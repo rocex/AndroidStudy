@@ -13,13 +13,12 @@ import java.util.List;
 /**
  * Created by rocexwang on 2017-6-6 21:37:01
  */
-public class BodyDataDBHelper extends SQLiteOpenHelper
+public class BodyDataDBHelper<T extends BodyData> extends SQLiteOpenHelper
 {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "bodydata.db";
     
-    private static String strCreateTableSQL = "create table bodydata (id integer primary key autoincrement, weight real, height real, bmi" +
-            " real, create_time long, ts long);";
+    private static String strCreateTableSQL = "create table bodydata (id integer primary key autoincrement, weight real, height real, bmi" + " real, create_time long, ts long);";
     
     private Context context;
     
@@ -56,7 +55,7 @@ public class BodyDataDBHelper extends SQLiteOpenHelper
         }
     }
     
-    public int update(BodyData... bodyDatas)
+    public int update(T... bodyDatas)
     {
         if(bodyDatas == null)
         {
@@ -89,7 +88,7 @@ public class BodyDataDBHelper extends SQLiteOpenHelper
         return iCount;
     }
     
-    public int delete(BodyData... bodyDatas)
+    public int delete(T... bodyDatas)
     {
         if(bodyDatas == null)
         {
@@ -115,7 +114,7 @@ public class BodyDataDBHelper extends SQLiteOpenHelper
         return iCount;
     }
     
-    public List<Long> insert(BodyData... bodyDatas)
+    public List<Long> insert(T... bodyDatas)
     {
         List<Long> listId = new ArrayList<Long>();
         
@@ -148,31 +147,46 @@ public class BodyDataDBHelper extends SQLiteOpenHelper
         return listId;
     }
     
-    public List<BodyData> query()
+    public BodyData queryById(long id)
     {
-        SQLiteDatabase db = getReadableDatabase();
+        List<BodyData> listBodyData = query(BodyData.ID + "=?", String.valueOf(id));
+    
+        return listBodyData.get(0);
+    }
+    
+    public List<BodyData> query(String strSelection, String... strSelectionArgs)
+    {
+        List<BodyData> listBodyData = new ArrayList<BodyData>();
         
-        Cursor cursor = db.query(BodyData.TABLE_NAME, new String[]{}, null, null, null, null, BodyData.CREATE_TIME);
-        
-        cursor.moveToFirst();
-        
-        List<BodyData> listBodyData = new ArrayList<>();
-        
-        do
+        try
         {
-            BodyData bodyData = new BodyData();
-            
-            bodyData.setId(cursor.getLong(cursor.getColumnIndex(BodyData.ID)));
-            bodyData.setTs(cursor.getLong(cursor.getColumnIndex(BodyData.TS)));
-            bodyData.setCreate_time(cursor.getLong(cursor.getColumnIndex(BodyData.CREATE_TIME)));
-            
-            bodyData.bmi = cursor.getDouble(cursor.getColumnIndex(BodyData.BMI));
-            bodyData.height = cursor.getDouble(cursor.getColumnIndex(BodyData.HEIGHT));
-            bodyData.weight = cursor.getDouble(cursor.getColumnIndex(BodyData.WEIGHT));
-            
-            listBodyData.add(bodyData);
-            
-        } while(cursor.isAfterLast());
+            SQLiteDatabase db = getReadableDatabase();
+    
+            Cursor cursor = db.query(BodyData.TABLE_NAME, null, strSelection, strSelectionArgs, null, null, BodyData.CREATE_TIME, "20");
+    
+            cursor.moveToFirst();
+    
+            while(!cursor.isAfterLast())
+            {
+                BodyData bodyData = new BodyData();
+        
+                bodyData.setId(cursor.getLong(cursor.getColumnIndex(BodyData.ID)));
+                bodyData.setTs(cursor.getLong(cursor.getColumnIndex(BodyData.TS)));
+                bodyData.setCreate_time(cursor.getLong(cursor.getColumnIndex(BodyData.CREATE_TIME)));
+        
+                bodyData.bmi = cursor.getDouble(cursor.getColumnIndex(BodyData.BMI));
+                bodyData.height = cursor.getDouble(cursor.getColumnIndex(BodyData.HEIGHT));
+                bodyData.weight = cursor.getDouble(cursor.getColumnIndex(BodyData.WEIGHT));
+        
+                listBodyData.add(bodyData);
+        
+                cursor.moveToNext();
+            }
+        }
+        finally
+        {
+            close();
+        }
         
         return listBodyData;
     }

@@ -62,7 +62,7 @@ public class BodyDataDetailActivity extends AppCompatActivity
         {
             // Create the detail fragment and add it to the activity using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(BodyDataDetailFragment.BODY_DATA_ID, getIntent().getStringExtra(BodyDataDetailFragment.BODY_DATA_ID));
+            arguments.putLong(BodyDataDetailFragment.BODY_DATA_ID, getIntent().getLongExtra(BodyDataDetailFragment.BODY_DATA_ID, -1));
             fragment = new BodyDataDetailFragment();
             fragment.setArguments(arguments);
     

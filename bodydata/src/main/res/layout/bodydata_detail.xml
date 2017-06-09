@@ -14,9 +14,9 @@
         android:layout_weight="4"
         android:columnCount="3"
         android:padding="@dimen/text_margin">
-        
+    
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textViewWeight"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
             android:text="@string/weight" />
@@ -32,9 +32,9 @@
             android:maxLength="6"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin" />
-        
+    
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewHeight"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
             android:text="@string/height" />
@@ -50,9 +50,9 @@
             android:maxLength="6"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin" />
-        
+    
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textViewBMI"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
             android:text="@string/bmi" />
@@ -67,9 +67,9 @@
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
             android:saveEnabled="true" />
-        
+    
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textViewCreateTimeName"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin"
             android:text="@string/bmi_date" />
@@ -80,9 +80,9 @@
             android:layout_gravity="fill"
             android:paddingBottom="@dimen/text_margin"
             android:paddingTop="@dimen/text_margin" />
-        
+    
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textViewBMIDesc"
             android:layout_columnSpan="3"
             android:layout_gravity="fill"
             android:paddingBottom="@dimen/text_margin"
@@ -106,6 +106,7 @@
         android:text="@string/Calculate"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
 </LinearLayout>
