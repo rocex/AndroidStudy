@@ -78,7 +78,7 @@ public class BodyDataListActivity extends AppCompatActivity
     {
         BodyDataDBHelper bodyDataDBHelper = new BodyDataDBHelper(this);
     
-        List list = bodyDataDBHelper.query(null, null);
+        List list = bodyDataDBHelper.query(null, (String[]) null);
     
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(list));//BodyDataContent.ITEMS
     }

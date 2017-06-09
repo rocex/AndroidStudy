@@ -76,6 +76,7 @@ public class BodyDataDBHelper<T extends BodyData> extends SQLiteOpenHelper
                 contentValues.put(BodyData.HEIGHT, bodyData.height);
                 contentValues.put(BodyData.WEIGHT, bodyData.weight);
                 contentValues.put(BodyData.CREATE_TIME, bodyData.getCreate_time());
+                contentValues.put(BodyData.TS, bodyData.getTs());
                 
                 iCount += db.update(BodyData.TABLE_NAME, contentValues, BodyData.ID + "=?", new String[]{String.valueOf(bodyData.getId())});
             }
@@ -135,6 +136,7 @@ public class BodyDataDBHelper<T extends BodyData> extends SQLiteOpenHelper
                 contentValues.put(BodyData.HEIGHT, bodyData.height);
                 contentValues.put(BodyData.WEIGHT, bodyData.weight);
                 contentValues.put(BodyData.CREATE_TIME, bodyData.getCreate_time());
+                contentValues.put(BodyData.TS, bodyData.getTs());
                 
                 listId.add(db.insert(BodyData.TABLE_NAME, null, contentValues));
             }
@@ -169,17 +171,17 @@ public class BodyDataDBHelper<T extends BodyData> extends SQLiteOpenHelper
             while(!cursor.isAfterLast())
             {
                 BodyData bodyData = new BodyData();
-        
+    
                 bodyData.setId(cursor.getLong(cursor.getColumnIndex(BodyData.ID)));
                 bodyData.setTs(cursor.getLong(cursor.getColumnIndex(BodyData.TS)));
                 bodyData.setCreate_time(cursor.getLong(cursor.getColumnIndex(BodyData.CREATE_TIME)));
-        
+    
                 bodyData.bmi = cursor.getDouble(cursor.getColumnIndex(BodyData.BMI));
                 bodyData.height = cursor.getDouble(cursor.getColumnIndex(BodyData.HEIGHT));
                 bodyData.weight = cursor.getDouble(cursor.getColumnIndex(BodyData.WEIGHT));
-        
+    
                 listBodyData.add(bodyData);
-        
+    
                 cursor.moveToNext();
             }
         }
