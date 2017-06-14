@@ -2,6 +2,7 @@ package org.rocex.model;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,6 +64,32 @@ public abstract class SuperModel implements Serializable
         this.id = id;
     }
     
+    public Object getPropValue(String strPropName)
+    {
+        Object objReturn = null;
+    
+        try
+        {
+            Method method = getClass().getMethod(strPropName, null);
+        
+            objReturn = method.invoke(this, null);
+        }
+        catch(NoSuchMethodException e)
+        {
+            e.printStackTrace();
+        }
+        catch(IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+        catch(InvocationTargetException e)
+        {
+            e.printStackTrace();
+        }
+    
+        return objReturn;
+    }
+    
     public String[] getPropNames()
     {
         String strPropNames[] = mapField.get(getClass().getName());
@@ -73,7 +100,8 @@ public abstract class SuperModel implements Serializable
             List<String> listGetSet = new ArrayList<>();
             List<Method> listAllMethod = new ArrayList<>();
             
-            for(Class clazz = getClass(); clazz.getSuperclass() instanceof Object; clazz = clazz.getSuperclass())
+            for(Class clazz = getClass(); clazz.getSuperclass() instanceof Object;
+                clazz = clazz.getSuperclass())
             {
                 listAllMethod.addAll(Arrays.asList(clazz.getMethods()));
             }

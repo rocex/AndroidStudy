@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 
 import org.rocex.model.SuperModel;
 
@@ -26,16 +27,16 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
     
     private Context context;
     
+    public DBHelper(Context context)
+    {
+        this(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+    
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
     {
         super(context, name, factory, version);
         
         this.context = context;
-    }
-    
-    public DBHelper(Context context)
-    {
-        this(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler)
@@ -74,13 +75,7 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         {
             for(T bodyData : bodyDatas)
             {
-                ContentValues contentValues = new ContentValues();
-                
-                contentValues.put(BodyData.BMI, bodyData.bmi);
-                contentValues.put(BodyData.HEIGHT, bodyData.height);
-                contentValues.put(BodyData.WEIGHT, bodyData.weight);
-                contentValues.put(BodyData.CREATE_TIME, bodyData.getCreate_time());
-                contentValues.put(BodyData.TS, bodyData.getTs());
+                ContentValues contentValues = getContentValues(bodyData);
                 
                 iCount += db.update(BodyData.TABLE_NAME, contentValues, BodyData.ID + "=?", new String[]{String.valueOf(bodyData.getId())});
             }
@@ -91,6 +86,24 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
         
         return iCount;
+    }
+    
+    @NonNull
+    public ContentValues getContentValues(T superModel, String... strPropNames)
+    {
+        if(strPropNames == null)
+        {
+            strPropNames = superModel.getPropNames();
+        }
+        
+        ContentValues contentValues = new ContentValues();
+        
+        for(String strPropName : strPropNames)
+        {
+            contentValues.put(strPropName, superModel.getPropValue(strPropName));
+        }
+        
+        return contentValues;
     }
     
     public int delete(T... bodyDatas)
@@ -134,13 +147,7 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         {
             for(T bodyData : bodyDatas)
             {
-                ContentValues contentValues = new ContentValues();
-                
-                contentValues.put(BodyData.BMI, bodyData.bmi);
-                contentValues.put(BodyData.HEIGHT, bodyData.height);
-                contentValues.put(BodyData.WEIGHT, bodyData.weight);
-                contentValues.put(BodyData.CREATE_TIME, bodyData.getCreate_time());
-                contentValues.put(BodyData.TS, bodyData.getTs());
+                ContentValues contentValues = getContentValues(bodyData);
                 
                 listId.add(db.insert(BodyData.TABLE_NAME, null, contentValues));
             }
