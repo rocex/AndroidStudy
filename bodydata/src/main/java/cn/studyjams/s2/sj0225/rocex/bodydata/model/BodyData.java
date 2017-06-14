@@ -2,7 +2,7 @@ package cn.studyjams.s2.sj0225.rocex.bodydata.model;
 
 import android.text.format.DateFormat;
 
-import org.rocex.db.SuperModel;
+import org.rocex.model.SuperModel;
 
 import java.text.MessageFormat;
 
