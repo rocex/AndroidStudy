@@ -13,8 +13,6 @@ import org.rocex.model.SuperModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
-
 /**
  * Created by rocexwang on 2017-06-14 11:23:26
  */
@@ -60,9 +58,9 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
     }
     
-    public int update(String strPropNames[], T... bodyDatas)
+    public int update(String strPropNames[], T... superModels)
     {
-        if(bodyDatas == null)
+        if(superModels == null)
         {
             return 0;
         }
@@ -73,11 +71,12 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         
         try
         {
-            for(T bodyData : bodyDatas)
+            for(T superModel : superModels)
             {
-                ContentValues contentValues = getContentValues(bodyData);
-                
-                iCount += db.update(BodyData.TABLE_NAME, contentValues, BodyData.ID + "=?", new String[]{String.valueOf(bodyData.getId())});
+                ContentValues contentValues = getContentValues(superModel);
+    
+                iCount += db.update(superModel.getTableName(), contentValues, SuperModel.ID + "=?",
+                        new String[]{String.valueOf(superModel.getId())});
             }
         }
         finally
@@ -106,9 +105,9 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         return contentValues;
     }
     
-    public int delete(T... bodyDatas)
+    public int delete(T... superModels)
     {
-        if(bodyDatas == null)
+        if(superModels == null)
         {
             return 0;
         }
@@ -119,9 +118,9 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         
         try
         {
-            for(T bodyData : bodyDatas)
+            for(T superModel : superModels)
             {
-                iCount += db.delete(BodyData.TABLE_NAME, BodyData.ID + "=?", new String[]{String.valueOf(bodyData.getId())});
+                iCount += db.delete(superModel.getTableName(), SuperModel.ID + "=?", new String[]{String.valueOf(superModel.getId())});
             }
         }
         finally
@@ -132,11 +131,11 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         return iCount;
     }
     
-    public List<Long> insert(String strPropNames[], T... bodyDatas)
+    public List<Long> insert(String strPropNames[], T... superModels)
     {
         List<Long> listId = new ArrayList<Long>();
-        
-        if(bodyDatas == null)
+    
+        if(superModels == null)
         {
             return listId;
         }
@@ -145,11 +144,11 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         
         try
         {
-            for(T bodyData : bodyDatas)
+            for(T superModel : superModels)
             {
-                ContentValues contentValues = getContentValues(bodyData);
-                
-                listId.add(db.insert(BodyData.TABLE_NAME, null, contentValues));
+                ContentValues contentValues = getContentValues(superModel);
+    
+                listId.add(db.insert(superModel.getTableName(), null, contentValues));
             }
         }
         finally
@@ -160,48 +159,62 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         return listId;
     }
     
-    public BodyData queryById(long id)
+    public T queryById(Class<T> clazz, long id)
     {
-        List<BodyData> listBodyData = query(BodyData.ID + "=?", String.valueOf(id));
-        
-        return listBodyData.get(0);
+        List<T> listSuperModel = query(clazz, SuperModel.ID + "=?", String.valueOf(id));
+    
+        return listSuperModel.get(0);
     }
     
-    public List<BodyData> query(String strSelection, String... strSelectionArgs)
+    public List<T> query(Class<T> clazz, String strSelection, String... strSelectionArgs)
     {
-        List<BodyData> listBodyData = new ArrayList<BodyData>();
+        List<T> listSuperModel = new ArrayList<T>();
         
         try
         {
-            SQLiteDatabase db = getReadableDatabase();
+            T superModel = clazz.newInstance();
             
-            Cursor cursor = db.query(BodyData.TABLE_NAME, null, strSelection, strSelectionArgs, null, null, BodyData.CREATE_TIME, "20");
+            SQLiteDatabase db = getReadableDatabase();
+    
+            Cursor cursor = db
+                    .query(superModel.getTableName(), null, strSelection, strSelectionArgs, null, null, SuperModel.CREATE_TIME, "20");
             
             cursor.moveToFirst();
             
             while(!cursor.isAfterLast())
             {
-                BodyData bodyData = new BodyData();
-                
-                bodyData.setId(cursor.getLong(cursor.getColumnIndex(BodyData.ID)));
-                bodyData.setTs(cursor.getLong(cursor.getColumnIndex(BodyData.TS)));
-                bodyData.setCreate_time(cursor.getLong(cursor.getColumnIndex(BodyData.CREATE_TIME)));
-                
-                bodyData.bmi = cursor.getDouble(cursor.getColumnIndex(BodyData.BMI));
-                bodyData.height = cursor.getDouble(cursor.getColumnIndex(BodyData.HEIGHT));
-                bodyData.weight = cursor.getDouble(cursor.getColumnIndex(BodyData.WEIGHT));
-                
-                listBodyData.add(bodyData);
+                superModel = clazz.newInstance();
+    
+                String[] strPropNames = superModel.getPropNames();
+    
+                for(String strPropName : strPropNames)
+                {
+                    superModel.setP
+                }
+    
+                superModel.setId(cursor.getLong(cursor.getColumnIndex(BodyData.ID)));
+                superModel.setTs(cursor.getLong(cursor.getColumnIndex(BodyData.TS)));
+                superModel.setCreate_time(cursor.getLong(cursor.getColumnIndex(BodyData.CREATE_TIME)));
+    
+                superModel.bmi = cursor.getDouble(cursor.getColumnIndex(BodyData.BMI));
+                superModel.height = cursor.getDouble(cursor.getColumnIndex(BodyData.HEIGHT));
+                superModel.weight = cursor.getDouble(cursor.getColumnIndex(BodyData.WEIGHT));
+    
+                listSuperModel.add(superModel);
                 
                 cursor.moveToNext();
             }
+        }
+        catch(Exception ex)
+        {
+            System.err.println(ex.getMessage());
         }
         finally
         {
             close();
         }
-        
-        return listBodyData;
+    
+        return listSuperModel;
     }
     
     @Override

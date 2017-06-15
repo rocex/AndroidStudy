@@ -2,7 +2,6 @@ package org.rocex.model;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,21 +20,17 @@ public abstract class SuperModel implements Serializable
     public static final String ID = "id";
     public static final String TS = "ts";
     
-    private static Map<String, String[]> mapField = new HashMap<String, String[]>();
-    
-    static
-    {
-        Field[] fields = SuperModel.class.getFields();
-        Field[] declaredFields = SuperModel.class.getDeclaredFields();
-        
-        System.out.println(fields);
-        System.out.println(declaredFields);
-    }
+    private static Map<String, Class> mapPropType = new HashMap<String, Class>(); // 全路径类名.属性名，属性名类型
+    private static Map<String, String[]> mapPropName = new HashMap<String, String[]>();// 全路径类名，属性名数组
     
     private Long create_time;
     private Long id;
     private Long ts;
     
+    /***************************************************************************
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:36
+     ***************************************************************************/
     public SuperModel()
     {
         super();
@@ -44,124 +39,166 @@ public abstract class SuperModel implements Serializable
         ts = create_time;
     }
     
+    /***************************************************************************
+     * @return
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:34
+     ***************************************************************************/
     public Long getCreate_time()
     {
         return create_time;
     }
     
+    /***************************************************************************
+     * @param create_time
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:10
+     ***************************************************************************/
     public void setCreate_time(Long create_time)
     {
         this.create_time = create_time;
     }
     
+    /***************************************************************************
+     * @return
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:31
+     ***************************************************************************/
     public Long getId()
     {
         return id;
     }
     
+    /***************************************************************************
+     * @param id
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:12
+     ***************************************************************************/
     public void setId(Long id)
     {
         this.id = id;
     }
     
-    public Object getPropValue(String strPropName)
-    {
-        Object objReturn = null;
-    
-        try
-        {
-            Method method = getClass().getMethod(strPropName, null);
-        
-            objReturn = method.invoke(this, null);
-        }
-        catch(NoSuchMethodException e)
-        {
-            e.printStackTrace();
-        }
-        catch(IllegalAccessException e)
-        {
-            e.printStackTrace();
-        }
-        catch(InvocationTargetException e)
-        {
-            e.printStackTrace();
-        }
-    
-        return objReturn;
-    }
-    
+    /***************************************************************************
+     * @return 属性名数组，必须满足同时有 getter 和 setter 方法
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:28
+     ***************************************************************************/
     public String[] getPropNames()
     {
-        String strPropNames[] = mapField.get(getClass().getName());
-        
-        if(strPropNames == null)
+        String strPropNames[] = mapPropName.get(getClass().getName());
+    
+        if(strPropNames != null)
         {
-            List<String> listPropGetSet = new ArrayList<>();
-            List<String> listGetSet = new ArrayList<>();
-            List<Method> listAllMethod = new ArrayList<>();
-            
-            for(Class clazz = getClass(); clazz.getSuperclass() instanceof Object;
-                clazz = clazz.getSuperclass())
+            return strPropNames;
+        }
+    
+        List<String> listField = new ArrayList<>();//
+    
+        for(Class clazz = getClass(); clazz.getSuperclass() instanceof Object; clazz = clazz.getSuperclass())
+        {
+            for(Field field : clazz.getDeclaredFields())
             {
-                listAllMethod.addAll(Arrays.asList(clazz.getMethods()));
-            }
-            
-            for(Method method : listAllMethod)
-            {
-                String strMethodName = method.getName();
-                
-                if(strMethodName.length() < 4)
+                try
                 {
+                    clazz.getMethod("get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1), (Class[]) null);
+                    clazz.getMethod("set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1), field.getType());
+                }
+                catch(Exception ex)
+                {
+                    System.err.println(ex);
                     continue;
                 }
-                
-                if(strMethodName.startsWith("get") || strMethodName.startsWith("set"))
-                {
-                    listGetSet.add(strMethodName);
-                    
-                    String _substring = strMethodName.substring(3);
-                    
-                    if(!listPropGetSet.contains(_substring))
-                    {
-                        listPropGetSet.add(_substring);
-                    }
-                }
+    
+                listField.add(field.getName());
+    
+                mapPropType.put(getClass().getName() + "." + field.getName(), field.getType());
             }
-            
-            List<String> listSet = new ArrayList<>();
-            
-            for(String strPropGetSet : listPropGetSet)
-            {
-                if(listGetSet.contains("get" + strPropGetSet) && listGetSet.contains("set" + strPropGetSet))
-                {
-                    String strPropName = strPropGetSet.substring(0, 1).toLowerCase() + strPropGetSet.substring(1);
-                    
-                    if(listSet.contains(strPropName))
-                    {
-                        continue;
-                    }
-                    
-                    listSet.add(strPropName);
-                }
-            }
-            
-            strPropNames = listSet.toArray(new String[0]);
-            
-            mapField.put(getClass().getName(), strPropNames);
         }
+    
+        System.out.println(getClass().getName() + "[" + listField + "]");
+        System.out.println(mapPropType);
+    
+        strPropNames = listField.toArray(new String[0]);
+    
+        Arrays.sort(strPropNames);
+    
+        mapPropName.put(getClass().getName(), strPropNames);
         
         return strPropNames;
     }
     
+    /***************************************************************************
+     * @param strPropName
+     * @return
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:25
+     ***************************************************************************/
+    public Object getPropValue(String strPropName)
+    {
+        Object objReturn = null;
+        
+        try
+        {
+            Method method = getClass()
+                    .getMethod("get" + strPropName.substring(0, 1).toUpperCase() + strPropName.substring(1), (Class) null);
+            
+            objReturn = method.invoke(this, (Object[]) null);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        
+        return objReturn;
+    }
+    
+    /***************************************************************************
+     * @return table name
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:21
+     ***************************************************************************/
     public abstract String getTableName();
     
+    /***************************************************************************
+     * @return
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:05
+     ***************************************************************************/
     public Long getTs()
     {
         return ts;
     }
     
+    /***************************************************************************
+     * @param ts
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:14
+     ***************************************************************************/
     public void setTs(Long ts)
     {
         this.ts = ts;
+    }
+    
+    /***************************************************************************
+     * @param strPropName
+     * @param objValue
+     * @author Rocex Wang
+     * @version 2017-6-15 10:12:11
+     ***************************************************************************/
+    public void setPropValue(String strPropName, Object objValue)
+    {
+        try
+        {
+            String _name = strPropName.substring(0, 1).toUpperCase() + strPropName.substring(1);
+            
+            Method method = getClass().getMethod("set" + _name, mapPropType.get(getClass().getName() + "." + strPropName));
+            
+            method.invoke(this, objValue);
+        }
+        catch(Exception ex)
+        {
+            System.err.println(ex);
+        }
     }
 }
