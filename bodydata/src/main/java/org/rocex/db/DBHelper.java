@@ -32,16 +32,16 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         this(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
+    public DBHelper(Context context, String strDatabaseName, SQLiteDatabase.CursorFactory cursorFactory, int iDatabaseVersion)
     {
-        super(context, name, factory, version);
-        
-        this.context = context;
+        this(context, strDatabaseName, cursorFactory, iDatabaseVersion, null);
     }
     
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler)
+    public DBHelper(Context context, String strDatabaseName, SQLiteDatabase.CursorFactory cursorFactory, int iDatabaseVersion, DatabaseErrorHandler errorHandler)
     {
-        super(context, name, factory, version, errorHandler);
+        super(context, strDatabaseName, cursorFactory, iDatabaseVersion, errorHandler);
+    
+        this.context = context;
     }
     
     public static void close(Cursor cursor)
@@ -80,41 +80,41 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
                 continue;
             }
     
-            Class propType = superModel.getPropType(strFieldName);
+            Class classPropType = superModel.getPropType(strFieldName);
     
-            if(propType.getClass().equals(Boolean.class))
+            if(classPropType.getClass().equals(Boolean.class))
             {
                 contentValues.put(strFieldName, (Boolean) objPropValue);
             }
-            else if(propType.getClass().equals(Byte.class))
+            else if(classPropType.getClass().equals(Byte.class))
             {
                 contentValues.put(strFieldName, (Byte) objPropValue);
             }
-            else if(propType.getClass().equals(byte[].class))
+            else if(classPropType.getClass().equals(byte[].class))
             {
                 contentValues.put(strFieldName, (byte[]) objPropValue);
             }
-            else if(propType.getClass().equals(Double.class))
+            else if(classPropType.getClass().equals(Double.class))
             {
                 contentValues.put(strFieldName, (Double) objPropValue);
             }
-            else if(propType.getClass().equals(Float.class))
+            else if(classPropType.getClass().equals(Float.class))
             {
                 contentValues.put(strFieldName, (Float) objPropValue);
             }
-            else if(propType.getClass().equals(Integer.class))
+            else if(classPropType.getClass().equals(Integer.class))
             {
                 contentValues.put(strFieldName, (Integer) objPropValue);
             }
-            else if(propType.getClass().equals(Long.class))
+            else if(classPropType.getClass().equals(Long.class))
             {
                 contentValues.put(strFieldName, (Long) objPropValue);
             }
-            else if(propType.getClass().equals(Short.class))
+            else if(classPropType.getClass().equals(Short.class))
             {
                 contentValues.put(strFieldName, (Short) objPropValue);
             }
-            else if(propType.getClass().equals(String.class))
+            else if(classPropType.getClass().equals(String.class))
             {
                 contentValues.put(strFieldName, (String) objPropValue);
             }
@@ -244,16 +244,51 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
                     .query(superModel.getTableName(), null, strSelection, strSelectionArgs, null, null, SuperModel.CREATE_TIME, "20");
             
             cursor.moveToFirst();
+    
+            String[] strPropNames = superModel.getPropNames();
             
             while(!cursor.isAfterLast())
             {
                 superModel = clazzModel.newInstance();
                 
-                String[] strPropNames = superModel.getPropNames();
-                
                 for(String strPropName : strPropNames)
                 {
-                    
+                    int iColumnIndex = cursor.getColumnIndex(strPropName);
+    
+                    Class classPropType = superModel.getPropType(strPropName);
+    
+                    if(classPropType.getClass().equals(Boolean.class))
+                    {
+                        superModel.setPropValue(strPropName, Boolean.valueOf(cursor.getString(iColumnIndex)));
+                    }
+                    else if(classPropType.getClass().equals(byte[].class))
+                    {
+                        superModel.setPropValue(strPropName, cursor.getBlob(iColumnIndex));
+                    }
+                    else if(classPropType.getClass().equals(Double.class))
+                    {
+                        superModel.setPropValue(strPropName, cursor.getDouble(iColumnIndex));
+                    }
+                    else if(classPropType.getClass().equals(Float.class))
+                    {
+                        superModel.setPropValue(strPropName, cursor.getFloat(iColumnIndex));
+                    }
+                    else if(classPropType.getClass().equals(Integer.class))
+                    {
+                        superModel.setPropValue(strPropName, cursor.getInt(iColumnIndex));
+                    }
+                    else if(classPropType.getClass().equals(Long.class))
+                    {
+                        superModel.setPropValue(strPropName, cursor.getLong(iColumnIndex));
+                    }
+                    else if(classPropType.getClass().equals(Short.class))
+                    {
+                        superModel.setPropValue(strPropName, cursor.getShort(iColumnIndex));
+                    }
+                    else if(classPropType.getClass().equals(String.class))
+                    {
+                        superModel.setPropValue(strPropName, cursor.getString(iColumnIndex));
+                    }
                 }
                 
                 listSuperModel.add(superModel);
@@ -263,7 +298,7 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
         catch(Exception ex)
         {
-            System.err.println(ex.getMessage());
+            Log.e(TAG, "query: class[" + clazzModel + "]", ex);
         }
         finally
         {

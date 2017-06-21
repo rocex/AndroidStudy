@@ -80,7 +80,7 @@ public class BodyDataListActivity extends AppCompatActivity
     
         List list = bodyDataDBHelper.query(null, (String[]) null);
     
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(list));//BodyDataContent.ITEMS
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(list));
     }
     
     public class SimpleItemRecyclerViewAdapter extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>

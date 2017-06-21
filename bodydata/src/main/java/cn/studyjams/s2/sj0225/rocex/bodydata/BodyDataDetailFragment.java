@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
-import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataContent;
 import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataDBHelper;
 
 /**
@@ -142,8 +141,6 @@ public class BodyDataDetailFragment extends Fragment
     
         if(getArguments().containsKey(BODY_DATA_ID) && getArguments().getLong(BODY_DATA_ID, -1) != -1)
         {
-            bodyData = BodyDataContent.ITEM_MAP.get(getArguments().getString(BODY_DATA_ID));
-    
             bodyData = bodyDataDBHelper.queryById(getArguments().getLong(BODY_DATA_ID));
             
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
