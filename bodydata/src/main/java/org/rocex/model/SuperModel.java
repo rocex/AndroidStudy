@@ -79,6 +79,11 @@ public abstract class SuperModel implements Serializable
         this.id = id;
     }
     
+    public Class getPropType(String strPropName)
+    {
+        return mapPropType.get(getClass().getName() + "." + strPropName);
+    }
+    
     /***************************************************************************
      * @return 属性名数组，必须满足同时有 getter 和 setter 方法
      * @author Rocex Wang

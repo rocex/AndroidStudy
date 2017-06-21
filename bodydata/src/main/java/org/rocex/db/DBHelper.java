@@ -61,7 +61,36 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
     
     public ContentValues convertToContentValues(T superModel, String... strFieldNames)
     {
+        if(strFieldNames == null || strFieldNames.length == 0)
+        {
+            strFieldNames = superModel.getPropNames();
+        }
+        
         ContentValues contentValues = new ContentValues();
+    
+        for(String strFieldName : strFieldNames)
+        {
+            Object objPropValue = superModel.getPropValue(strFieldName);
+        
+            if(objPropValue == null)
+            {
+                contentValues.putNull(strFieldName);
+            
+                continue;
+            }
+        
+            Class propType = superModel.getPropType(strFieldName);
+        
+            //            switch(propType.getClass())
+            //            {
+            //
+            //            }
+        
+            if(propType.getClass().getName().equals(String.class.getName()))
+            {
+                contentValues.put(strFieldName, (String) objPropValue);
+            }
+        }
         
         return contentValues;
     }
@@ -108,8 +137,9 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
             for(T superModel : superModels)
             {
                 ContentValues contentValues = getContentValues(superModel);
-                
-                iCount += db.update(superModel.getTableName(), contentValues, SuperModel.ID + "=?", new String[]{String.valueOf(superModel.getId())});
+    
+                iCount += db.update(superModel.getTableName(), contentValues, SuperModel.ID + "=?",
+                        new String[]{String.valueOf(superModel.getId())});
             }
         }
         finally
@@ -132,7 +162,7 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         
         for(String strPropName : strPropNames)
         {
-            contentValues.put(strPropName, superModel.getPropValue(strPropName));
+            contentValues.put(strPropName, (String) superModel.getPropValue(strPropName));
         }
         
         return contentValues;
@@ -208,8 +238,9 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
             T superModel = clazzModel.newInstance();
             
             SQLiteDatabase db = getReadableDatabase();
-            
-            Cursor cursor = db.query(superModel.getTableName(), null, strSelection, strSelectionArgs, null, null, SuperModel.CREATE_TIME, "20");
+    
+            Cursor cursor = db
+                    .query(superModel.getTableName(), null, strSelection, strSelectionArgs, null, null, SuperModel.CREATE_TIME, "20");
             
             cursor.moveToFirst();
             
@@ -223,14 +254,6 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
                 {
                     
                 }
-                
-                superModel.setId(cursor.getLong(cursor.getColumnIndex(BodyData.ID)));
-                superModel.setTs(cursor.getLong(cursor.getColumnIndex(BodyData.TS)));
-                superModel.setCreate_time(cursor.getLong(cursor.getColumnIndex(BodyData.CREATE_TIME)));
-                
-                superModel.bmi = cursor.getDouble(cursor.getColumnIndex(BodyData.BMI));
-                superModel.height = cursor.getDouble(cursor.getColumnIndex(BodyData.HEIGHT));
-                superModel.weight = cursor.getDouble(cursor.getColumnIndex(BodyData.WEIGHT));
                 
                 listSuperModel.add(superModel);
                 
