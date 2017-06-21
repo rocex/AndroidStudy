@@ -22,7 +22,7 @@ public abstract class SuperModel implements Serializable
     public static final String ID = "id";
     public static final String TS = "ts";
     
-    private static final String TAG = "SuperModel";
+    private static final String TAG = SuperModel.class.getName();
     
     private static Map<String, Class> mapPropType = new HashMap<String, Class>(); // 全路径类名.属性名，属性名类型
     private static Map<String, String[]> mapPropName = new HashMap<String, String[]>();// 全路径类名，属性名数组

@@ -16,21 +16,9 @@ import java.util.List;
 /**
  * Created by rocexwang on 2017-06-14 11:23:26
  */
-public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
+public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
 {
-    public static final String DATABASE_NAME = "bodydata.db";
-    public static final int DATABASE_VERSION = 1;
-    
-    private static final String TAG = "DBHelper";
-    
-    private static String strCreateTableSQL = "create table bodydata (id integer primary key autoincrement, weight real, height real, bmi" + " real, create_time long, ts long);";
-    
-    private Context context;
-    
-    public DBHelper(Context context)
-    {
-        this(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
+    private static final String TAG = DBHelper.class.getName();
     
     public DBHelper(Context context, String strDatabaseName, SQLiteDatabase.CursorFactory cursorFactory, int iDatabaseVersion)
     {
@@ -40,8 +28,6 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
     public DBHelper(Context context, String strDatabaseName, SQLiteDatabase.CursorFactory cursorFactory, int iDatabaseVersion, DatabaseErrorHandler errorHandler)
     {
         super(context, strDatabaseName, cursorFactory, iDatabaseVersion, errorHandler);
-    
-        this.context = context;
     }
     
     public static void close(Cursor cursor)
@@ -159,8 +145,8 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
         
         int iCount = 0;
-        
-        SQLiteDatabase db = new DBHelper(context).getWritableDatabase();
+    
+        SQLiteDatabase db = getWritableDatabase();
         
         try
         {
@@ -185,8 +171,8 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         {
             return listId;
         }
-        
-        SQLiteDatabase db = new DBHelper(context).getWritableDatabase();
+    
+        SQLiteDatabase db = getWritableDatabase();
         
         try
         {
@@ -205,24 +191,12 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         return listId;
     }
     
-    @Override
-    public void onCreate(SQLiteDatabase db)
+    public boolean existTable(String strTableName)
     {
-        Cursor cursor = null;
-        
-        try
-        {
-            cursor = db.rawQuery("select name from sqlite_master where type='table' and name='bodydata'", null);
+        Cursor cursor = getReadableDatabase()
+                .rawQuery("select name from sqlite_master where type='table' and name='" + strTableName + "'", null);
     
-            if(cursor.getCount() == 0)
-            {
-                db.execSQL(strCreateTableSQL);
-            }
-        }
-        finally
-        {
-            close(cursor);
-        }
+        return cursor.getCount() > 0;
     }
     
     @Override
@@ -259,7 +233,7 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
     
                     if(classPropType.getClass().equals(Boolean.class))
                     {
-                        superModel.setPropValue(strPropName, Boolean.valueOf(cursor.getString(iColumnIndex)));
+                        superModel.setPropValue(strPropName, 1 == cursor.getInt(iColumnIndex));
                     }
                     else if(classPropType.getClass().equals(byte[].class))
                     {
