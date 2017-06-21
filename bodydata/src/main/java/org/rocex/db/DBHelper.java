@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.rocex.model.SuperModel;
@@ -19,8 +18,10 @@ import java.util.List;
  */
 public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
 {
-    public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "bodydata.db";
+    public static final int DATABASE_VERSION = 1;
+    
+    private static final String TAG = "DBHelper";
     
     private static String strCreateTableSQL = "create table bodydata (id integer primary key autoincrement, weight real, height real, bmi" + " real, create_time long, ts long);";
     
@@ -71,22 +72,49 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         for(String strFieldName : strFieldNames)
         {
             Object objPropValue = superModel.getPropValue(strFieldName);
-        
+    
             if(objPropValue == null)
             {
                 contentValues.putNull(strFieldName);
-            
+    
                 continue;
             }
-        
+    
             Class propType = superModel.getPropType(strFieldName);
-        
-            //            switch(propType.getClass())
-            //            {
-            //
-            //            }
-        
-            if(propType.getClass().getName().equals(String.class.getName()))
+    
+            if(propType.getClass().equals(Boolean.class))
+            {
+                contentValues.put(strFieldName, (Boolean) objPropValue);
+            }
+            else if(propType.getClass().equals(Byte.class))
+            {
+                contentValues.put(strFieldName, (Byte) objPropValue);
+            }
+            else if(propType.getClass().equals(byte[].class))
+            {
+                contentValues.put(strFieldName, (byte[]) objPropValue);
+            }
+            else if(propType.getClass().equals(Double.class))
+            {
+                contentValues.put(strFieldName, (Double) objPropValue);
+            }
+            else if(propType.getClass().equals(Float.class))
+            {
+                contentValues.put(strFieldName, (Float) objPropValue);
+            }
+            else if(propType.getClass().equals(Integer.class))
+            {
+                contentValues.put(strFieldName, (Integer) objPropValue);
+            }
+            else if(propType.getClass().equals(Long.class))
+            {
+                contentValues.put(strFieldName, (Long) objPropValue);
+            }
+            else if(propType.getClass().equals(Short.class))
+            {
+                contentValues.put(strFieldName, (Short) objPropValue);
+            }
+            else if(propType.getClass().equals(String.class))
             {
                 contentValues.put(strFieldName, (String) objPropValue);
             }
@@ -105,7 +133,9 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
         catch(Exception ex)
         {
-            Log.e(DBHelper.class.getName(), "convertToModel: ", ex);
+            Log.e(TAG, "convertToModel: class[" + clazzModel + "]", ex);
+    
+            return null;
         }
         
         if(strFieldNames == null || strFieldNames.length == 0)
@@ -119,53 +149,6 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
         
         return superModel;
-    }
-    
-    public int update(String strPropNames[], T... superModels)
-    {
-        if(superModels == null)
-        {
-            return 0;
-        }
-        
-        int iCount = 0;
-        
-        SQLiteDatabase db = new DBHelper(context).getWritableDatabase();
-        
-        try
-        {
-            for(T superModel : superModels)
-            {
-                ContentValues contentValues = getContentValues(superModel);
-    
-                iCount += db.update(superModel.getTableName(), contentValues, SuperModel.ID + "=?",
-                        new String[]{String.valueOf(superModel.getId())});
-            }
-        }
-        finally
-        {
-            close();
-        }
-        
-        return iCount;
-    }
-    
-    @NonNull
-    public ContentValues getContentValues(T superModel, String... strPropNames)
-    {
-        if(strPropNames == null)
-        {
-            strPropNames = superModel.getPropNames();
-        }
-        
-        ContentValues contentValues = new ContentValues();
-        
-        for(String strPropName : strPropNames)
-        {
-            contentValues.put(strPropName, (String) superModel.getPropValue(strPropName));
-        }
-        
-        return contentValues;
     }
     
     public int delete(T... superModels)
@@ -194,7 +177,7 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         return iCount;
     }
     
-    public List<Long> insert(String strPropNames[], T... superModels)
+    public List<Long> insert(T superModels[], String... strPropNames)
     {
         List<Long> listId = new ArrayList<Long>();
         
@@ -209,8 +192,8 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         {
             for(T superModel : superModels)
             {
-                ContentValues contentValues = getContentValues(superModel);
-                
+                ContentValues contentValues = convertToContentValues(superModel, strPropNames);
+    
                 listId.add(db.insert(superModel.getTableName(), null, contentValues));
             }
         }
@@ -218,15 +201,33 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         {
             close();
         }
-        
+    
         return listId;
     }
     
-    public T queryById(Class<T> clazzModel, long id)
+    @Override
+    public void onCreate(SQLiteDatabase db)
     {
-        List<T> listSuperModel = query(clazzModel, SuperModel.ID + "=?", String.valueOf(id));
+        Cursor cursor = null;
         
-        return listSuperModel.get(0);
+        try
+        {
+            cursor = db.rawQuery("select name from sqlite_master where type='table' and name='bodydata'", null);
+    
+            if(cursor.getCount() == 0)
+            {
+                db.execSQL(strCreateTableSQL);
+            }
+        }
+        finally
+        {
+            close(cursor);
+        }
+    }
+    
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
     }
     
     public List<T> query(Class<T> clazzModel, String strSelection, String... strSelectionArgs)
@@ -272,28 +273,39 @@ public class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         return listSuperModel;
     }
     
-    @Override
-    public void onCreate(SQLiteDatabase db)
+    public T queryById(Class<T> clazzModel, long id)
     {
-        Cursor cursor = null;
+        List<T> listSuperModel = query(clazzModel, SuperModel.ID + "=?", String.valueOf(id));
+    
+        return listSuperModel.get(0);
+    }
+    
+    public int update(T superModels[], String... strPropNames)
+    {
+        if(superModels == null || superModels.length == 0)
+        {
+            return 0;
+        }
+        
+        int iCount = 0;
+        
+        SQLiteDatabase db = getWritableDatabase();
         
         try
         {
-            cursor = db.rawQuery("select name from sqlite_master where type='table' and name='bodydata'", null);
-            
-            if(cursor.getCount() == 0)
+            for(T superModel : superModels)
             {
-                db.execSQL(strCreateTableSQL);
+                ContentValues contentValues = convertToContentValues(superModel);
+    
+                iCount += db.update(superModel.getTableName(), contentValues, SuperModel.ID + "=?",
+                        new String[]{String.valueOf(superModel.getId())});
             }
         }
         finally
         {
-            close(cursor);
+            close();
         }
-    }
-    
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
+        
+        return iCount;
     }
 }

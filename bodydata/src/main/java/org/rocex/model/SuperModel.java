@@ -1,5 +1,7 @@
 package org.rocex.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -19,6 +21,8 @@ public abstract class SuperModel implements Serializable
     public static final String CREATE_TIME = "create_time";
     public static final String ID = "id";
     public static final String TS = "ts";
+    
+    private static final String TAG = "SuperModel";
     
     private static Map<String, Class> mapPropType = new HashMap<String, Class>(); // 全路径类名.属性名，属性名类型
     private static Map<String, String[]> mapPropName = new HashMap<String, String[]>();// 全路径类名，属性名数组
@@ -79,6 +83,11 @@ public abstract class SuperModel implements Serializable
         this.id = id;
     }
     
+    /***************************************************************************
+     * @param strPropName
+     * @author Rocex Wang
+     * @version 2017-6-15 10:10:12
+     ***************************************************************************/
     public Class getPropType(String strPropName)
     {
         return mapPropType.get(getClass().getName() + "." + strPropName);
@@ -111,7 +120,7 @@ public abstract class SuperModel implements Serializable
                 }
                 catch(Exception ex)
                 {
-                    System.err.println(ex);
+                    Log.e(TAG, "getPropNames: name[" + field.getName() + "], type[" + field.getType() + "]", ex);
                     continue;
                 }
     
@@ -121,9 +130,9 @@ public abstract class SuperModel implements Serializable
             }
         }
     
-        System.out.println(getClass().getName() + "[" + listField + "]");
-        System.out.println(mapPropType);
-    
+        Log.d(TAG, "getPropNames: fields[" + listField + "]");
+        Log.d(TAG, "getPropNames: type[" + mapPropType + "]");
+        
         strPropNames = listField.toArray(new String[0]);
     
         Arrays.sort(strPropNames);
@@ -145,14 +154,14 @@ public abstract class SuperModel implements Serializable
         
         try
         {
-            Method method = getClass()
-                    .getMethod("get" + strPropName.substring(0, 1).toUpperCase() + strPropName.substring(1), (Class) null);
+            String strMethodName = "get" + strPropName.substring(0, 1).toUpperCase() + strPropName.substring(1);
+            Method method = getClass().getMethod(strMethodName, (Class) null);
             
             objReturn = method.invoke(this, (Object[]) null);
         }
         catch(Exception ex)
         {
-            ex.printStackTrace();
+            Log.e(TAG, "getPropValue: name[" + strPropName + "]", ex);
         }
         
         return objReturn;
@@ -195,15 +204,15 @@ public abstract class SuperModel implements Serializable
     {
         try
         {
-            String _name = strPropName.substring(0, 1).toUpperCase() + strPropName.substring(1);
-            
-            Method method = getClass().getMethod("set" + _name, mapPropType.get(getClass().getName() + "." + strPropName));
+            String strMethodName = "set" + strPropName.substring(0, 1).toUpperCase() + strPropName.substring(1);
+    
+            Method method = getClass().getMethod(strMethodName, getPropType(strPropName));
             
             method.invoke(this, objValue);
         }
         catch(Exception ex)
         {
-            System.err.println(ex);
+            Log.e(TAG, "setPropValue: name[" + strPropName + "], type[" + getPropType(strPropName) + "], value[" + objValue + "]", ex);
         }
     }
 }
