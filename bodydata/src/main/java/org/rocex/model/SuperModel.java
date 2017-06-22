@@ -148,6 +148,25 @@ public abstract class SuperModel implements Serializable
         return strPropNames;
     }
     
+    public String getCreateTableSQL(String... strPropNames)
+    {
+        if(strPropNames == null || strPropNames.length == 0)
+        {
+            strPropNames = getPropNames();
+        }
+        
+        String strFieldSQL = "";
+        
+        for(String strPropName : strPropNames)
+        {
+            strFieldSQL = strFieldSQL + strPropName + " int" + ", ";
+        }
+        
+        String strSQL = "create table " + getTableName() + " (id integer primary key autoincrement," + strFieldSQL + "create_time long, ts long)";
+        
+        return strSQL;
+    }
+    
     /***************************************************************************
      * @param strPropName
      * @return

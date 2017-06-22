@@ -321,38 +321,6 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         return listSuperModel;
     }
     
-    protected String getCreateTableSQL(Class<T> clazzModel, String... strPropNames)
-    {
-        T superModel = null;
-    
-        try
-        {
-            superModel = clazzModel.newInstance();
-        }
-        catch(Exception ex)
-        {
-            Log.e(TAG, "getCreateTableSQL: class[" + clazzModel + "]", ex);
-        
-            return null;
-        }
-    
-        if(strPropNames == null || strPropNames.length == 0)
-        {
-            strPropNames = superModel.getPropNames();
-        }
-    
-        String strFieldSQL = "";
-    
-        for(String strPropName : strPropNames)
-        {
-            strFieldSQL = strFieldSQL + strPropName + " int" + ",";
-        }
-    
-        String strSQL = "create table " + superModel.getTableName() + " (id integer primary key autoincrement,";
-    
-        return strSQL;
-    }
-    
     public T query(Class<T> clazzModel, long id)
     {
         List<T> listSuperModel = query(clazzModel, null, null, null, null, null, SuperModel.ID + "=?", new String[]{String.valueOf(id)});
