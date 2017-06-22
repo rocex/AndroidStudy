@@ -13,9 +13,9 @@ import org.rocex.model.SuperModel;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/***************************************************************************
  * Created by rocexwang on 2017-06-14 11:23:26
- */
+ ***************************************************************************/
 public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
 {
     private static final String TAG = DBHelper.class.getName();
@@ -193,9 +193,10 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
     
     public boolean existTable(String strTableName)
     {
-        Cursor cursor = getReadableDatabase()
-                .rawQuery("select name from sqlite_master where type='table' and name='" + strTableName + "'", null);
+        String strSQL = "select name from sqlite_master where type='table' and name='" + strTableName + "'";
     
+        Cursor cursor = getReadableDatabase().rawQuery(strSQL, null);
+        
         return cursor.getCount() > 0;
     }
     
@@ -219,56 +220,7 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
             
             cursor.moveToFirst();
     
-            String[] strPropNames = superModel.getPropNames();
-            
-            while(!cursor.isAfterLast())
-            {
-                superModel = clazzModel.newInstance();
-                
-                for(String strPropName : strPropNames)
-                {
-                    int iColumnIndex = cursor.getColumnIndex(strPropName);
-    
-                    Class classPropType = superModel.getPropType(strPropName);
-    
-                    if(classPropType.getClass().equals(Boolean.class))
-                    {
-                        superModel.setPropValue(strPropName, 1 == cursor.getInt(iColumnIndex));
-                    }
-                    else if(classPropType.getClass().equals(byte[].class))
-                    {
-                        superModel.setPropValue(strPropName, cursor.getBlob(iColumnIndex));
-                    }
-                    else if(classPropType.getClass().equals(Double.class))
-                    {
-                        superModel.setPropValue(strPropName, cursor.getDouble(iColumnIndex));
-                    }
-                    else if(classPropType.getClass().equals(Float.class))
-                    {
-                        superModel.setPropValue(strPropName, cursor.getFloat(iColumnIndex));
-                    }
-                    else if(classPropType.getClass().equals(Integer.class))
-                    {
-                        superModel.setPropValue(strPropName, cursor.getInt(iColumnIndex));
-                    }
-                    else if(classPropType.getClass().equals(Long.class))
-                    {
-                        superModel.setPropValue(strPropName, cursor.getLong(iColumnIndex));
-                    }
-                    else if(classPropType.getClass().equals(Short.class))
-                    {
-                        superModel.setPropValue(strPropName, cursor.getShort(iColumnIndex));
-                    }
-                    else if(classPropType.getClass().equals(String.class))
-                    {
-                        superModel.setPropValue(strPropName, cursor.getString(iColumnIndex));
-                    }
-                }
-                
-                listSuperModel.add(superModel);
-                
-                cursor.moveToNext();
-            }
+            listSuperModel = convertToModel(clazzModel, cursor, superModel.getPropNames());
         }
         catch(Exception ex)
         {
@@ -277,6 +229,73 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         finally
         {
             close();
+        }
+        
+        return listSuperModel;
+    }
+    
+    public List<T> convertToModel(Class<T> clazzModel, Cursor cursor, String... strPropNames)
+    {
+        List<T> listSuperModel = new ArrayList<T>();
+        
+        while(!cursor.isAfterLast())
+        {
+            T superModel = null;
+            
+            try
+            {
+                superModel = clazzModel.newInstance();
+            }
+            catch(Exception ex)
+            {
+                Log.e(TAG, "convertToModel: ", ex);
+                
+                continue;
+            }
+            
+            for(String strPropName : strPropNames)
+            {
+                int iColumnIndex = cursor.getColumnIndex(strPropName);
+                
+                Class classPropType = superModel.getPropType(strPropName);
+                
+                if(classPropType.getClass().equals(Boolean.class))
+                {
+                    superModel.setPropValue(strPropName, 1 == cursor.getInt(iColumnIndex));
+                }
+                else if(classPropType.getClass().equals(byte[].class))
+                {
+                    superModel.setPropValue(strPropName, cursor.getBlob(iColumnIndex));
+                }
+                else if(classPropType.getClass().equals(Double.class))
+                {
+                    superModel.setPropValue(strPropName, cursor.getDouble(iColumnIndex));
+                }
+                else if(classPropType.getClass().equals(Float.class))
+                {
+                    superModel.setPropValue(strPropName, cursor.getFloat(iColumnIndex));
+                }
+                else if(classPropType.getClass().equals(Integer.class))
+                {
+                    superModel.setPropValue(strPropName, cursor.getInt(iColumnIndex));
+                }
+                else if(classPropType.getClass().equals(Long.class))
+                {
+                    superModel.setPropValue(strPropName, cursor.getLong(iColumnIndex));
+                }
+                else if(classPropType.getClass().equals(Short.class))
+                {
+                    superModel.setPropValue(strPropName, cursor.getShort(iColumnIndex));
+                }
+                else if(classPropType.getClass().equals(String.class))
+                {
+                    superModel.setPropValue(strPropName, cursor.getString(iColumnIndex));
+                }
+            }
+            
+            listSuperModel.add(superModel);
+            
+            cursor.moveToNext();
         }
         
         return listSuperModel;
