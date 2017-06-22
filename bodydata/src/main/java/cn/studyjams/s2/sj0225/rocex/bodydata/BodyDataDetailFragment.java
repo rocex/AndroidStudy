@@ -25,7 +25,7 @@ public class BodyDataDetailFragment extends Fragment
     // The fragment argument representing the item _ID that this fragment represents.
     public static final String BODY_DATA_ID = "body_data_id";
     
-    private BodyDataDBHelper bodyDataDBHelper = null;
+    private BodyDataDBHelper<BodyData> bodyDataDBHelper = null;
     
     // The model content this fragment is presenting.
     private BodyData bodyData;
@@ -96,11 +96,11 @@ public class BodyDataDetailFragment extends Fragment
         
         if(bodyData.getId() == null)
         {
-            bodyDataDBHelper.insert(bodyData);
+            bodyDataDBHelper.insert(new BodyData[]{bodyData});
         }
         else
         {
-            bodyDataDBHelper.update(bodyData);
+            bodyDataDBHelper.update(new BodyData[]{bodyData});
         }
     }
     
@@ -137,11 +137,11 @@ public class BodyDataDetailFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
     
-        bodyDataDBHelper = new BodyDataDBHelper(getContext());
-    
+        bodyDataDBHelper = new BodyDataDBHelper<BodyData>(getContext());
+        
         if(getArguments().containsKey(BODY_DATA_ID) && getArguments().getLong(BODY_DATA_ID, -1) != -1)
         {
-            bodyData = bodyDataDBHelper.queryById(getArguments().getLong(BODY_DATA_ID));
+            bodyData = (BodyData) bodyDataDBHelper.query(BodyData.class, getArguments().getLong(BODY_DATA_ID));
             
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
             if(appBarLayout != null)

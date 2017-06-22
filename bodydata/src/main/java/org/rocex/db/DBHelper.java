@@ -25,7 +25,8 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         this(context, strDatabaseName, cursorFactory, iDatabaseVersion, null);
     }
     
-    public DBHelper(Context context, String strDatabaseName, SQLiteDatabase.CursorFactory cursorFactory, int iDatabaseVersion, DatabaseErrorHandler errorHandler)
+    public DBHelper(Context context, String strDatabaseName, SQLiteDatabase.CursorFactory cursorFactory, int iDatabaseVersion,
+                    DatabaseErrorHandler errorHandler)
     {
         super(context, strDatabaseName, cursorFactory, iDatabaseVersion, errorHandler);
     }
@@ -205,26 +206,45 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
     {
     }
     
-    public List<T> query(Class<T> clazzModel, String strSelection, String... strSelectionArgs)
+    public List<T> query(Class<T> clazzModel, String strPropNames[], String strOrderBy, String strSelection, String... strSelectionArgs)
     {
-        List<T> listSuperModel = new ArrayList<T>();
+        return query(clazzModel, strPropNames, null, null, strOrderBy, null, strSelection, strSelectionArgs);
+    }
+    
+    public List<T> query(Class<T> clazzModel, String strPropNames[], String strGroupBy, String strHaving, String strOrderBy,
+                         String strLimit, String strSelection, String... strSelectionArgs)
+    {
+        List<T> listSuperModel = new ArrayList<>();
+        
+        T superModel = null;
         
         try
         {
-            T superModel = clazzModel.newInstance();
-            
-            SQLiteDatabase db = getReadableDatabase();
-    
-            Cursor cursor = db
-                    .query(superModel.getTableName(), null, strSelection, strSelectionArgs, null, null, SuperModel.CREATE_TIME, "20");
-            
-            cursor.moveToFirst();
-    
-            listSuperModel = convertToModel(clazzModel, cursor, superModel.getPropNames());
+            superModel = clazzModel.newInstance();
         }
         catch(Exception ex)
         {
             Log.e(TAG, "query: class[" + clazzModel + "]", ex);
+    
+            return listSuperModel;
+        }
+        
+        if(strPropNames == null || strPropNames.length == 0)
+        {
+            strPropNames = superModel.getPropNames();
+        }
+        
+        try
+        {
+            SQLiteDatabase db = getReadableDatabase();
+            
+            Cursor cursor = db
+                    .query(superModel.getTableName(), strPropNames, strSelection, strSelectionArgs, strGroupBy, strHaving, strOrderBy,
+                            strLimit);
+            
+            cursor.moveToFirst();
+            
+            listSuperModel = convertToModel(clazzModel, cursor, superModel.getPropNames());
         }
         finally
         {
@@ -301,10 +321,42 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         return listSuperModel;
     }
     
-    public T queryById(Class<T> clazzModel, long id)
+    protected String getCreateTableSQL(Class<T> clazzModel, String... strPropNames)
     {
-        List<T> listSuperModel = query(clazzModel, SuperModel.ID + "=?", String.valueOf(id));
+        T superModel = null;
     
+        try
+        {
+            superModel = clazzModel.newInstance();
+        }
+        catch(Exception ex)
+        {
+            Log.e(TAG, "getCreateTableSQL: class[" + clazzModel + "]", ex);
+        
+            return null;
+        }
+    
+        if(strPropNames == null || strPropNames.length == 0)
+        {
+            strPropNames = superModel.getPropNames();
+        }
+    
+        String strFieldSQL = "";
+    
+        for(String strPropName : strPropNames)
+        {
+            strFieldSQL = strFieldSQL + strPropName + " int" + ",";
+        }
+    
+        String strSQL = "create table " + superModel.getTableName() + " (id integer primary key autoincrement,";
+    
+        return strSQL;
+    }
+    
+    public T query(Class<T> clazzModel, long id)
+    {
+        List<T> listSuperModel = query(clazzModel, null, null, null, null, null, SuperModel.ID + "=?", new String[]{String.valueOf(id)});
+        
         return listSuperModel.get(0);
     }
     
@@ -323,8 +375,8 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         {
             for(T superModel : superModels)
             {
-                ContentValues contentValues = convertToContentValues(superModel);
-    
+                ContentValues contentValues = convertToContentValues(superModel, strPropNames);
+                
                 iCount += db.update(superModel.getTableName(), contentValues, SuperModel.ID + "=?",
                         new String[]{String.valueOf(superModel.getId())});
             }

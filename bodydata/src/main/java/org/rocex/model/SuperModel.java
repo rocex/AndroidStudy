@@ -5,6 +5,7 @@ import android.util.Log;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -113,6 +114,11 @@ public abstract class SuperModel implements Serializable
         {
             for(Field field : clazz.getDeclaredFields())
             {
+                if(Modifier.isStatic(field.getModifiers()))
+                {
+                    continue;
+                }
+                
                 try
                 {
                     clazz.getMethod("get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1), (Class[]) null);

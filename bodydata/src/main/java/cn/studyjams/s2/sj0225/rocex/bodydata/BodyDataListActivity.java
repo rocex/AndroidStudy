@@ -78,8 +78,8 @@ public class BodyDataListActivity extends AppCompatActivity
     {
         BodyDataDBHelper bodyDataDBHelper = new BodyDataDBHelper(this);
     
-        List list = bodyDataDBHelper.query(null, (String[]) null);
-    
+        List list = bodyDataDBHelper.query(BodyData.class, null, null, null);
+        
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(list));
     }
     
