@@ -159,7 +159,44 @@ public abstract class SuperModel implements Serializable
         
         for(String strPropName : strPropNames)
         {
-            strFieldSQL = strFieldSQL + strPropName + " int" + ", ";
+            Class classPropType = getPropType(strPropName);
+    
+            String strFieldType = "";
+    
+            if(classPropType.getClass().equals(Boolean.class))
+            {
+                strFieldType = "";
+            }
+            else if(classPropType.getClass().equals(byte[].class))
+            {
+                strFieldType = "";
+            }
+            else if(classPropType.getClass().equals(Double.class))
+            {
+                strFieldType = "";
+            }
+            else if(classPropType.getClass().equals(Float.class))
+            {
+                strFieldType = "";
+            }
+            else if(classPropType.getClass().equals(Integer.class))
+            {
+                strFieldType = "";
+            }
+            else if(classPropType.getClass().equals(Long.class))
+            {
+                strFieldType = "";
+            }
+            else if(classPropType.getClass().equals(Short.class))
+            {
+                strFieldType = "";
+            }
+            else if(classPropType.getClass().equals(String.class))
+            {
+                strFieldType = "";
+            }
+    
+            strFieldSQL = strFieldSQL + strPropName + " " + strFieldType + ", ";
         }
         
         String strSQL = "create table " + getTableName() + " (id integer primary key autoincrement," + strFieldSQL + "create_time long, ts long)";
