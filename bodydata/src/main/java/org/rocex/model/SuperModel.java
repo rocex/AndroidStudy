@@ -163,43 +163,28 @@ public abstract class SuperModel implements Serializable
     
             String strFieldType = "";
     
-            if(classPropType.getClass().equals(Boolean.class))
+            if(classPropType.equals(Boolean.class) || classPropType.equals(Integer.class) || classPropType
+                    .equals(Long.class) || classPropType.equals(Short.class))
             {
-                strFieldType = "";
+                strFieldType = "int";
             }
-            else if(classPropType.getClass().equals(byte[].class))
+            else if(classPropType.equals(byte[].class))
             {
-                strFieldType = "";
+                strFieldType = "blob";
             }
-            else if(classPropType.getClass().equals(Double.class))
+            else if(classPropType.equals(Double.class) || classPropType.equals(Float.class))
             {
-                strFieldType = "";
+                strFieldType = "real";
             }
-            else if(classPropType.getClass().equals(Float.class))
+            else if(classPropType.equals(String.class))
             {
-                strFieldType = "";
-            }
-            else if(classPropType.getClass().equals(Integer.class))
-            {
-                strFieldType = "";
-            }
-            else if(classPropType.getClass().equals(Long.class))
-            {
-                strFieldType = "";
-            }
-            else if(classPropType.getClass().equals(Short.class))
-            {
-                strFieldType = "";
-            }
-            else if(classPropType.getClass().equals(String.class))
-            {
-                strFieldType = "";
+                strFieldType = "text";
             }
     
             strFieldSQL = strFieldSQL + strPropName + " " + strFieldType + ", ";
         }
-        
-        String strSQL = "create table " + getTableName() + " (id integer primary key autoincrement," + strFieldSQL + "create_time long, ts long)";
+    
+        String strSQL = "create table " + getTableName() + " (id int primary key autoincrement not null, " + strFieldSQL + "create_time long, ts long)";
         
         return strSQL;
     }
