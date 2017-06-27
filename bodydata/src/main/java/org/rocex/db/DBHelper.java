@@ -158,7 +158,7 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
         finally
         {
-            close();
+            //close();
         }
         
         return iCount;
@@ -186,7 +186,7 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
         finally
         {
-            close();
+            //close();
         }
     
         return listId;
@@ -248,7 +248,7 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
         finally
         {
-            close();
+            //close();
         }
         
         return listSuperModel;
@@ -351,7 +351,7 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         }
         finally
         {
-            close();
+            //close();
         }
         
         return iCount;

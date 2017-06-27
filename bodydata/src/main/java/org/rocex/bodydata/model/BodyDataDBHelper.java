@@ -35,7 +35,12 @@ public class BodyDataDBHelper<T extends BodyData> extends DBHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        if(!existTable("bodydata"))
+        if(db.getVersion() == 0)
+        {
+            //            return;
+        }
+    
+        //        if(!existTable("bodydata"))
         {
             db.execSQL(strCreateTableSQL);
         }

@@ -210,9 +210,9 @@ public abstract class SuperModel implements Serializable
         try
         {
             String strMethodName = "get" + strPropName.substring(0, 1).toUpperCase() + strPropName.substring(1);
-            Method method = getClass().getMethod(strMethodName, null);
+            Method method = getClass().getMethod(strMethodName, (Class) null);
     
-            objReturn = method.invoke(this, null);
+            objReturn = method.invoke(this, (Object) null);
         }
         catch(Exception ex)
         {
