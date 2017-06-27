@@ -1,4 +1,4 @@
-package cn.studyjams.s2.sj0225.rocex.bodydata;
+package org.rocex.bodydata;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
+import org.rocex.bodydata.model.BodyData;
+import org.rocex.bodydata.model.BodyDataDBHelper;
 
-import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
-import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataDBHelper;
+import java.util.List;
 
 /**
  * An activity representing a list of BodyDatas. This activity
@@ -59,9 +59,9 @@ public class BodyDataListActivity extends AppCompatActivity
         });
         
         View recyclerView = findViewById(R.id.bodydata_list);
-    
+        
         assert recyclerView != null;
-    
+        
         setupRecyclerView((RecyclerView) recyclerView);
         
         if(findViewById(R.id.bodydata_detail_container) != null)
@@ -77,7 +77,7 @@ public class BodyDataListActivity extends AppCompatActivity
     private void setupRecyclerView(@NonNull RecyclerView recyclerView)
     {
         BodyDataDBHelper bodyDataDBHelper = new BodyDataDBHelper(this);
-    
+        
         List list = bodyDataDBHelper.query(BodyData.class, null, null, null);
         
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(list));
@@ -104,11 +104,11 @@ public class BodyDataListActivity extends AppCompatActivity
         public void onBindViewHolder(final ViewHolder holder, int position)
         {
             holder.bodyData = listBodyData.get(position);
-    
+            
             holder.textViewCreateTime.setText(DateFormat.format("yyyy-MM-dd", holder.bodyData.getCreate_time()).toString());
-            holder.textViewWeight.setText(holder.bodyData.weight + "kg");
-            holder.textViewHeight.setText(holder.bodyData.height + "cm");
-            holder.textViewBMI.setText(String.format("%.2f", holder.bodyData.bmi));
+            holder.textViewWeight.setText(holder.bodyData.getWeight() + "kg");
+            holder.textViewHeight.setText(holder.bodyData.getHeight() + "cm");
+            holder.textViewBMI.setText(String.format("%.2f", holder.bodyData.getBmi()));
             
             holder.view.setOnClickListener(new View.OnClickListener()
             {

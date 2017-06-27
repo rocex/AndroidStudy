@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.studyjams.s2.sj0225.rocex.bodydata">
+    package="org.rocex.bodydata">
     
     <application
         android:allowBackup="true"
@@ -25,7 +25,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cn.studyjams.s2.sj0225.rocex.bodydata.BodyDataListActivity" />
+                android:value="org.rocex.bodydata.BodyDataListActivity" />
         </activity>
     </application>
 

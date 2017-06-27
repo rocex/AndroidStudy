@@ -1,4 +1,4 @@
-package cn.studyjams.s2.sj0225.rocex.bodydata;
+package org.rocex.bodydata;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public class BodyDataDetailActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bodydata_detail);
-    
+        
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         
@@ -65,7 +65,7 @@ public class BodyDataDetailActivity extends AppCompatActivity
             arguments.putLong(BodyDataDetailFragment.BODY_DATA_ID, getIntent().getLongExtra(BodyDataDetailFragment.BODY_DATA_ID, -1));
             fragment = new BodyDataDetailFragment();
             fragment.setArguments(arguments);
-    
+            
             getSupportFragmentManager().beginTransaction().add(R.id.bodydata_detail_container, fragment).commit();
         }
     }
@@ -84,10 +84,10 @@ public class BodyDataDetailActivity extends AppCompatActivity
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
             NavUtils.navigateUpTo(this, new Intent(this, BodyDataListActivity.class));
-    
+            
             return true;
         }
-    
+        
         return super.onOptionsItemSelected(item);
     }
     

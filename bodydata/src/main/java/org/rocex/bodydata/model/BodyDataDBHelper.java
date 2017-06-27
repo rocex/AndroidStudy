@@ -1,4 +1,4 @@
-package cn.studyjams.s2.sj0225.rocex.bodydata.model;
+package org.rocex.bodydata.model;
 
 import android.content.Context;
 import android.database.DatabaseErrorHandler;
@@ -26,7 +26,8 @@ public class BodyDataDBHelper<T extends BodyData> extends DBHelper
         this(context, name, factory, version, null);
     }
     
-    public BodyDataDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler)
+    public BodyDataDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version,
+                            DatabaseErrorHandler errorHandler)
     {
         super(context, name, factory, version, errorHandler);
     }

@@ -6,7 +6,7 @@
     android:layout_marginTop="@dimen/text_margin"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context="cn.studyjams.s2.sj0225.rocex.bodydata.BodyDataDetailFragment">
+    tools:context="org.rocex.bodydata.BodyDataDetailFragment">
     
     <GridLayout
         android:layout_width="match_parent"
@@ -123,4 +123,4 @@
     android:padding="16dp"
     android:text="test"
     android:textIsSelectable="true"
-    tools:context="cn.studyjams.s2.sj0225.rocex.bodydata.BodyDataDetailFragment" />-->
+    tools:context="org.rocex.bodydata.BodyDataDetailFragment" />-->

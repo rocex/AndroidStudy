@@ -69,39 +69,39 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
     
             Class classPropType = superModel.getPropType(strFieldName);
     
-            if(classPropType.getClass().equals(Boolean.class))
+            if(classPropType.equals(Boolean.class))
             {
                 contentValues.put(strFieldName, (Boolean) objPropValue);
             }
-            else if(classPropType.getClass().equals(Byte.class))
+            else if(classPropType.equals(Byte.class))
             {
                 contentValues.put(strFieldName, (Byte) objPropValue);
             }
-            else if(classPropType.getClass().equals(byte[].class))
+            else if(classPropType.equals(byte[].class))
             {
                 contentValues.put(strFieldName, (byte[]) objPropValue);
             }
-            else if(classPropType.getClass().equals(Double.class))
+            else if(classPropType.equals(Double.class))
             {
                 contentValues.put(strFieldName, (Double) objPropValue);
             }
-            else if(classPropType.getClass().equals(Float.class))
+            else if(classPropType.equals(Float.class))
             {
                 contentValues.put(strFieldName, (Float) objPropValue);
             }
-            else if(classPropType.getClass().equals(Integer.class))
+            else if(classPropType.equals(Integer.class))
             {
                 contentValues.put(strFieldName, (Integer) objPropValue);
             }
-            else if(classPropType.getClass().equals(Long.class))
+            else if(classPropType.equals(Long.class))
             {
                 contentValues.put(strFieldName, (Long) objPropValue);
             }
-            else if(classPropType.getClass().equals(Short.class))
+            else if(classPropType.equals(Short.class))
             {
                 contentValues.put(strFieldName, (Short) objPropValue);
             }
-            else if(classPropType.getClass().equals(String.class))
+            else if(classPropType.equals(String.class))
             {
                 contentValues.put(strFieldName, (String) objPropValue);
             }
@@ -278,36 +278,36 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
                 int iColumnIndex = cursor.getColumnIndex(strPropName);
                 
                 Class classPropType = superModel.getPropType(strPropName);
-                
-                if(classPropType.getClass().equals(Boolean.class))
+    
+                if(classPropType.equals(Boolean.class))
                 {
                     superModel.setPropValue(strPropName, 1 == cursor.getInt(iColumnIndex));
                 }
-                else if(classPropType.getClass().equals(byte[].class))
+                else if(classPropType.equals(byte[].class))
                 {
                     superModel.setPropValue(strPropName, cursor.getBlob(iColumnIndex));
                 }
-                else if(classPropType.getClass().equals(Double.class))
+                else if(classPropType.equals(Double.class))
                 {
                     superModel.setPropValue(strPropName, cursor.getDouble(iColumnIndex));
                 }
-                else if(classPropType.getClass().equals(Float.class))
+                else if(classPropType.equals(Float.class))
                 {
                     superModel.setPropValue(strPropName, cursor.getFloat(iColumnIndex));
                 }
-                else if(classPropType.getClass().equals(Integer.class))
+                else if(classPropType.equals(Integer.class))
                 {
                     superModel.setPropValue(strPropName, cursor.getInt(iColumnIndex));
                 }
-                else if(classPropType.getClass().equals(Long.class))
+                else if(classPropType.equals(Long.class))
                 {
                     superModel.setPropValue(strPropName, cursor.getLong(iColumnIndex));
                 }
-                else if(classPropType.getClass().equals(Short.class))
+                else if(classPropType.equals(Short.class))
                 {
                     superModel.setPropValue(strPropName, cursor.getShort(iColumnIndex));
                 }
-                else if(classPropType.getClass().equals(String.class))
+                else if(classPropType.equals(String.class))
                 {
                     superModel.setPropValue(strPropName, cursor.getString(iColumnIndex));
                 }

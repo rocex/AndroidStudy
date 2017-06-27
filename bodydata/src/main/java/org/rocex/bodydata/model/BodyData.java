@@ -1,4 +1,4 @@
-package cn.studyjams.s2.sj0225.rocex.bodydata.model;
+package org.rocex.bodydata.model;
 
 import android.text.format.DateFormat;
 
@@ -18,9 +18,9 @@ public class BodyData extends SuperModel
     
     public final String dateString;
     
-    public Double height = 1.0;  // 身高cm
-    public Double weight = 1.0; // 体重kg
-    public Double bmi; // 体质指数BMI = weight / (height / 100 * height / 100)
+    private Double height;  // 身高cm
+    private Double weight; // 体重kg
+    private Double bmi; // 体质指数BMI = weight / (height / 100 * height / 100)
     
     public BodyData()
     {
@@ -37,6 +37,36 @@ public class BodyData extends SuperModel
         this.height = height;
         
         calculate();
+    }
+    
+    public Double getWeight()
+    {
+        return weight;
+    }
+    
+    public void setWeight(Double weight)
+    {
+        this.weight = weight;
+    }
+    
+    public Double getBmi()
+    {
+        return bmi;
+    }
+    
+    public void setBmi(Double bmi)
+    {
+        this.bmi = bmi;
+    }
+    
+    public Double getHeight()
+    {
+        return height;
+    }
+    
+    public void setHeight(Double height)
+    {
+        this.height = height;
     }
     
     public void calculate()

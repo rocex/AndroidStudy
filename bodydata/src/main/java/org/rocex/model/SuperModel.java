@@ -1,8 +1,10 @@
 package org.rocex.model;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -28,8 +30,11 @@ public abstract class SuperModel implements Serializable
     private static Map<String, Class> mapPropType = new HashMap<String, Class>(); // 全路径类名.属性名，属性名类型
     private static Map<String, String[]> mapPropName = new HashMap<String, String[]>();// 全路径类名，属性名数组
     
+    @NonNull
     private Long create_time;
+    @NonNull
     private Long id;
+    @NonNull
     private Long ts;
     
     /***************************************************************************
@@ -69,6 +74,7 @@ public abstract class SuperModel implements Serializable
      * @author Rocex Wang
      * @version 2017-6-15 10:10:31
      ***************************************************************************/
+    @NonNull
     public Long getId()
     {
         return id;
@@ -163,6 +169,8 @@ public abstract class SuperModel implements Serializable
     
             String strFieldType = "";
     
+            Annotation annotation = classPropType.getAnnotation(NonNull.class);
+            
             if(classPropType.equals(Boolean.class) || classPropType.equals(Integer.class) || classPropType
                     .equals(Long.class) || classPropType.equals(Short.class))
             {
@@ -202,9 +210,9 @@ public abstract class SuperModel implements Serializable
         try
         {
             String strMethodName = "get" + strPropName.substring(0, 1).toUpperCase() + strPropName.substring(1);
-            Method method = getClass().getMethod(strMethodName, (Class) null);
-            
-            objReturn = method.invoke(this, (Object[]) null);
+            Method method = getClass().getMethod(strMethodName, null);
+    
+            objReturn = method.invoke(this, null);
         }
         catch(Exception ex)
         {

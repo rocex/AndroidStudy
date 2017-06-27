@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="cn.studyjams.s2.sj0225.rocex.bodydata.BodyDataDetailActivity"
+    tools:context="org.rocex.bodydata.BodyDataDetailActivity"
     tools:ignore="MergeRootFrame">
     
     <android.support.design.widget.AppBarLayout

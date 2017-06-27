@@ -1,4 +1,4 @@
-package cn.studyjams.s2.sj0225.rocex.bodydata;
+package org.rocex.bodydata;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyData;
-import cn.studyjams.s2.sj0225.rocex.bodydata.model.BodyDataDBHelper;
+import org.rocex.bodydata.model.BodyData;
+import org.rocex.bodydata.model.BodyDataDBHelper;
 
 /**
  * A fragment representing a single BodyData detail screen.
@@ -73,7 +73,7 @@ public class BodyDataDetailFragment extends Fragment
             return;
         }
         
-        bodyData.weight = Double.valueOf(strWeight);
+        bodyData.setWeight(Double.valueOf(strWeight));
         
         TextView editTextHeight = (TextView) rootView.findViewById(R.id.editTextHeight);
         String strHeight = editTextHeight.getText().toString();
@@ -86,12 +86,12 @@ public class BodyDataDetailFragment extends Fragment
             return;
         }
         
-        bodyData.height = Double.valueOf(strHeight);
+        bodyData.setHeight(Double.valueOf(strHeight));
         
         bodyData.calculate();
         
         setValue(bodyData);
-    
+        
         setEditable(false);
         
         if(bodyData.getId() == null)
@@ -116,11 +116,11 @@ public class BodyDataDetailFragment extends Fragment
             
             return;
         }
-    
+        
         ((TextView) rootView.findViewById(R.id.textViewId)).setText(String.valueOf(bodyData.getId()));
-        ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(bodyData.weight));
-        ((TextView) rootView.findViewById(R.id.editTextHeight)).setText(String.valueOf(bodyData.height));
-        ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", bodyData.bmi));
+        ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(bodyData.getWeight()));
+        ((TextView) rootView.findViewById(R.id.editTextHeight)).setText(String.valueOf(bodyData.getHeight()));
+        ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", bodyData.getBmi()));
         ((TextView) rootView.findViewById(R.id.textViewCreateTime)).setText(bodyData.dateString);
     }
     
@@ -136,7 +136,7 @@ public class BodyDataDetailFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-    
+        
         bodyDataDBHelper = new BodyDataDBHelper<BodyData>(getContext());
         
         if(getArguments().containsKey(BODY_DATA_ID) && getArguments().getLong(BODY_DATA_ID, -1) != -1)
