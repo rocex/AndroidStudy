@@ -16,7 +16,7 @@ public class BodyData extends SuperModel
     public static final String BMI = "bmi";
     public static final String TABLE_NAME = "bodydata";
     
-    public final String dateString;
+    public String dateString;
     
     private Double height;  // 身高cm
     private Double weight; // 体重kg
@@ -25,8 +25,6 @@ public class BodyData extends SuperModel
     public BodyData()
     {
         super();
-        
-        dateString = DateFormat.format("yyyy-MM-dd HH:mm:ss", getCreate_time()).toString();
     }
     
     public BodyData(Double height, Double weight)
@@ -79,6 +77,8 @@ public class BodyData extends SuperModel
         {
             this.bmi = 0.0;
         }
+    
+        dateString = DateFormat.format("yyyy-MM-dd HH:mm:ss", getCreate_time()).toString();
     }
     
     @Override

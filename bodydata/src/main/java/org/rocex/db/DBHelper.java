@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import org.rocex.model.ModelStatus;
 import org.rocex.model.SuperModel;
 
 import java.util.ArrayList;
@@ -179,6 +180,10 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         {
             for(T superModel : superModels)
             {
+                superModel.setStatus(ModelStatus.NEW);
+    
+                initAudit(superModel);
+                
                 ContentValues contentValues = convertToContentValues(superModel, strPropNames);
     
                 listId.add(db.insert(superModel.getTableName(), null, contentValues));
@@ -321,6 +326,29 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         return listSuperModel;
     }
     
+    protected void initAudit(T superModel)
+    {
+        if(superModel == null)
+        {
+            return;
+        }
+        
+        long lTime = System.currentTimeMillis();
+        
+        superModel.setTs(lTime);
+        
+        switch(superModel.getStatus())
+        {
+            case NEW:
+                superModel.setCreate_time(lTime);
+                break;
+            case MODIFIED:
+                break;
+            case DELETED:
+                break;
+        }
+    }
+    
     public T query(Class<T> clazzModel, long id)
     {
         List<T> listSuperModel = query(clazzModel, null, null, null, null, null, SuperModel.ID + "=?", new String[]{String.valueOf(id)});
@@ -343,6 +371,10 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
         {
             for(T superModel : superModels)
             {
+                superModel.setStatus(ModelStatus.MODIFIED);
+    
+                initAudit(superModel);
+                
                 ContentValues contentValues = convertToContentValues(superModel, strPropNames);
                 
                 iCount += db.update(superModel.getTableName(), contentValues, SuperModel.ID + "=?",

@@ -35,7 +35,7 @@ public class BodyDataDBHelper<T extends BodyData> extends DBHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        if(db.getVersion() == 0)
+        if(db.getVersion() != 0)
         {
             //            return;
         }

@@ -37,6 +37,8 @@ public abstract class SuperModel implements Serializable
     @NonNull
     private Long ts;
     
+    private ModelStatus enumStatus = ModelStatus.NOCHANGE;
+    
     /***************************************************************************
      * @author Rocex Wang
      * @version 2017-6-15 10:10:36
@@ -44,9 +46,6 @@ public abstract class SuperModel implements Serializable
     public SuperModel()
     {
         super();
-        
-        create_time = System.currentTimeMillis();
-        ts = create_time;
     }
     
     /***************************************************************************
@@ -210,9 +209,9 @@ public abstract class SuperModel implements Serializable
         try
         {
             String strMethodName = "get" + strPropName.substring(0, 1).toUpperCase() + strPropName.substring(1);
-            Method method = getClass().getMethod(strMethodName, (Class) null);
+            Method method = getClass().getMethod(strMethodName);
     
-            objReturn = method.invoke(this, (Object) null);
+            objReturn = method.invoke(this);
         }
         catch(Exception ex)
         {
@@ -269,5 +268,15 @@ public abstract class SuperModel implements Serializable
         {
             Log.e(TAG, "setPropValue: name[" + strPropName + "], type[" + getPropType(strPropName) + "], value[" + objValue + "]", ex);
         }
+    }
+    
+    public ModelStatus getStatus()
+    {
+        return enumStatus;
+    }
+    
+    public void setStatus(ModelStatus iStatus)
+    {
+        this.enumStatus = iStatus;
     }
 }
