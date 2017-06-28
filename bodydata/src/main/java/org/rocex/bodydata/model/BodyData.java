@@ -16,8 +16,6 @@ public class BodyData extends SuperModel
     public static final String BMI = "bmi";
     public static final String TABLE_NAME = "bodydata";
     
-    public String dateString;
-    
     private Double height;  // 身高cm
     private Double weight; // 体重kg
     private Double bmi; // 体质指数BMI = weight / (height / 100 * height / 100)
@@ -35,6 +33,11 @@ public class BodyData extends SuperModel
         this.height = height;
         
         calculate();
+    }
+    
+    public String getStringDate()
+    {
+        return DateFormat.format("yyyy-MM-dd HH:mm:ss", getCreate_time()).toString();
     }
     
     public Double getWeight()
@@ -77,8 +80,6 @@ public class BodyData extends SuperModel
         {
             this.bmi = 0.0;
         }
-    
-        dateString = DateFormat.format("yyyy-MM-dd HH:mm:ss", getCreate_time()).toString();
     }
     
     @Override

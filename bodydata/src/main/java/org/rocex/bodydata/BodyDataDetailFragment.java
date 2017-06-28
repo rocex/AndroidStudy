@@ -14,6 +14,8 @@ import android.widget.TextView;
 import org.rocex.bodydata.model.BodyData;
 import org.rocex.bodydata.model.BodyDataDBHelper;
 
+import java.util.List;
+
 /**
  * A fragment representing a single BodyData detail screen.
  * This fragment is either contained in a {@link BodyDataListActivity}
@@ -90,18 +92,22 @@ public class BodyDataDetailFragment extends Fragment
         
         bodyData.calculate();
         
-        setValue(bodyData);
-        
         setEditable(false);
         
         if(bodyData.getId() == null)
         {
-            bodyDataDBHelper.insert(new BodyData[]{bodyData});
+            List<Long> listId = bodyDataDBHelper.insert(new BodyData[]{bodyData});
+    
+            bodyData = (BodyData) bodyDataDBHelper.query(BodyData.class, listId.get(0));
         }
         else
         {
             bodyDataDBHelper.update(new BodyData[]{bodyData});
+    
+            bodyData = (BodyData) bodyDataDBHelper.query(BodyData.class, bodyData.getId());
         }
+    
+        setValue(bodyData);
     }
     
     public void setValue(BodyData bodyData)
@@ -121,7 +127,7 @@ public class BodyDataDetailFragment extends Fragment
         ((TextView) rootView.findViewById(R.id.editTextWeight)).setText(String.valueOf(bodyData.getWeight()));
         ((TextView) rootView.findViewById(R.id.editTextHeight)).setText(String.valueOf(bodyData.getHeight()));
         ((TextView) rootView.findViewById(R.id.editTextBMI)).setText(String.format("%.2f", bodyData.getBmi()));
-        ((TextView) rootView.findViewById(R.id.textViewCreateTime)).setText(bodyData.dateString);
+        ((TextView) rootView.findViewById(R.id.textViewCreateTime)).setText(bodyData.getStringDate());
     }
     
     public void setEditable(boolean blEditable)
