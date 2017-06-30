@@ -1,5 +1,6 @@
 package org.rocex.bodydata;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.rocex.bodydata.databinding.BodydataDetailBinding;
 import org.rocex.bodydata.model.BodyData;
 import org.rocex.bodydata.model.BodyDataDBHelper;
 
@@ -112,6 +114,11 @@ public class BodyDataDetailFragment extends Fragment
     
     public void setValue(BodyData bodyData)
     {
+        if(true)
+        {
+            return;
+        }
+        
         if(bodyData == null)
         {
             ((TextView) rootView.findViewById(R.id.textViewId)).setText("");
@@ -167,7 +174,7 @@ public class BodyDataDetailFragment extends Fragment
         
         if(bodyData != null)
         {
-            setValue(bodyData);
+            //            setValue(bodyData);
         }
         else
         {
@@ -175,6 +182,9 @@ public class BodyDataDetailFragment extends Fragment
             
             setEditable(true);
         }
+    
+        BodydataDetailBinding binding = DataBindingUtil.setContentView(getActivity(), R.layout.bodydata_detail);
+        binding.setBodyData(bodyData);
         
         return rootView;
     }

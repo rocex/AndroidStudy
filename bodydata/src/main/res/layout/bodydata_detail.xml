@@ -1,113 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/text_margin"
-    android:orientation="vertical"
-    android:padding="8dp"
     tools:context="org.rocex.bodydata.BodyDataDetailFragment">
     
-    <GridLayout
+    <data>
+        
+        <variable
+            name="bodyData"
+            type="org.rocex.bodydata.model.BodyData" />
+    </data>
+    
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:columnCount="3"
-        android:padding="@dimen/text_margin">
-    
-        <TextView
-            android:id="@+id/textViewWeight"
-            android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin"
-            android:text="@string/weight" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/text_margin"
+        android:orientation="vertical"
+        android:padding="8dp">
         
-        <EditText
-            android:id="@+id/editTextWeight"
-            android:layout_columnSpan="2"
-            android:layout_gravity="fill"
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:columnCount="3"
+            android:padding="@dimen/text_margin">
+            
+            <TextView
+                android:id="@+id/textViewWeight"
+                android:paddingBottom="@dimen/text_margin"
+                android:paddingTop="@dimen/text_margin"
+                android:text="@string/weight" />
+            
+            <EditText
+                android:id="@+id/editTextWeight"
+                android:layout_columnSpan="2"
+                android:layout_gravity="fill"
+                android:enabled="false"
+                android:gravity="end"
+                android:hint="@string/weight_hint"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:paddingBottom="@dimen/text_margin"
+                android:paddingTop="@dimen/text_margin"
+                android:text='@{""+bodyData.weight}' />
+            
+            <TextView
+                android:id="@+id/textViewHeight"
+                android:paddingBottom="@dimen/text_margin"
+                android:paddingTop="@dimen/text_margin"
+                android:text="@string/height" />
+            
+            <EditText
+                android:id="@+id/editTextHeight"
+                android:layout_columnSpan="2"
+                android:layout_gravity="fill"
+                android:enabled="false"
+                android:gravity="end"
+                android:hint="@string/height_hint"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:paddingBottom="@dimen/text_margin"
+                android:paddingTop="@dimen/text_margin"
+                android:text='@{""+bodyData.height}' />
+            
+            <TextView
+                android:id="@+id/textViewBMI"
+                android:paddingBottom="@dimen/text_margin"
+                android:paddingTop="@dimen/text_margin"
+                android:text="@string/bmi" />
+            
+            <EditText
+                android:id="@+id/editTextBMI"
+                android:layout_columnSpan="2"
+                android:layout_gravity="fill"
+                android:enabled="false"
+                android:gravity="end"
+                android:inputType="numberDecimal"
+                android:paddingBottom="@dimen/text_margin"
+                android:paddingTop="@dimen/text_margin"
+                android:saveEnabled="true"
+                android:text='@{""+bodyData.bmi}' />
+            
+            <TextView
+                android:id="@+id/textViewCreateTimeName"
+                android:paddingBottom="@dimen/text_margin"
+                android:paddingTop="@dimen/text_margin"
+                android:text="@string/bmi_date" />
+            
+            <TextView
+                android:id="@+id/textViewCreateTime"
+                android:layout_columnSpan="2"
+                android:layout_gravity="fill"
+                android:paddingBottom="@dimen/text_margin"
+                android:paddingTop="@dimen/text_margin"
+                android:text="@{bodyData.stringDate}" />
+            
+            <TextView
+                android:id="@+id/textViewBMIDesc"
+                android:layout_columnSpan="3"
+                android:layout_gravity="fill"
+                android:paddingBottom="@dimen/text_margin"
+                android:paddingTop="@dimen/text_margin"
+                android:text="@string/bmi_desc" />
+            
+            <TextView
+                android:id="@+id/textViewId"
+                android:visibility="gone" />
+        
+        </GridLayout>
+        
+        <Button
+            android:id="@+id/btnCalculate"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@android:color/holo_blue_light"
             android:enabled="false"
-            android:gravity="end"
-            android:hint="@string/weight_hint"
-            android:inputType="numberDecimal"
-            android:maxLength="6"
-            android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin" />
+            android:onClick="onCalculateBMI"
+            android:text="@string/Calculate"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     
-        <TextView
-            android:id="@+id/textViewHeight"
-            android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin"
-            android:text="@string/height" />
-        
-        <EditText
-            android:id="@+id/editTextHeight"
-            android:layout_columnSpan="2"
-            android:layout_gravity="fill"
-            android:enabled="false"
-            android:gravity="end"
-            android:hint="@string/height_hint"
-            android:inputType="numberDecimal"
-            android:maxLength="6"
-            android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin" />
-    
-        <TextView
-            android:id="@+id/textViewBMI"
-            android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin"
-            android:text="@string/bmi" />
-        
-        <EditText
-            android:id="@+id/editTextBMI"
-            android:layout_columnSpan="2"
-            android:layout_gravity="fill"
-            android:enabled="false"
-            android:gravity="end"
-            android:inputType="numberDecimal"
-            android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin"
-            android:saveEnabled="true" />
-    
-        <TextView
-            android:id="@+id/textViewCreateTimeName"
-            android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin"
-            android:text="@string/bmi_date" />
-        
-        <TextView
-            android:id="@+id/textViewCreateTime"
-            android:layout_columnSpan="2"
-            android:layout_gravity="fill"
-            android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin" />
-    
-        <TextView
-            android:id="@+id/textViewBMIDesc"
-            android:layout_columnSpan="3"
-            android:layout_gravity="fill"
-            android:paddingBottom="@dimen/text_margin"
-            android:paddingTop="@dimen/text_margin"
-            android:text="@string/bmi_desc" />
-    
-        <TextView
-            android:id="@+id/textViewId"
-            android:visibility="gone" />
-
-    </GridLayout>
-    
-    <Button
-        android:id="@+id/btnCalculate"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:background="@android:color/holo_blue_light"
-        android:enabled="false"
-        android:onClick="onCalculateBMI"
-        android:text="@string/Calculate"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-</LinearLayout>
+    </LinearLayout>
+</layout>
+  
