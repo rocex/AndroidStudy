@@ -9,7 +9,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="org.rocex.bodydata.BodyDataListActivity">
+    tools:context="org.rocex.bodydata.view.BodyDataListActivity">
     
     <!-- This layout is a two-pane layout for the BodyDatas master/detail flow.  -->
     
@@ -22,7 +22,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context="org.rocex.bodydata.BodyDataListActivity"
+        tools:context="org.rocex.bodydata.view.BodyDataListActivity"
         tools:listitem="@layout/bodydata_list_content" />
     
     <FrameLayout

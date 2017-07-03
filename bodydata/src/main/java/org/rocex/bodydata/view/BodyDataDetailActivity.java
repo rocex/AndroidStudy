@@ -1,4 +1,4 @@
-package org.rocex.bodydata;
+package org.rocex.bodydata.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+
+import org.rocex.bodydata.R;
 
 /**
  * An activity representing a single BodyData detail screen. This

@@ -1,4 +1,4 @@
-package org.rocex.bodydata;
+package org.rocex.bodydata.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.rocex.bodydata.R;
 import org.rocex.bodydata.model.BodyData;
 import org.rocex.bodydata.model.BodyDataDBHelper;
 

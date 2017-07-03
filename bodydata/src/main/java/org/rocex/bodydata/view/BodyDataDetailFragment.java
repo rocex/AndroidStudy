@@ -1,4 +1,4 @@
-package org.rocex.bodydata;
+package org.rocex.bodydata.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.rocex.bodydata.R;
 import org.rocex.bodydata.databinding.BodydataDetailBinding;
 import org.rocex.bodydata.model.BodyData;
 import org.rocex.bodydata.model.BodyDataDBHelper;

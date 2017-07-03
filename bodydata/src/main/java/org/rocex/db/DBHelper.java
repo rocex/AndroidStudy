@@ -34,18 +34,22 @@ public abstract class DBHelper<T extends SuperModel> extends SQLiteOpenHelper
     
     public static void close(Cursor cursor)
     {
-        if(cursor != null && !cursor.isClosed())
+        if(cursor == null || cursor.isClosed())
         {
-            cursor.close();
+            return;
         }
+    
+        cursor.close();
     }
     
     public static void close(SQLiteDatabase db)
     {
-        if(db != null && db.isOpen())
+        if(db == null || !db.isOpen())
         {
-            db.close();
+            return;
         }
+    
+        db.close();
     }
     
     public ContentValues convertToContentValues(T superModel, String... strFieldNames)
