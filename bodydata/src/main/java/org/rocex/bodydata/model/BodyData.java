@@ -37,7 +37,7 @@ public class BodyData extends SuperModel
     
     public String getStringDate()
     {
-        return DateFormat.format("yyyy-MM-dd HH:mm:ss", getCreate_time()).toString();
+        return getCreate_time() == null ? "" : DateFormat.format("yyyy-MM-dd HH:mm:ss", getCreate_time()).toString();
     }
     
     public Double getWeight()

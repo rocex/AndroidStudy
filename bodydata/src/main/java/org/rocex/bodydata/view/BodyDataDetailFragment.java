@@ -168,7 +168,11 @@ public class BodyDataDetailFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        rootView = inflater.inflate(R.layout.bodydata_detail, container, false);
+        //        BodydataDetailBinding binding = DataBindingUtil.setContentView(getActivity(), R.layout.bodydata_detail);
+        BodydataDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.bodydata_detail, container, false);
+    
+        rootView = binding.getRoot();
+        //rootView = inflater.inflate(R.layout.bodydata_detail, container, false);
         
         ((TextView) rootView.findViewById(R.id.editTextWeight)).addTextChangedListener(textWatcher);
         ((TextView) rootView.findViewById(R.id.editTextHeight)).addTextChangedListener(textWatcher);
@@ -184,8 +188,6 @@ public class BodyDataDetailFragment extends Fragment
             setEditable(true);
         }
     
-        //        BodydataDetailBinding binding = DataBindingUtil.setContentView(getActivity(), R.layout.bodydata_detail);
-        BodydataDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.bodydata_detail, container, false);
         binding.setBodyData(bodyData);
         
         return rootView;
