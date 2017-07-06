@@ -41,7 +41,7 @@
                 android:maxLength="6"
                 android:paddingBottom="@dimen/text_margin"
                 android:paddingTop="@dimen/text_margin"
-                android:text='@{""+bodyData.weight}' />
+                android:text="@{String.valueOf(bodyData.weight)}" />
             
             <TextView
                 android:id="@+id/textViewHeight"
@@ -60,7 +60,7 @@
                 android:maxLength="6"
                 android:paddingBottom="@dimen/text_margin"
                 android:paddingTop="@dimen/text_margin"
-                android:text='@{""+bodyData.height}' />
+                android:text="@{String.valueOf(bodyData.height)}" />
             
             <TextView
                 android:id="@+id/textViewBMI"
@@ -78,7 +78,7 @@
                 android:paddingBottom="@dimen/text_margin"
                 android:paddingTop="@dimen/text_margin"
                 android:saveEnabled="true"
-                android:text='@{""+bodyData.bmi}' />
+                android:text="@{String.valueOf(bodyData.bmi)}" />
             
             <TextView
                 android:id="@+id/textViewCreateTimeName"

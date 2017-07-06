@@ -175,7 +175,7 @@ public class BodyDataDetailFragment extends Fragment
         
         if(bodyData != null)
         {
-            //            setValue(bodyData);
+            // setValue(bodyData);
         }
         else
         {
@@ -184,7 +184,8 @@ public class BodyDataDetailFragment extends Fragment
             setEditable(true);
         }
     
-        BodydataDetailBinding binding = DataBindingUtil.setContentView(getActivity(), R.layout.bodydata_detail);
+        //        BodydataDetailBinding binding = DataBindingUtil.setContentView(getActivity(), R.layout.bodydata_detail);
+        BodydataDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.bodydata_detail, container, false);
         binding.setBodyData(bodyData);
         
         return rootView;
