@@ -78,7 +78,7 @@
                 android:paddingBottom="@dimen/text_margin"
                 android:paddingTop="@dimen/text_margin"
                 android:saveEnabled="true"
-                android:text="@{String.valueOf(bodyData.bmi)}" />
+                android:text="@{String.format(`%.2f`, bodyData.bmi)}" />
             
             <TextView
                 android:id="@+id/textViewCreateTimeName"

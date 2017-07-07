@@ -34,6 +34,7 @@ public class BodyDataDetailFragment extends Fragment
     
     // The model content this fragment is presenting.
     private BodyData bodyData;
+    
     private View rootView;
     
     private TextWatcher textWatcher = new TextWatcher()
@@ -168,7 +169,6 @@ public class BodyDataDetailFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        //        BodydataDetailBinding binding = DataBindingUtil.setContentView(getActivity(), R.layout.bodydata_detail);
         BodydataDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.bodydata_detail, container, false);
     
         rootView = binding.getRoot();
